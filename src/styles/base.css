@@ -12,7 +12,7 @@ body,
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at 20% 0%, #0a1d2f, var(--bg) 48%);
+  background: #070a0e;
   color: var(--text);
 }
 

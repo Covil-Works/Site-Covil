@@ -86,15 +86,26 @@ function App() {
           <div className="about-text">
             <h2>Sobre nós</h2>
             <p>
-              A Covil transforma ideias em produtos digitais sob medida, com foco em
-              resultado real, performance e experiência para o seu negócio.
+              Uma ideia só tem impacto quando se torna realidade, e para isso, ela precisa de um ambiente focado em construção e excelência técnica. Esse lugar é a Covil. Do Norte do Brasil para o mundo, desenvolvemos softwares sob medida de acordo com as suas necessidades.
             </p>
           </div>
         </section>
 
+        <h2 className="services-heading">Serviços</h2>
+
         <section id="projetos" className="services">
           <article>
-            <h3>Sites e Landing Pages</h3>
+            <h3 className="service-title">
+              <span className="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18" />
+                  <path d="M12 3a15 15 0 0 1 0 18" />
+                  <path d="M12 3a15 15 0 0 0 0 18" />
+                </svg>
+              </span>
+              <span>Sites</span>
+            </h3>
             <p>
               Sites institucionais e landing pages para posicionar o seu negócio na
               internet.
@@ -102,13 +113,34 @@ function App() {
           </article>
 
           <article>
-            <h3>Aplicativos Mobile</h3>
-            <p>Aplicativos para celular que atendem às suas necessidades específicas.</p>
+            <h3 className="service-title">
+              <span className="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="7" y="2.5" width="10" height="19" rx="2.2" ry="2.2" />
+                  <path d="M10 5h4" />
+                  <circle cx="12" cy="18.5" r="0.7" />
+                </svg>
+              </span>
+              <span>Aplicativos Mobile</span>
+            </h3>
+            <p>Aplicativos para celular personalizados que atendem às suas necessidades específicas.</p>
           </article>
 
           <article>
-            <h3>Sistemas Web</h3>
-            <p>Sistemas para o seu negócio acessíveis diretamente do navegador.</p>
+            <h3 className="service-title">
+              <span className="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" ry="2.2" />
+                  <path d="M3.5 8.5h17" />
+                  <circle cx="6.3" cy="6.5" r="0.8" />
+                  <circle cx="9.1" cy="6.5" r="0.8" />
+                  <path d="M9 12.2 7 14.2l2 2" />
+                  <path d="M14 12.2 16 14.2l-2 2" />
+                </svg>
+              </span>
+              <span>Sistemas Web</span>
+            </h3>
+            <p>Sistemas completos acessíveis de qualquer lugar diretamente pelo navegador.</p>
           </article>
         </section>
 

@@ -34,6 +34,10 @@
     gap: 30px;
   }
 
+  .services-heading {
+    text-align: center;
+  }
+
   .forest-strip h2 {
     font-size: 1.6rem;
   }
@@ -152,6 +156,10 @@
   .services {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .services-heading {
+    text-align: center;
   }
 
   .forest-section {
