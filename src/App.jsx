@@ -56,10 +56,7 @@ function App() {
               <a href="#projetos" onClick={closeMobileMenu}>
                 Projetos
               </a>
-              <a href="#contato" onClick={closeMobileMenu}>
-                Contato
-              </a>
-              <a href="#contato" className="cta-button" onClick={closeMobileMenu}>
+              <a href="#projetos" className="cta-button" onClick={closeMobileMenu}>
                 Crie seu projeto
               </a>
             </div>
@@ -176,24 +173,6 @@ function App() {
                   Tratamos cada projeto como se fosse nosso, garantindo segurança,
                   escalabilidade e manutenibilidade a longo prazo.
                 </p>
-              </div>
-            </article>
-
-            <h2 id="contato" className="contact-title">
-              Contato
-            </h2>
-
-            <article className="contact-card">
-              <div className="contact-side-glow" />
-              <div className="contact-main">
-                <p>
-                  Quer desenvolver um projeto novo que atenda a todas as suas
-                  necessidades com uma equipe dedicada e qualificada? Estamos prontos
-                  para te atender.
-                </p>
-                <a href="#contato" className="cta-button contact-button">
-                  Fale com um Especialista
-                </a>
               </div>
             </article>
           </div>
