@@ -11,11 +11,9 @@
   grid-template-columns: minmax(180px, 240px) 1fr;
   gap: 24px;
   align-items: center;
-  background: #0e1218;
+  background: var(--panel);
   border-radius: 14px;
   padding: 28px 32px;
-  
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
 }
 
 .about-logo-wrap {
@@ -44,24 +42,24 @@
 }
 
 .services {
-  margin-top: 54px;
+  margin-top: 60px;
+  margin-bottom: 80px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 38px;
 }
 
 .services-heading {
-  margin: 54px 0 0;
-  font-size: clamp(1.55rem, 2.2vw, 2rem);
-  font-weight: 600;
+  margin: 60px 0 0;
+  font-size: 1.5rem;
+  font-weight: 400;
   text-align: center;
 }
 
 .services article {
-  background: #0e1218;
+  background: var(--bg);
   border-radius: 14px;
   padding: 24px 24px 22px;
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
 }
 
 .services h3 {
@@ -82,7 +80,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #f5f7fb;
+  color: var(--text);
   flex-shrink: 0;
 }
 

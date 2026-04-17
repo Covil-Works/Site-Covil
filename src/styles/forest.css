@@ -19,6 +19,7 @@
 .forest-strip {
   position: relative;
   z-index: 1;
+  overflow: hidden;
   height: 56px;
   display: flex;
   align-items: center;
@@ -28,10 +29,21 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.forest-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/img/barra.svg") center / cover no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .forest-strip h2 {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  font-size: 1.9rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .forest-content {
@@ -39,7 +51,7 @@
   z-index: 1;
   width: min(100%, var(--container-width));
   margin: 0 auto;
-  padding: 40px var(--container-gutter) 70px;
+  padding: 60px var(--container-gutter) 70px;
 }
 
 .why-card {

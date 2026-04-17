@@ -88,7 +88,7 @@ function App() {
           </div>
         </section>
 
-        <h2 className="services-heading">Serviços</h2>
+        <h2 className="services-heading">Nossos Serviços</h2>
 
         <section id="projetos" className="services">
           <article>
