@@ -1,0 +1,65 @@
+.content {
+  width: min(100%, var(--container-width));
+  margin: -52px auto 0;
+  padding: 0 var(--container-gutter) 72px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 24px;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(8, 17, 29, 0.95) 0%, rgba(8, 17, 29, 0.85) 100%);
+  border-radius: 14px;
+  padding: 28px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
+}
+
+.about-logo-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.about-logo {
+  width: clamp(84px, 8vw, 112px);
+  height: auto;
+  opacity: 0.9;
+}
+
+.about-text h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+  font-weight: 600;
+}
+
+.about-text p {
+  margin: 14px 0 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 760px;
+}
+
+.services {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 38px;
+}
+
+.services h3 {
+  margin: 0;
+  font-size: clamp(1.28rem, 1.85vw, 1.7rem);
+  font-weight: 500;
+}
+
+.services p {
+  margin-top: 16px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 340px;
+}

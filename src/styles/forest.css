@@ -1,0 +1,133 @@
+.forest-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 56px;
+  background-image: url("/img/forest-image.png");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.forest-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--forest-overlay-color);
+  opacity: var(--forest-overlay-opacity);
+}
+
+.forest-strip {
+  position: relative;
+  z-index: 1;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 15, 22, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.forest-strip h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 500;
+}
+
+.forest-content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--container-width));
+  margin: 0 auto;
+  padding: 40px var(--container-gutter) 70px;
+}
+
+.why-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
+  gap: 28px;
+  padding: 34px 40px;
+  border-radius: 14px;
+  background: rgba(7, 17, 24, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.why-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 34% 52%, rgba(96, 188, 122, 0.24), transparent 44%);
+  pointer-events: none;
+}
+
+.why-card-left,
+.why-card-right {
+  position: relative;
+  z-index: 1;
+}
+
+.why-card-left {
+  display: flex;
+  align-items: center;
+}
+
+.why-card-left h3 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.1vw, 2.1rem);
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.why-card-right p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.why-card-right p + p {
+  margin-top: 14px;
+}
+
+.contact-title {
+  margin: 40px 0 16px;
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 500;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1fr);
+  min-height: 215px;
+  border-radius: 10px;
+  background: rgba(6, 14, 23, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.contact-side-glow {
+  background: radial-gradient(circle at 25% 50%, rgba(42, 111, 92, 0.18), rgba(7, 16, 25, 0.06) 60%);
+}
+
+.contact-main {
+  padding: 42px 42px 34px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-main p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #eef3fb;
+  max-width: 540px;
+}
+
+.contact-button {
+  margin-top: 28px;
+  align-self: flex-start;
+}

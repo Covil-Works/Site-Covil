@@ -1,0 +1,13 @@
+:root {
+  --bg: #02080f;
+  --panel: #081320;
+  --text: #f5f7fb;
+  --muted: #c9d0dc;
+  --accent: #057447;
+  --container-width: 1200px;
+  --container-gutter: 20px;
+  --hero-overlay-color: #050709;
+  --hero-overlay-opacity: 0.5;
+  --forest-overlay-color: #020a10;
+  --forest-overlay-opacity: 0.5;
+}
