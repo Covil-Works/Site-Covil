@@ -19,6 +19,7 @@
   --hero-scroll-progress: 0;
   --hero-content-offset: 0px;
   --hero-zoom-range: 0.24;
+  --about-card-overlap: clamp(76px, 9vw, 124px);
   --forest-overlay-color: #020a10;
   --forest-overlay-opacity: 0.5;
 }

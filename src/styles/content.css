@@ -1,9 +1,22 @@
 .content {
   width: min(100%, var(--container-width));
-  margin: -52px auto 0;
+  margin: 0 auto;
   padding: 0 var(--container-gutter) 72px;
   position: relative;
   z-index: 2;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: var(--bg);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .about-card {
@@ -14,6 +27,9 @@
   background: var(--panel);
   border-radius: 14px;
   padding: 28px 32px;
+  position: relative;
+  transform: translateY(calc(-1 * var(--about-card-overlap)));
+  margin-bottom: calc(-1 * var(--about-card-overlap));
 }
 
 .about-logo-wrap {

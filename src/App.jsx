@@ -4,6 +4,7 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pageRef = useRef(null);
   const heroRef = useRef(null);
+  const aboutCardRef = useRef(null);
 
   useEffect(() => {
     const closeMenuOnDesktop = () => {
@@ -58,6 +59,38 @@ function App() {
 
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateAboutCardOverlap = () => {
+      if (!pageRef.current || !aboutCardRef.current) {
+        return;
+      }
+
+      const aboutCardHeight = aboutCardRef.current.offsetHeight;
+      const isMobileViewport = window.innerWidth <= 720;
+      const overlap = isMobileViewport ? 30 : Math.max(aboutCardHeight / 2, 0);
+      pageRef.current.style.setProperty("--about-card-overlap", `${overlap.toFixed(1)}px`);
+    };
+
+    updateAboutCardOverlap();
+
+    let resizeObserver = null;
+
+    if (typeof ResizeObserver !== "undefined" && aboutCardRef.current) {
+      resizeObserver = new ResizeObserver(updateAboutCardOverlap);
+      resizeObserver.observe(aboutCardRef.current);
+    }
+
+    window.addEventListener("resize", updateAboutCardOverlap);
+
+    return () => {
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+
+      window.removeEventListener("resize", updateAboutCardOverlap);
     };
   }, []);
 
@@ -120,7 +153,7 @@ function App() {
       </header>
 
       <main className="content">
-        <section id="sobre" className="about-card">
+        <section id="sobre" className="about-card" ref={aboutCardRef}>
           <div className="about-logo-wrap">
             <img src="/img/logo.svg" alt="Logo Covil" className="about-logo" />
           </div>
