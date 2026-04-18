@@ -94,6 +94,50 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const serviceCards = Array.from(document.querySelectorAll(".services article"));
+
+    if (serviceCards.length === 0) {
+      return undefined;
+    }
+
+    const setCardPointerToCenter = (card) => {
+      card.style.setProperty("--card-pointer-x", `${(card.clientWidth / 2).toFixed(1)}px`);
+      card.style.setProperty("--card-pointer-y", `${(card.clientHeight / 2).toFixed(1)}px`);
+    };
+
+    const updateCardPointer = (event) => {
+      const card = event.currentTarget;
+      const bounds = card.getBoundingClientRect();
+      const pointerX = event.clientX - bounds.left;
+      const pointerY = event.clientY - bounds.top;
+
+      card.style.setProperty("--card-pointer-x", `${pointerX.toFixed(1)}px`);
+      card.style.setProperty("--card-pointer-y", `${pointerY.toFixed(1)}px`);
+    };
+
+    serviceCards.forEach((card) => {
+      setCardPointerToCenter(card);
+      card.addEventListener("pointerenter", updateCardPointer);
+      card.addEventListener("pointermove", updateCardPointer);
+    });
+
+    const updateAllCardCenters = () => {
+      serviceCards.forEach(setCardPointerToCenter);
+    };
+
+    window.addEventListener("resize", updateAllCardCenters);
+
+    return () => {
+      serviceCards.forEach((card) => {
+        card.removeEventListener("pointerenter", updateCardPointer);
+        card.removeEventListener("pointermove", updateCardPointer);
+      });
+
+      window.removeEventListener("resize", updateAllCardCenters);
+    };
+  }, []);
+
   const handleMenuToggle = () => {
     setIsMobileMenuOpen((current) => !current);
   };
