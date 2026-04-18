@@ -1,7 +1,9 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pageRef = useRef(null);
+  const heroRef = useRef(null);
 
   useEffect(() => {
     const closeMenuOnDesktop = () => {
@@ -18,6 +20,47 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    let rafId = null;
+
+    const updateHeroScrollProgress = () => {
+      rafId = null;
+
+      if (!pageRef.current || !heroRef.current) {
+        return;
+      }
+
+      const heroHeight = heroRef.current.offsetHeight;
+      const maxScrollableDistance = Math.max(heroHeight * 0.9, 1);
+      const scrollProgress = Math.min(window.scrollY / maxScrollableDistance, 1);
+      const heroContentOffset = window.scrollY;
+
+      pageRef.current.style.setProperty("--hero-scroll-progress", scrollProgress.toFixed(4));
+      pageRef.current.style.setProperty("--hero-content-offset", `${heroContentOffset.toFixed(1)}px`);
+    };
+
+    const scheduleUpdate = () => {
+      if (rafId !== null) {
+        return;
+      }
+
+      rafId = window.requestAnimationFrame(updateHeroScrollProgress);
+    };
+
+    updateHeroScrollProgress();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
   const handleMenuToggle = () => {
     setIsMobileMenuOpen((current) => !current);
   };
@@ -27,8 +70,9 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <header className="hero">
+    <div className="page" ref={pageRef}>
+      <header className="hero" ref={heroRef}>
+        <div className="hero-bg" />
         <div className="hero-overlay" />
         <div className="hero-content">
           <nav className="navbar">
