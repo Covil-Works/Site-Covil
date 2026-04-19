@@ -55,6 +55,7 @@
 }
 
 .why-card {
+  --why-card-bg-opacity: 1;
   position: relative;
   display: grid;
   grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
@@ -66,17 +67,23 @@
   background:
     linear-gradient(
       140deg,
-      rgba(28, 52, 64, 0.36) 0%,
-      rgba(9, 18, 28, 0.24) 48%,
-      rgba(6, 13, 20, 0.32) 100%
+      rgba(28, 52, 64, calc(0.36 * var(--why-card-bg-opacity))) 0%,
+      rgba(9, 18, 28, calc(0.24 * var(--why-card-bg-opacity))) 48%,
+      rgba(6, 13, 20, calc(0.32 * var(--why-card-bg-opacity))) 100%
     );
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, calc(0.2 * var(--why-card-bg-opacity)));
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.36),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px) saturate(130%);
-  -webkit-backdrop-filter: blur(16px) saturate(130%);
+    0 18px 45px rgba(0, 0, 0, calc(0.36 * var(--why-card-bg-opacity))),
+    inset 0 1px 0 rgba(255, 255, 255, calc(0.22 * var(--why-card-bg-opacity))),
+    inset 0 -1px 0 rgba(255, 255, 255, calc(0.05 * var(--why-card-bg-opacity)));
+  backdrop-filter: blur(calc(16px * var(--why-card-bg-opacity))) saturate(130%);
+  -webkit-backdrop-filter: blur(calc(16px * var(--why-card-bg-opacity))) saturate(130%);
+  transition:
+    background 180ms linear,
+    border-color 180ms linear,
+    box-shadow 180ms linear,
+    backdrop-filter 180ms linear,
+    -webkit-backdrop-filter 180ms linear;
 }
 
 .why-card::before {
@@ -85,8 +92,9 @@
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(circle at 20% 14%, rgba(255, 255, 255, 0.12), transparent 52%);
-  opacity: 0.42;
+  opacity: calc(0.42 * var(--why-card-bg-opacity));
   pointer-events: none;
+  transition: opacity 180ms linear;
 }
 
 .why-card::after {
@@ -99,13 +107,14 @@
     rgba(255, 255, 255, 0.06) 0%,
     rgba(255, 255, 255, 0) 46%
   );
-  opacity: 0.36;
+  opacity: calc(0.36 * var(--why-card-bg-opacity));
   pointer-events: none;
+  transition: opacity 180ms linear;
 }
 
 @supports not ((-webkit-backdrop-filter: blur(2px)) or (backdrop-filter: blur(2px))) {
   .why-card {
-    background: rgba(7, 17, 24, 0.88);
+    background: rgba(7, 17, 24, calc(0.88 * var(--why-card-bg-opacity)));
   }
 }
 

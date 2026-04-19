@@ -5,6 +5,7 @@ function App() {
   const pageRef = useRef(null);
   const heroRef = useRef(null);
   const aboutCardRef = useRef(null);
+  const whyCardRef = useRef(null);
 
   useEffect(() => {
     const closeMenuOnDesktop = () => {
@@ -132,6 +133,49 @@ function App() {
       });
 
       window.removeEventListener("resize", updateAllCardCenters);
+    };
+  }, []);
+
+  useEffect(() => {
+    let rafId = null;
+
+    const updateWhyCardBackground = () => {
+      rafId = null;
+
+      if (!whyCardRef.current) {
+        return;
+      }
+
+      const rect = whyCardRef.current.getBoundingClientRect();
+      const viewportHeight = Math.max(window.innerHeight, 1);
+      const fadeStart = viewportHeight * 0.75;
+      const fadeEnd = viewportHeight * 0.2;
+      const rawProgress = (fadeStart - rect.top) / Math.max(fadeStart - fadeEnd, 1);
+      const fadeProgress = Math.max(0, Math.min(rawProgress, 1));
+      const backgroundOpacity = 0.1 + (fadeProgress * 0.9);
+
+      whyCardRef.current.style.setProperty("--why-card-bg-opacity", backgroundOpacity.toFixed(4));
+    };
+
+    const scheduleUpdate = () => {
+      if (rafId !== null) {
+        return;
+      }
+
+      rafId = window.requestAnimationFrame(updateWhyCardBackground);
+    };
+
+    updateWhyCardBackground();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 
@@ -269,7 +313,7 @@ function App() {
           </div>
 
           <div className="forest-content">
-            <article className="why-card">
+            <article className="why-card" ref={whyCardRef}>
               <div className="why-card-left">
                 <h3>
                   Parceria,
