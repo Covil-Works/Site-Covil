@@ -65,7 +65,7 @@
   }
 
   .hero {
-    min-height: clamp(600px, 74vh, 560px);
+    height: min(100svh, 500px);
   }
 
   .hero-content {

@@ -34,10 +34,7 @@ function App() {
       const heroHeight = heroRef.current.offsetHeight;
       const maxScrollableDistance = Math.max(heroHeight * 0.9, 1);
       const scrollProgress = Math.min(window.scrollY / maxScrollableDistance, 1);
-      const heroContentOffset = window.scrollY;
-
       pageRef.current.style.setProperty("--hero-scroll-progress", scrollProgress.toFixed(4));
-      pageRef.current.style.setProperty("--hero-content-offset", `${heroContentOffset.toFixed(1)}px`);
     };
 
     const scheduleUpdate = () => {
@@ -149,8 +146,10 @@ function App() {
   return (
     <div className="page" ref={pageRef}>
       <header className="hero" ref={heroRef}>
-        <div className="hero-bg" />
-        <div className="hero-overlay" />
+        <div className="hero-media" aria-hidden="true">
+          <div className="hero-bg" />
+          <div className="hero-overlay" />
+        </div>
         <div className="hero-content">
           <nav className="navbar">
             <a href="#" className="brand" aria-label="Covil">
