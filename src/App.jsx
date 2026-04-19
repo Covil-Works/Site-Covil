@@ -93,7 +93,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const serviceCards = Array.from(document.querySelectorAll(".services article"));
+    const serviceCards = Array.from(document.querySelectorAll(".services article, .contact-card"));
 
     if (serviceCards.length === 0) {
       return undefined;
@@ -220,7 +220,16 @@ function App() {
               <a href="#projetos" onClick={closeMobileMenu}>
                 Projetos
               </a>
-              <a href="#projetos" className="cta-button" onClick={closeMobileMenu}>
+              <a href="#contato" onClick={closeMobileMenu}>
+                Contato
+              </a>
+              <a
+                href="https://wa.me/5591986402937"
+                target="_blank"
+                rel="noreferrer"
+                className="cta-button"
+                onClick={closeMobileMenu}
+              >
                 Crie seu projeto
               </a>
             </div>
@@ -343,7 +352,149 @@ function App() {
 
           <div className="forest-strip" aria-hidden="true" />
         </section>
+
+        <section id="contato" className="contact-section" aria-labelledby="contact-heading">
+          <div className="contact-header">
+            <h2 id="contact-heading">Vamos tirar seu projeto do papel?</h2>
+            <p>Fale com a Covil no WhatsApp e comece agora mesmo a construção do seu software.</p>
+          </div>
+
+          <div className="contact-grid">
+            <a
+              href="https://wa.me/5591986402937"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-card contact-card--cta"
+              aria-label="Chamar a Covil no WhatsApp"
+            >
+              <span className="contact-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M12.1 3.1a8.7 8.7 0 0 0-7.5 13.2L3 21l4.9-1.5a8.9 8.9 0 0 0 4.2 1.1h.1a8.8 8.8 0 0 0-.1-17.5Z" />
+                  <path d="M9 8.7c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .5.4.2.5.8 1.8.8 1.9.1.2.1.3 0 .5s-.2.3-.4.4-.3.3-.4.4c-.1.1-.2.3 0 .5.2.4 1 1.6 2.4 2.1.3.1.5.1.6 0 .2-.2.5-.6.6-.8.2-.2.3-.2.5-.1.2.1 1.3.6 1.5.7.2.1.4.2.4.3s0 .8-.3 1.2c-.2.4-1 .8-1.3.8-.4.1-.8.2-1.3 0a7 7 0 0 1-2.1-.7 8.1 8.1 0 0 1-2.8-2.5c-.8-1.1-1.2-2.1-1.4-2.8-.2-.7.1-1.1.3-1.4.2-.3.4-.5.6-.7Z" />
+                </svg>
+              </span>
+              <span className="contact-card-content">
+                <span className="contact-card-label">WhatsApp</span>
+                <span className="contact-card-value">(91) 98640-2937</span>
+              </span>
+              <span className="contact-card-action">Chamar agora</span>
+            </a>
+
+            <div className="contact-alt" aria-label="Outras redes de contato">
+              <p>ou pelas outras redes sociais</p>
+              <div className="contact-alt-icons">
+                <a
+                  href="https://www.instagram.com/covildev/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-alt-link"
+                  aria-label="Instagram da Covil"
+                >
+                  <svg viewBox="0 0 24 24" role="img">
+                    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" />
+                    <circle cx="12" cy="12" r="4.2" />
+                    <circle cx="17.5" cy="6.6" r="1.1" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://linkedin.com/company/covildev"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-alt-link"
+                  aria-label="LinkedIn da Covil"
+                >
+                  <svg viewBox="0 0 24 24" role="img">
+                    <rect x="3.1" y="3.1" width="17.8" height="17.8" rx="3.3" />
+                    <path d="M8 10.2v6.6" />
+                    <circle cx="8" cy="7.5" r="1" />
+                    <path d="M11.6 16.8v-6.6h3v1c.4-.7 1.3-1.3 2.5-1.3 2 0 2.9 1.2 2.9 3.4v3.5h-3v-3.2c0-1-.3-1.7-1.2-1.7s-1.2.7-1.2 1.8v3.1Z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="mailto:covildev@gmail.com"
+                  className="contact-alt-link"
+                  aria-label="Email da Covil"
+                >
+                  <svg viewBox="0 0 24 24" role="img">
+                    <rect x="3" y="5.6" width="18" height="12.8" rx="2.1" />
+                    <path d="M3.8 7.1 12 13.2l8.2-6.1" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="site-footer" aria-labelledby="footer-title">
+        <div className="site-footer-inner">
+          <div className="site-footer-brand">
+            <img src="/img/nome-covil.svg" alt="Covil" />
+            <p>
+              Desenvolvemos softwares robustos, escaláveis e sob medida para transformar
+              ideias em soluções digitais.
+            </p>
+          </div>
+
+          <nav className="site-footer-nav" aria-label="Links rápidos">
+            <h2 id="footer-title">Links rápidos</h2>
+            <a href="#sobre">Sobre nós</a>
+            <a href="#projetos">Serviços</a>
+            <a href="#contato">Contato</a>
+          </nav>
+
+          <div className="site-footer-contact">
+            <h2>Contato</h2>
+            <a href="https://wa.me/5591986402937" target="_blank" rel="noreferrer">
+              WhatsApp: (91) 98640-2937
+            </a>
+            <a href="mailto:covildev@gmail.com">covildev@gmail.com</a>
+          </div>
+
+          <div className="site-footer-social">
+            <h2>Redes sociais</h2>
+            <div className="site-footer-social-icons">
+              <a
+                href="https://www.instagram.com/covildev/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram da Covil"
+              >
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" />
+                  <circle cx="12" cy="12" r="4.2" />
+                  <circle cx="17.5" cy="6.6" r="1.1" />
+                </svg>
+              </a>
+              <a
+                href="https://linkedin.com/company/covildev"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn da Covil"
+              >
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3.1" y="3.1" width="17.8" height="17.8" rx="3.3" />
+                  <path d="M8 10.2v6.6" />
+                  <circle cx="8" cy="7.5" r="1" />
+                  <path d="M11.6 16.8v-6.6h3v1c.4-.7 1.3-1.3 2.5-1.3 2 0 2.9 1.2 2.9 3.4v3.5h-3v-3.2c0-1-.3-1.7-1.2-1.7s-1.2.7-1.2 1.8v3.1Z" />
+                </svg>
+              </a>
+              <a href="mailto:covildev@gmail.com" aria-label="Email da Covil">
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3" y="5.6" width="18" height="12.8" rx="2.1" />
+                  <path d="M3.8 7.1 12 13.2l8.2-6.1" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="site-footer-bottom">
+          <p>© {new Date().getFullYear()} Covil Dev. Todos os direitos reservados.</p>
+        </div>
+      </footer>
     </div>
   );
 }

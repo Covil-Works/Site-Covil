@@ -180,4 +180,56 @@
     font-size: 1.4rem;
   }
 
+  .contact-section {
+    margin-top: 56px;
+    padding: 0;
+  }
+
+  .contact-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    margin-top: 22px;
+  }
+
+  .contact-card {
+    grid-template-columns: auto 1fr;
+    row-gap: 10px;
+  }
+
+  .contact-card-action {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .contact-alt {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 34px;
+  }
+
+  .site-footer-brand,
+  .site-footer-nav,
+  .site-footer-contact,
+  .site-footer-social {
+    grid-column: auto;
+  }
 }

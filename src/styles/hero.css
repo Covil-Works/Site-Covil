@@ -80,10 +80,21 @@
   font-size: 1rem;
   font-weight: 500;
   color: rgba(245, 247, 251, 0.96);
+  transition: color 0.2s ease, transform 0.2s ease;
+  transform-origin: center;
 }
 
 .menu a:hover {
   color: #fff;
+}
+
+.menu a:not(.cta-button) {
+  display: inline-block;
+}
+
+.menu a:not(.cta-button):hover,
+.menu a:not(.cta-button):focus-visible {
+  transform: scale(1.06);
 }
 
 .cta-button {
@@ -92,6 +103,16 @@
   border-radius: 10px;
   font-size: 0.9rem;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+  transform: scale(1.05);
+  box-shadow: 0 10px 22px rgba(5, 116, 71, 0.35);
 }
 
 .hero-text {
