@@ -340,6 +340,8 @@ function App() {
               </div>
             </article>
           </div>
+
+          <div className="forest-strip" aria-hidden="true" />
         </section>
       </main>
     </div>
