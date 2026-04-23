@@ -44,13 +44,22 @@
 .hero-content {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   width: min(100%, var(--container-width));
   min-height: 100%;
   margin: 0 auto;
   padding: 34px var(--container-gutter) 86px;
   display: grid;
   grid-template-rows: auto 1fr;
+}
+
+.hero-stage {
+  align-self: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 23vw, 300px);
+  align-items: center;
+  gap: clamp(16px, 3.8vw, 56px);
+  width: 100%;
 }
 
 .navbar {
@@ -116,8 +125,7 @@
 }
 
 .hero-text {
-  align-self: center;
-  max-width: 60%;
+  max-width: min(100%, 700px);
   margin: 0;
   text-align: left;
 }

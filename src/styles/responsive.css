@@ -11,6 +11,11 @@
     font-size: clamp(2rem, 4vw, 2.25rem);
   }
 
+  .hero-stage {
+    grid-template-columns: minmax(0, 1fr) clamp(150px, 20vw, 220px);
+    gap: clamp(12px, 3vw, 32px);
+  }
+
   .menu {
     gap: 18px;
   }
@@ -145,6 +150,11 @@
 
   .hero-text {
     max-width: 80%;
+  }
+
+  .hero-stage {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-text h1 {

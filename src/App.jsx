@@ -235,16 +235,24 @@ function App() {
             </div>
           </nav>
 
-          <section className="hero-text">
-            <h1>
-              Softwares <strong>robustos, escaláveis</strong>
-              <br />
-              e focados na necessidade real
-              <br />
-              do <strong>seu negócio.</strong>
-            </h1>
-            <p>Seu projeto no conforto e segurança do nosso covil.</p>
-          </section>
+          <div className="hero-stage">
+            <section className="hero-text">
+              <h1>
+                Softwares <strong>robustos, escaláveis</strong>
+                <br />
+                e focados na necessidade real
+                <br />
+                do <strong>seu negócio.</strong>
+              </h1>
+              <p>Seu projeto no conforto e segurança do nosso covil.</p>
+            </section>
+
+            <div className="hero-fireflies" aria-hidden="true">
+              <span className="hero-firefly hero-firefly--north" />
+              <span className="hero-firefly hero-firefly--middle" />
+              <span className="hero-firefly hero-firefly--south" />
+            </div>
+          </div>
         </div>
       </header>
 
