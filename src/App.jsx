@@ -217,9 +217,6 @@ function App() {
               <a href="#sobre" onClick={closeMobileMenu}>
                 Sobre nós
               </a>
-              <a href="#projetos" onClick={closeMobileMenu}>
-                Projetos
-              </a>
               <a href="#contato" onClick={closeMobileMenu}>
                 Contato
               </a>
