@@ -1,3 +1,5 @@
+﻿import "../styles/apps.css";
+
 function PrivacyPolicyPage({ appSlug }) {
   return (
     <main className="policy-shell">
@@ -110,7 +112,7 @@ function PrivacyPolicyPage({ appSlug }) {
         <h2>How do you give your consent?</h2>
         <p>
           By using the Application, you are giving your consent to the Service Provider processing of your information
-          as set forth in this Privacy Policy now and as amended by us. "Processing,� means using cookies on a
+          as set forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on a
           computer/hand held device or using or touching information in any way, including, but not limited to,
           collecting, storing, deleting, using, combining and disclosing information.
         </p>

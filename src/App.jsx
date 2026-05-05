@@ -31,8 +31,12 @@ function App() {
 
   const parts = pathname.slice(1).split("/").filter(Boolean);
 
-  if (parts.length === 1) {
-    const appSlug = parts[0];
+  if (parts[0] !== "apps") {
+    return <NotFoundPage pathname={pathname} />;
+  }
+
+  if (parts.length === 2) {
+    const appSlug = parts[1];
     const appInfo = APP_REGISTRY[appSlug];
 
     if (!appInfo) {
@@ -42,8 +46,8 @@ function App() {
     return <AppLandingPage appSlug={appSlug} appName={appInfo.name} />;
   }
 
-  if (parts.length === 2) {
-    const [appSlug, pageSlug] = parts;
+  if (parts.length === 3) {
+    const [, appSlug, pageSlug] = parts;
     const appInfo = APP_REGISTRY[appSlug];
 
     if (!appInfo) {
