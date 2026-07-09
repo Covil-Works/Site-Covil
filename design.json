@@ -1,0 +1,38 @@
+{
+  "brand": "Covil",
+  "typography": {
+    "primary": "Poppins, sans-serif",
+    "weights": [300, 400, 500, 600, 700, 800]
+  },
+  "colors": {
+    "background": {
+      "main": "#070a0e",
+      "black": "#000000"
+    },
+    "surface": {
+      "main": "#0e1518",
+      "alt": "#0e1218"
+    },
+    "text": {
+      "primary": "#f5f7fb",
+      "muted": "#c9d0dc"
+    },
+    "accent": {
+      "primary": "#057447"
+    },
+    "overlays": {
+      "hero": "#050709",
+      "forest": "#020a10"
+    }
+  },
+  "layout": {
+    "containerMaxWidth": "1200px",
+    "containerGutter": "20px"
+  },
+  "aestheticFeatures": [
+    "Dark mode predominante",
+    "Animações dinâmicas no scroll",
+    "Efeito de vagalumes (fireflies)",
+    "Cards interativos com rastreamento de ponteiro (mouse glow effect)"
+  ]
+}
