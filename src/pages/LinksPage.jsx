@@ -89,7 +89,7 @@ function LinksPage() {
           <div className="links-logo-wrap">
             <img src="/img/logo.svg" alt="Covil Dev Logo" className="links-logo" />
           </div>
-          <h1 className="links-title">Covil Dev</h1>
+          <img src="/img/nome-covil.svg" alt="Covil" className="links-title-image" />
           <p className="links-bio">
             Refúgio criativo. Desenvolvemos softwares sob medida.
           </p>
@@ -129,10 +129,6 @@ function LinksPage() {
           ))}
         </nav>
       </main>
-
-      <footer className="links-footer">
-        <img src="/img/nome-covil.svg" alt="Covil" className="links-footer-logo" />
-      </footer>
     </div>
   );
 }
