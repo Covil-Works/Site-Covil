@@ -3,7 +3,7 @@
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-top: 56px;
-  background-image: url("/img/forest-image.png");
+  background-image: url("/img/forest-image.webp");
   background-size: cover;
   background-position: center;
   overflow: hidden;
