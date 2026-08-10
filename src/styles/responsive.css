@@ -74,8 +74,15 @@
   }
 
   .hero-content {
-    padding-top: 20px;
-    padding: 20px;
+    padding: 95px 20px 30px;
+  }
+
+  .site-header-fixed {
+    padding: 16px 0;
+  }
+
+  .site-header-fixed.is-scrolled {
+    padding: 12px 0;
   }
 
   .navbar {

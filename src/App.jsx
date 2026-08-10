@@ -3,6 +3,7 @@ import AppLandingPage from "./pages/AppLandingPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import LinksPage from "./pages/LinksPage";
+import EquipePage from "./pages/EquipePage";
 
 const APP_REGISTRY = {
   splitup: {
@@ -29,10 +30,15 @@ function App() {
   if (pathname === "/") {
     return <HomePage />;
   }
+
+  if (pathname === "/equipe") {
+    return <EquipePage />;
+  }
   
   if (pathname === "/links") {
     return <LinksPage />;
   }
+
 
   const parts = pathname.slice(1).split("/").filter(Boolean);
 
