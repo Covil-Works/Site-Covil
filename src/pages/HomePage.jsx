@@ -318,7 +318,7 @@ function HomePage() {
 
           <div className="contact-grid">
             <a
-              href="https://wa.me/5591986402937"
+              href="https://wa.me/5591984085049"
               target="_blank"
               rel="noreferrer"
               className="contact-card contact-card--cta"
@@ -332,7 +332,7 @@ function HomePage() {
               </span>
               <span className="contact-card-content">
                 <span className="contact-card-label">WhatsApp</span>
-                <span className="contact-card-value">(91) 98640-2937</span>
+                <span className="contact-card-value">(91) 98408-5049</span>
               </span>
               <span className="contact-card-action">Chamar agora</span>
             </a>

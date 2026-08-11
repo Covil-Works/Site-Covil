@@ -9,7 +9,7 @@ function LinksPage() {
   const socialLinks = [
     {
       title: "WhatsApp",
-      url: "https://wa.me/5591986402937",
+      url: "https://wa.me/5591984085049",
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" role="img">
           <path d="M12.1 3.1a8.7 8.7 0 0 0-7.5 13.2L3 21l4.9-1.5a8.9 8.9 0 0 0 4.2 1.1h.1a8.8 8.8 0 0 0-.1-17.5Z" />

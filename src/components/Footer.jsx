@@ -20,8 +20,8 @@ function Footer() {
 
         <div className="site-footer-contact">
           <h2>Contato</h2>
-          <a href="https://wa.me/5591986402937" target="_blank" rel="noreferrer">
-            WhatsApp: (91) 98640-2937
+          <a href="https://wa.me/5591984085049" target="_blank" rel="noreferrer">
+            WhatsApp: (91) 98408-5049
           </a>
           <a href="mailto:covildev@gmail.com">covildev@gmail.com</a>
         </div>

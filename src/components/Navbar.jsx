@@ -88,7 +88,7 @@ function Navbar({ activePage = "" }) {
               Contato
             </a>
             <a
-              href="https://wa.me/5591986402937"
+              href="https://wa.me/5591984085049"
               target="_blank"
               rel="noreferrer"
               className="cta-button"
