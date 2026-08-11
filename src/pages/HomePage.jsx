@@ -189,7 +189,7 @@ function HomePage() {
               <h1>
                 Softwares <strong>robustos, escaláveis</strong>
                 <br />
-                e focados na necessidade real
+                e focados na necessidade
                 <br />
                 do <strong>seu negócio.</strong>
               </h1>
