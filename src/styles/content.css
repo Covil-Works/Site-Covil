@@ -343,6 +343,7 @@
   background: var(--panel);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   transform: translateY(calc(var(--hero-scroll-progress, 0) * -280px));
+  margin-bottom: -280px;
   will-change: transform;
 }
 
@@ -434,7 +435,7 @@
 
 .site-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 14px var(--container-gutter) calc(14px + 280px);
+  padding: 14px var(--container-gutter);
   text-align: center;
 }
 
