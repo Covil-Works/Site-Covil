@@ -318,7 +318,10 @@ function HomePage() {
         <section id="contato" className="contact-section" aria-labelledby="contact-heading">
           <div className="contact-header">
             <h2 id="contact-heading">Vamos tirar seu projeto do papel?</h2>
-            <p>Fale com a Covil no WhatsApp e comece agora mesmo a construção do seu software.</p>
+            <p>
+              Fale com a Covil no WhatsApp e comece agora <br />
+              mesmo a construção do seu software.
+            </p>
           </div>
 
           <div className="contact-grid">
