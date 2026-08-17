@@ -4,7 +4,7 @@
   padding: 0 var(--container-gutter) 72px;
   position: relative;
   z-index: 2;
-  transform: translateY(calc(var(--hero-scroll-progress, 0) * -150px));
+  transform: translateY(calc(var(--hero-scroll-progress, 0) * -280px));
   will-change: transform;
 }
 
@@ -336,7 +336,7 @@
   z-index: 2;
   background: var(--panel);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transform: translateY(calc(var(--hero-scroll-progress, 0) * -150px));
+  transform: translateY(calc(var(--hero-scroll-progress, 0) * -280px));
   will-change: transform;
 }
 
@@ -428,7 +428,7 @@
 
 .site-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 14px var(--container-gutter) calc(14px + 150px);
+  padding: 14px var(--container-gutter) calc(14px + 280px);
   text-align: center;
 }
 
