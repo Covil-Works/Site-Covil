@@ -138,29 +138,7 @@
   margin: 0;
 }
 
-.service-cta {
-  background: none;
-  border: none;
-  color: #fff;
-  padding: 0;
-  font-size: 0.86rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: auto;
-}
 
-.cta-arrow {
-  font-size: 1rem;
-  transition: transform 0.2s ease;
-}
-
-.service-card:hover .cta-arrow,
-.service-card:focus-within .cta-arrow {
-  transform: translateX(4px);
-}
 
 @media (max-width: 900px) {
   .about-inner {

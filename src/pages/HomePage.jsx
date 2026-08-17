@@ -236,7 +236,7 @@ function HomePage() {
                 <div className="service-card-desc">
                   <p>Sites institucionais e landing pages para posicionar o seu negócio na internet com extrema qualidade.</p>
                 </div>
-                <button className="service-cta">Saiba mais <span className="cta-arrow">↗</span></button>
+                
               </article>
 
               <article className="service-card">
@@ -251,7 +251,7 @@ function HomePage() {
                 <div className="service-card-desc">
                   <p>Aplicativos para celular nativos ou híbridos, desenhados para atender às suas necessidades específicas.</p>
                 </div>
-                <button className="service-cta">Saiba mais <span className="cta-arrow">↗</span></button>
+                
               </article>
 
               <article className="service-card">
@@ -269,7 +269,7 @@ function HomePage() {
                 <div className="service-card-desc">
                   <p>Sistemas completos em nuvem e painéis administrativos acessíveis de qualquer navegador moderno.</p>
                 </div>
-                <button className="service-cta">Saiba mais <span className="cta-arrow">↗</span></button>
+                
               </article>
 
             </div>
