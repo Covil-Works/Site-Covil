@@ -1,0 +1,294 @@
+/* solutions.css */
+.solutions-page, .solution-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Solutions Page Title Section */
+.solutions-title-section {
+  max-width: 720px;
+  margin: 120px auto 48px;
+  padding: 0 var(--container-gutter);
+  text-align: center;
+}
+
+.solutions-title-section h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+.solutions-title-section h1 strong {
+  color: #fff;
+  font-weight: 800;
+}
+
+.solutions-title-section p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(.98rem, 1.6vw, 1.1rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.solutions-container {
+  width: min(100%, var(--container-width));
+  margin: 0 auto;
+  padding: 0 var(--container-gutter) 100px;
+}
+
+/* Solutions List & Grid */
+.solutions-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+}
+
+.solutions-list-header h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 600;
+}
+
+.solutions-list-header span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  padding-top: 28px;
+}
+
+/* Solution Card */
+.solution-card {
+  position: relative;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.solution-card:hover, .solution-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 90%, var(--accent) 10%);
+  outline: none;
+}
+
+.solution-card-topline {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(245, 247, 251, 0.58);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: auto;
+}
+
+.solution-status {
+  color: var(--accent);
+}
+
+.solution-card-content p {
+  margin: 0 0 7px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.solution-card h3 {
+  margin: 0 0 10px;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.solution-card-content > span {
+  display: block;
+  max-width: 80%;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.solution-card-arrow {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  color: var(--text);
+  font-size: 1.4rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.solution-card:hover .solution-card-arrow {
+  transform: translate(4px, -4px);
+  color: var(--accent);
+}
+
+/* Solution Detail Page */
+.solution-detail {
+  min-height: min(760px, 86vh);
+  padding: 152px max(20px, calc((100vw - var(--container-width))/2)) 100px;
+  display: flex;
+  align-items: center;
+}
+
+.solution-detail-inner {
+  width: 100%;
+}
+
+.solution-back-link {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.solution-back-link span {
+  color: var(--accent);
+  margin-right: 8px;
+  transition: transform 0.2s ease;
+}
+
+.solution-back-link:hover {
+  color: var(--text);
+}
+
+.solution-back-link:hover span {
+  transform: translateX(-4px);
+}
+
+.solution-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 0.75fr);
+  gap: clamp(60px, 10vw, 120px);
+  align-items: center;
+  margin-top: 64px;
+}
+
+.solutions-kicker {
+  margin: 0 0 16px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.solution-detail-content h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 5rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.solution-detail-description {
+  margin: 24px 0 0;
+  color: var(--text);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.solution-detail-support {
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 16px 0 36px;
+  font-size: 0.98rem;
+}
+
+.solution-primary-link {
+  display: inline-flex;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.solution-primary-link:hover {
+  transform: translateY(-2px);
+  background-color: color-mix(in srgb, var(--accent) 85%, #fff 15%);
+}
+
+.solution-detail-visual {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-visual-placeholder {
+  width: 50%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,.1);
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  box-shadow: 0 0 60px rgba(5, 116, 71, 0.15);
+}
+
+.solution-visual-placeholder span {
+  color: var(--accent);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+@media(max-width: 720px) {
+  .solutions-title-section {
+    margin: 64px auto 34px;
+  }
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+  .solution-card {
+    min-height: 280px;
+    padding: 24px;
+  }
+  .solution-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-top: 48px;
+  }
+  .solution-detail-visual {
+    width: min(80vw, 360px);
+    justify-self: center;
+  }
+}

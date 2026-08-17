@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  height: min(100svh, 500px);
+  height: min(100svh, 850px);
   overflow: hidden;
   isolation: isolate;
   z-index: 0;
@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: min(100svh, 500px);
+  height: min(100svh, 850px);
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
@@ -52,6 +52,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transform: translateY(calc(var(--hero-scroll-progress, 0) * 180px));
+  opacity: calc(1 - var(--hero-scroll-progress, 0) * 1.5);
+  will-change: transform, opacity;
 }
 
 .site-header-fixed {

@@ -206,70 +206,75 @@ function HomePage() {
       </header>
 
       <main className="content">
-        <section id="sobre" className="about-card" ref={aboutCardRef}>
-          <div className="about-logo-wrap">
-            <img src="/img/logo.svg" alt="Logo Covil" className="about-logo" />
-          </div>
-          <div className="about-text">
-            <h2>Sobre nós</h2>
-            <p>
-              Uma ideia só tem impacto quando se torna realidade, e para isso, ela precisa de um ambiente focado em construção e excelência técnica. Esse lugar é a Covil. Do Norte do Brasil para o mundo, desenvolvemos softwares sob medida de acordo com as suas necessidades.
-            </p>
-          </div>
-        </section>
+        <div className="main-content-wrapper">
+          <section id="sobre" className="about-section" ref={aboutCardRef}>
+            <h2 className="section-title">Sobre nós</h2>
+            <div className="about-inner">
+              <img src="/img/logo.svg" alt="Logo Covil" className="about-logo" />
+              <div className="about-text">
+                <p>
+                  Uma ideia só tem impacto quando se torna realidade, e para isso, ela precisa de um ambiente focado em construção e excelência técnica. Esse lugar é a Covil. Do Norte do Brasil para o mundo, desenvolvemos softwares sob medida de acordo com as suas necessidades.
+                </p>
+              </div>
+            </div>
+          </section>
 
-        <h2 className="services-heading">Nossos Serviços</h2>
+          <section id="projetos" className="services-section">
+            <h2 className="section-title">Nossos Serviços</h2>
+            <div className="services-grid">
+              
+              <article className="service-card">
+                <div className="service-card-icon">
+                  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18" />
+                    <path d="M12 3a15 15 0 0 1 0 18" />
+                    <path d="M12 3a15 15 0 0 0 0 18" />
+                  </svg>
+                </div>
+                <h3 className="service-card-title">Sites institucionais</h3>
+                <div className="service-card-desc">
+                  <p>Sites institucionais e landing pages para posicionar o seu negócio na internet com extrema qualidade.</p>
+                </div>
+                
+              </article>
 
-        <section id="projetos" className="services">
-          <article>
-            <h3 className="service-title">
-              <span className="service-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M3 12h18" />
-                  <path d="M12 3a15 15 0 0 1 0 18" />
-                  <path d="M12 3a15 15 0 0 0 0 18" />
-                </svg>
-              </span>
-              <span>Sites</span>
-            </h3>
-            <p>
-              Sites institucionais e landing pages para posicionar o seu negócio na
-              internet.
-            </p>
-          </article>
+              <article className="service-card">
+                <div className="service-card-icon">
+                  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                    <rect x="7" y="2.5" width="10" height="19" rx="2.2" ry="2.2" />
+                    <path d="M10 5h4" />
+                    <circle cx="12" cy="18.5" r="0.7" />
+                  </svg>
+                </div>
+                <h3 className="service-card-title">Aplicativos Mobile</h3>
+                <div className="service-card-desc">
+                  <p>Aplicativos para celular nativos ou híbridos, desenhados para atender às suas necessidades específicas.</p>
+                </div>
+                
+              </article>
 
-          <article>
-            <h3 className="service-title">
-              <span className="service-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <rect x="7" y="2.5" width="10" height="19" rx="2.2" ry="2.2" />
-                  <path d="M10 5h4" />
-                  <circle cx="12" cy="18.5" r="0.7" />
-                </svg>
-              </span>
-              <span>Aplicativos Mobile</span>
-            </h3>
-            <p>Aplicativos para celular personalizados que atendem às suas necessidades específicas.</p>
-          </article>
+              <article className="service-card">
+                <div className="service-card-icon">
+                  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                    <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" ry="2.2" />
+                    <path d="M3.5 8.5h17" />
+                    <circle cx="6.3" cy="6.5" r="0.8" />
+                    <circle cx="9.1" cy="6.5" r="0.8" />
+                    <path d="M9 12.2 7 14.2l2 2" />
+                    <path d="M14 12.2 16 14.2l-2 2" />
+                  </svg>
+                </div>
+                <h3 className="service-card-title">Sistemas Web</h3>
+                <div className="service-card-desc">
+                  <p>Sistemas completos em nuvem e painéis administrativos acessíveis de qualquer navegador moderno.</p>
+                </div>
+                
+              </article>
 
-          <article>
-            <h3 className="service-title">
-              <span className="service-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" ry="2.2" />
-                  <path d="M3.5 8.5h17" />
-                  <circle cx="6.3" cy="6.5" r="0.8" />
-                  <circle cx="9.1" cy="6.5" r="0.8" />
-                  <path d="M9 12.2 7 14.2l2 2" />
-                  <path d="M14 12.2 16 14.2l-2 2" />
-                </svg>
-              </span>
-              <span>Sistemas Web</span>
-            </h3>
-            <p>Sistemas completos acessíveis de qualquer lugar diretamente pelo navegador.</p>
-          </article>
-        </section>
+            </div>
+          </section>
+        </div>
 
         <section className="forest-section">
           <div className="forest-overlay" />
@@ -313,7 +318,10 @@ function HomePage() {
         <section id="contato" className="contact-section" aria-labelledby="contact-heading">
           <div className="contact-header">
             <h2 id="contact-heading">Vamos tirar seu projeto do papel?</h2>
-            <p>Fale com a Covil no WhatsApp e comece agora mesmo a construção do seu software.</p>
+            <p>
+              Fale com a Covil no WhatsApp e comece agora <br />
+              mesmo a construção do seu software.
+            </p>
           </div>
 
           <div className="contact-grid">

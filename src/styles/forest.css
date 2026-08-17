@@ -42,8 +42,8 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 600;
 }
 
 .forest-content {
@@ -131,14 +131,14 @@
 
 .why-card-left h3 {
   margin: 0;
-  font-size: clamp(1.6rem, 2.1vw, 2.1rem);
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
   line-height: 1.35;
   font-weight: 700;
 }
 
 .why-card-right p {
   margin: 0;
-  font-size: 0.98rem;
+  font-size: 1.15rem;
   line-height: 1.7;
   color: var(--muted);
 }

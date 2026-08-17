@@ -81,6 +81,13 @@ function Navbar({ activePage = "" }) {
               Equipe
             </a>
             <a
+              href="/solucoes"
+              onClick={closeMobileMenu}
+              className={activePage === "solucoes" ? "is-active" : ""}
+            >
+              Soluções
+            </a>
+            <a
               href="/#contato"
               onClick={closeMobileMenu}
               className={activePage === "contato" ? "is-active" : ""}
