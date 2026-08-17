@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  height: min(100svh, 500px);
+  height: min(100svh, 850px);
   overflow: hidden;
   isolation: isolate;
   z-index: 0;
@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: min(100svh, 500px);
+  height: min(100svh, 850px);
   z-index: 0;
   overflow: hidden;
   pointer-events: none;

@@ -46,13 +46,8 @@
   position: absolute;
   inset: -2px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent, #057447) 0%, transparent 100%);
+  background: var(--accent, #057447);
   z-index: -1;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-.links-logo-wrap:hover::before {
   opacity: 1;
 }
 
@@ -128,23 +123,11 @@
   overflow: hidden;
 }
 
-.links-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
 .links-card:hover {
   transform: translateY(-3px);
   border-color: rgba(5, 116, 71, 0.5);
   box-shadow: 0 8px 24px rgba(5, 116, 71, 0.15);
-}
-
-.links-card:hover::before {
-  transform: translateX(100%);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .links-card-icon {

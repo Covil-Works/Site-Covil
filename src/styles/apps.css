@@ -3,10 +3,7 @@
   display: grid;
   place-items: center;
   padding: clamp(2rem, 5vw, 4rem) 1.25rem;
-  background:
-    radial-gradient(circle at 20% 15%, rgba(224, 201, 136, 0.2), transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(90, 121, 99, 0.25), transparent 42%),
-    #0f1b16;
+  background: #0f1b16;
 }
 
 .policy-card {
