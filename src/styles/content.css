@@ -4,8 +4,6 @@
   padding: 0 var(--container-gutter) 72px;
   position: relative;
   z-index: 2;
-  transform: translateY(calc(var(--hero-scroll-progress, 0) * -280px));
-  will-change: transform;
 }
 
 .content::before {
@@ -342,9 +340,6 @@
   z-index: 2;
   background: var(--panel);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transform: translateY(calc(var(--hero-scroll-progress, 0) * -280px));
-  margin-bottom: -280px;
-  will-change: transform;
 }
 
 .site-footer-inner {
