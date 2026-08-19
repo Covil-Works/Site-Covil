@@ -73,8 +73,13 @@
     height: min(100svh, 500px);
   }
 
+  .hero-bg {
+    background-position: calc(50% - 30px) center;
+  }
+
   .hero-content {
-    padding: 95px 20px 10px;
+    justify-content: center;
+    padding: 95px 20px;
   }
 
   .site-header-fixed {
@@ -157,12 +162,16 @@
   }
 
   .hero-text {
-    max-width: 80%;
+    max-width: 90%;
   }
 
   .hero-stage {
     position: relative;
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-text {
+    transform: translateY(clamp(36px, 10vh, 56px));
   }
 
   .hero-text h1 {
@@ -171,6 +180,10 @@
 
   .content {
     margin-top: 0;
+  }
+
+  .content::before {
+    border-radius: 28px 28px 0 0;
   }
 
   .services {

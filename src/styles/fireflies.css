@@ -133,7 +133,7 @@
 @media (max-width: 720px) {
   .hero-fireflies {
     position: absolute;
-    top: 8%;
+    top: 88%;
     right: 2%;
     width: clamp(104px, 27vw, 134px);
     height: clamp(88px, 24vw, 126px);
