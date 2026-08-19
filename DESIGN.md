@@ -38,3 +38,21 @@ A paleta de cores foca em tons muito escuros para o fundo, criando profundidade,
 - Na seção Sobre, a logo fica à esquerda no desktop, com 30px até o texto; no mobile, fica acima do texto e tudo é centralizado.
 - A seção Por que a Covil usa títulos com as mesmas propriedades de Sobre e Nossos Serviços; suas tiras de textura são finas e o título fica dentro do container da imagem, alinhado à esquerda.
 - O botão do WhatsApp usa o verde de destaque #057447.
+## Regras visuais implementadas na home
+
+### Hero
+- O título usa texto claro, com peso regular (`400`) no conteúdo comum.
+- Os trechos destacados continuam em bold (`700`), mas herdam a cor clara do título; não recebem verde.
+- O texto atual é: “Softwares robustos / focados na necessidade / do seu negócio.”
+- O ponto final fica fora do trecho em bold, para não receber o mesmo peso tipográfico.
+
+### Títulos de seção
+- Os títulos gerais usam a mesma escala do título de contato: `clamp(1.8rem, 5vw, 3.4rem)`.
+- O título “Vamos tirar seu projeto do papel?” e o texto de apoio ficam alinhados à esquerda, como os demais títulos de seção.
+- O parágrafo de contato não possui quebra de linha forçada; a largura disponível decide a quebra naturalmente.
+
+### Vagalumes
+- Os vagalumes são elementos HTML animados e não usam imagens.
+- O núcleo tem `2px` e é desenhado por `.hero-firefly::before`, com círculo branco sobre três camadas de `box-shadow`.
+- O brilho mantém a linguagem amarela do efeito: camada interna concentrada, camada média translúcida e camada externa difusa.
+- A estrutura, as posições, o deslocamento e o piscar continuam controlados por CSS e pelas animações existentes.

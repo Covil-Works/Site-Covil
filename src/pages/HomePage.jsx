@@ -187,11 +187,11 @@ function HomePage() {
           <div className="hero-stage">
             <section className="hero-text">
               <h1>
-                Softwares <strong>robustos, escaláveis</strong>
+                Softwares <strong>robustos</strong>
                 <br />
-                e focados na necessidade
+                focados na necessidade
                 <br />
-                do <strong>seu negócio.</strong>
+                do <strong>seu negócio</strong>.
               </h1>
               <p>Seu projeto no conforto e segurança do nosso covil.</p>
             </section>
@@ -319,8 +319,7 @@ function HomePage() {
           <div className="contact-header">
             <h2 id="contact-heading">Vamos tirar seu projeto do papel?</h2>
             <p>
-              Fale com a Covil no WhatsApp e comece agora <br />
-              mesmo a construção do seu software.
+              Fale com a Covil no WhatsApp e comece agora mesmo a construção do seu software.
             </p>
           </div>
 

@@ -34,7 +34,7 @@
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 5.5vw, 4.7rem);
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
   margin: 0 0 50px 0;
   font-weight: 700;
   line-height: 0.95;
@@ -180,7 +180,7 @@
 .contact-header {
   max-width: none;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .contact-header h2 {
