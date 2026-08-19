@@ -2,7 +2,7 @@
   position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  margin-top: 56px;
+  margin-top: var(--section-max);
   background-image: url("/img/forest-image.webp");
   background-size: cover;
   background-position: center;
@@ -44,7 +44,7 @@
   z-index: 1;
   width: min(100%, var(--container-width));
   margin: 0 auto;
-  padding: 60px var(--container-gutter) 70px;
+  padding: var(--section-max) var(--container-gutter) 70px;
 }
 
 .why-card {

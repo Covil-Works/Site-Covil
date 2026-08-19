@@ -44,9 +44,8 @@
 
 /* Sobre Nós */
 .about-section {
-  padding-top: 60px;
   padding: var(--section-max) 0 0;
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 
 
@@ -91,10 +90,14 @@
   gap: 30px;
 }
 
+.services-section .section-title {
+  margin-bottom: 60px;
+}
+
 .service-card {
   display: flex;
   flex-direction: column;
-  background: transparent;
+  background: var(--color-surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   padding: 28px;

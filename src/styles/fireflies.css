@@ -133,11 +133,16 @@
 @media (max-width: 720px) {
   .hero-fireflies {
     position: absolute;
-    top: 54%;
+    top: 8%;
     right: 2%;
     width: clamp(104px, 27vw, 134px);
     height: clamp(88px, 24vw, 126px);
+    overflow: visible;
     opacity: calc((1 - clamp(0, calc(var(--hero-scroll-progress) * var(--firefly-fade-speed)), 1)) * 0.84);
+  }
+
+  .hero-firefly {
+    --size: 2px;
   }
 }
 
