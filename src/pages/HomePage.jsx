@@ -208,7 +208,7 @@ function HomePage() {
       <main className="content">
         <div className="main-content-wrapper">
           <section id="sobre" className="about-section" ref={aboutCardRef}>
-            <h2 className="section-title">Sobre nós</h2>
+            <h2 className="section-title">Sobre</h2>
             <div className="about-inner">
               <img src="/img/logo.svg" alt="Logo Covil" className="about-logo" />
               <div className="about-text">
