@@ -53,6 +53,6 @@ A paleta de cores foca em tons muito escuros para o fundo, criando profundidade,
 
 ### Vagalumes
 - Os vagalumes são elementos HTML animados e não usam imagens.
-- O núcleo tem `2px` e é desenhado por `.hero-firefly::before`, com círculo branco sobre três camadas de `box-shadow`.
-- O brilho mantém a linguagem amarela do efeito: camada interna concentrada, camada média translúcida e camada externa difusa.
+- Os núcleos variam entre `2px`, `3px` e `4px` e são desenhados por `.hero-firefly::before`, com círculo branco sobre três camadas de `box-shadow`.
+- O brilho usa a linguagem verde da referência: camada interna concentrada, camada média translúcida e camada externa difusa.
 - A estrutura, as posições, o deslocamento e o piscar continuam controlados por CSS e pelas animações existentes.

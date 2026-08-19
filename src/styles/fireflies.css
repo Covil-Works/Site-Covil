@@ -2,7 +2,8 @@
   --firefly-fade-speed: 1.35;
   position: relative;
   justify-self: end;
-  z-index: 6;
+  z-index: 10;
+  isolation: isolate;
   width: clamp(170px, 20vw, 250px);
   height: clamp(145px, 18vw, 220px);
   overflow: hidden;
@@ -44,14 +45,14 @@
   border-radius: 50%;
   background: #fff;
   box-shadow:
-    0 0 7px 3px rgb(255 231 130 / 90%),
-    0 0 20px 9px rgb(255 202 74 / 48%),
-    0 0 38px 15px rgb(245 166 0 / 20%);
+    0 0 5px 2px rgb(166 255 130 / 90%),
+    0 0 14px 6px rgb(74 255 101 / 48%),
+    0 0 26px 10px rgb(35 207 84 / 20%);
 }
 
 .hero-firefly--north {
-  top: 30%;
-  left: 10%;
+  top: 26%;
+  left: 5%;
   --drift-duration: 5.6s;
   --flicker-duration: 8.6s;
   --drift-delay: -1.9s;
@@ -61,8 +62,9 @@
 }
 
 .hero-firefly--middle {
-  top: 46%;
-  left: 76%;
+  --size: 3px;
+  top: 45%;
+  left: 83%;
   --drift-duration: 6.1s;
   --flicker-duration: 9.2s;
   --drift-delay: -2.8s;
@@ -72,8 +74,9 @@
 }
 
 .hero-firefly--south {
-  top: 79%;
-  left: 22%;
+  --size: 4px;
+  top: 84%;
+  left: 16%;
   --drift-duration: 5.3s;
   --flicker-duration: 7.8s;
   --drift-delay: -0.8s;
