@@ -1,7 +1,7 @@
 :root {
   /* Base palette */
-  --ink: oklch(0.2 0.018 72);
-  --muted-ink: oklch(0.46 0.025 72);
+  --ink: #f5f7fb;
+  --muted-ink: #c9d0dc;
   --paper: #070a0e;
   --honey: #057447;
   --line: rgba(255, 255, 255, 0.12);
@@ -20,7 +20,7 @@
   --container-gutter: 1.25rem;
   --content-gutter: 1.25rem;
   --section-min: 5rem;
-  --section-max: 9rem;
+  --section-max: 60px;
   --radius-card: 14px;
   --radius-device: 0.85rem;
   --radius-pill: 999px;

@@ -279,11 +279,11 @@ function HomePage() {
         <section className="forest-section">
           <div className="forest-overlay" />
 
-          <div className="forest-strip">
-            <h2>Por que a Covil?</h2>
-          </div>
+          <div className="forest-strip" aria-hidden="true" />
 
           <div className="forest-content">
+            <h2 className="section-title">Por que a Covil?</h2>
+
             <article className="why-card" ref={whyCardRef}>
               <div className="why-card-left">
                 <h3>

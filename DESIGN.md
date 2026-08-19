@@ -29,3 +29,12 @@ A paleta de cores foca em tons muito escuros para o fundo, criando profundidade,
   - Animações imersivas de vagalumes ("fireflies") que dão um ar lúdico e vivo à página inicial.
   - Interações ricas de ponteiro (mouse hover glow) nos cards de serviços, onde a iluminação segue o mouse do usuário.
   - Opacidade de cards baseada na posição do scroll (ex: card "Por que a Covil?").
+
+
+## Diretrizes refinadas
+- Manter exclusivamente a paleta original da Covil: fundo #070a0e, superfícies #0e1518 e #0e1218, texto #f5f7fb, texto secundário #c9d0dc e verde #057447. Não usar laranja.
+- Usar Poppins, com hero e títulos de seção em escala forte porém contida; títulos de seção têm 50px de distância do conteúdo no desktop e 40px no mobile.
+- O container principal acompanha o cabeçalho recolhido: min(calc(100% - 32px), 1120px). O espaçamento vertical entre seções é 60px.
+- Na seção Sobre, a logo fica à esquerda no desktop, com 30px até o texto; no mobile, fica acima do texto e tudo é centralizado.
+- A seção Por que a Covil usa títulos com as mesmas propriedades de Sobre e Nossos Serviços; suas tiras de textura são finas e o título fica dentro do container da imagem, alinhado à esquerda.
+- O botão do WhatsApp usa o verde de destaque #057447.

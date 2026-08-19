@@ -23,3 +23,9 @@ A Covil desenvolve **softwares sob medida** focados na necessidade real do negó
 - Empresas e empreendedores que precisam tirar um projeto do papel ou modernizar seus processos digitais.
 - Negócios que buscam posicionamento na internet (via sites/landing pages).
 - Organizações que necessitam de sistemas robustos e customizados (mobile ou web) que ferramentas prontas de mercado não conseguem atender de forma eficiente.
+
+
+## Preferências confirmadas de experiência
+- A experiência deve permanecer noturna, profissional e segura, sem laranja ou tons quentes alaranjados.
+- A interface deve privilegiar respiro controlado, alinhamento consistente e hierarquia tipográfica clara.
+- No mobile, a seção Sobre deve empilhar logo e texto, com alinhamento central.

@@ -34,8 +34,8 @@
 }
 
 .section-title {
-  font-size: clamp(2.8rem, 6vw, 5.2rem);
-  margin: 0 0 40px 0;
+  font-size: clamp(2.5rem, 5.5vw, 4.7rem);
+  margin: 0 0 50px 0;
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -152,17 +152,28 @@
 
 
 @media (max-width: 900px) {
+  .section-title {
+    margin-bottom: 40px;
+  }
+
   .about-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 30px;
-}
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .about-inner .about-logo {
+    max-width: 100%;
+  }
+
+  .about-text {
+    width: 100%;
+  }
 }
 
 .contact-section {
   margin-top: var(--section-max);
-  border-top: 1px solid var(--line);
   padding: 0;
 }
 
@@ -293,7 +304,7 @@
   font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
-  background: var(--ink);
+  background: var(--accent);
   border-radius: 999px;
   padding: 11px 18px;
   white-space: nowrap;

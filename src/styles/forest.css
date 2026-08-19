@@ -20,10 +20,11 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  height: 56px;
+  height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: max(16px, calc((100% - 1120px) / 2));
   background: rgba(4, 15, 22, 0.7);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -36,14 +37,6 @@
   background: url("/img/barra.svg") center / cover no-repeat;
   z-index: 0;
   pointer-events: none;
-}
-
-.forest-strip h2 {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 600;
 }
 
 .forest-content {
@@ -130,14 +123,14 @@
 }
 
 .why-card-left h3 {
-  margin: 0;
+  margin: 0 0 32px;
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
   line-height: 1.35;
   font-weight: 700;
 }
 
 .why-card-right p {
-  margin: 0;
+  margin: 0 0 32px;
   font-size: 1.15rem;
   line-height: 1.7;
   color: var(--muted);
