@@ -147,38 +147,11 @@
   inset: 0;
   z-index: 0;
   background: #61afaf;
+  transition: background-color 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero[data-theme="dark"] .hero__background {
-  background: var(--hero-bg-dark);
-}
-
-.hero__background-image {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  display: block;
-  width: var(--composition-width);
-  max-width: none;
-  height: auto;
-  transform: translateX(-50%);
-  transition: opacity 650ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero__background-image--light {
-  opacity: 1;
-}
-
-.hero__background-image--dark {
-  opacity: 0;
-}
-
-.hero[data-theme="dark"] .hero__background-image--light {
-  opacity: 0;
-}
-
-.hero[data-theme="dark"] .hero__background-image--dark {
-  opacity: 1;
+  background: #090b0d;
 }
 
 .hero__birds {

@@ -251,10 +251,7 @@ function HomePage() {
           "--mobile-hero-menu-offset-y": `${MOBILE_HERO_MENU_OFFSET_Y}px`,
         }}
       >
-        <div className="hero__background" aria-hidden="true">
-          <img className="hero__background-image hero__background-image--light" src="/img/bg-light.svg" alt="" />
-          <img className="hero__background-image hero__background-image--dark" src="/img/bg-dark.svg" alt="" />
-        </div>
+        <div className="hero__background" aria-hidden="true" />
 
         <div className="hero__birds" aria-hidden="true">
           <img className="hero__bird hero__bird--1" src="/img/b1.png" alt="" />
