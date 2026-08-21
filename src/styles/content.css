@@ -192,6 +192,8 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  color: var(--text);
+  transition: color 240ms ease;
 }
 
 @media (min-width: 768px) {
@@ -205,6 +207,7 @@
   font-size: 1.15rem;
   line-height: 1.65;
   color: var(--muted);
+  transition: color 240ms ease;
 }
 
 .contact-grid {
@@ -222,11 +225,11 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--line);
   background: var(--color-surface);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 240ms ease;
 }
 
 .contact-card-content {
@@ -275,9 +278,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #dce7f7;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--ink);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--line);
+  transition: color 240ms ease, background-color 240ms ease, border-color 240ms ease;
 }
 
 .contact-card-icon svg {
@@ -292,7 +296,8 @@
 
 .contact-card-label {
   font-size: 1rem;
-  color: rgba(245, 247, 251, 0.84);
+  color: var(--muted);
+  transition: color 240ms ease;
 }
 
 .contact-card-value {
@@ -301,6 +306,7 @@
   line-height: 1.45;
   color: var(--text);
   word-break: break-word;
+  transition: color 240ms ease;
 }
 
 .contact-card-action {
@@ -319,12 +325,15 @@
   justify-content: center;
   gap: 10px;
   color: var(--muted);
+  transition: color 240ms ease;
 }
 
 .contact-alt p {
   margin: 0;
   font-size: 1rem;
   line-height: 1.4;
+  color: var(--muted);
+  transition: color 240ms ease;
 }
 
 .contact-alt-icons {
@@ -340,17 +349,17 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  color: rgba(245, 247, 251, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.02);
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: var(--color-surface);
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 240ms ease;
 }
 
 .contact-alt-link:hover,
 .contact-alt-link:focus-visible {
   transform: translateY(-2px);
   border-color: var(--ink);
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .contact-alt-link svg {
