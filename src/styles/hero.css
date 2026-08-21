@@ -303,6 +303,7 @@
 
 /* Theme toggle (inside navbar) */
 .theme-toggle-nav {
+  position: relative;
   display: grid;
   width: 1.85rem;
   aspect-ratio: 1;
@@ -337,6 +338,34 @@
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Alignment and spacing adjustments for desktop menu */
+@media (min-width: 721px) {
+  .theme-toggle-nav {
+    margin-left: 5px;
+  }
+  
+  .theme-toggle-nav::before {
+    content: "";
+    position: absolute;
+    right: calc(100% + 17px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 14px;
+    background: currentColor;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+}
+
+/* Alignment and spacing adjustments for mobile menu */
+@media (max-width: 720px) {
+  .theme-toggle-nav {
+    margin-top: 10px;
+    margin-left: 5px;
+  }
 }
 
 /* Hero Content & Layers */
