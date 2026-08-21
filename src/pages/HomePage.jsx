@@ -1,51 +1,121 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+const MOBILE_STACK_START = 20;
+const MOBILE_STACK_GAP = 10;
+const DESKTOP_STACK_START = 300;
+const DESKTOP_STACK_GAP = 30;
+const DESKTOP_STACK_3_TOP = DESKTOP_STACK_START + DESKTOP_STACK_GAP * 2;
+const HERO_CONTENT_OFFSET_Y = -100;
+const MOBILE_HERO_PHOTO_OFFSET_Y = -90;
+const MOBILE_HERO_MENU_OFFSET_Y = -120;
+const HERO_CONTENT_FADE = {
+  start: 0.55,
+  end: 0.8,
+};
+const STACK_SCROLL_SPEED = {
+  desktop: [1, 0.7, 0.4],
+  mobile: [0.8, 0.55, 0.3],
+};
+const DESKTOP_PARALLAX_DISTANCE = 60;
+
+const heroStacks = [
+  { light: "/img/stack1-light.svg", dark: "/img/stack1-dark.svg" },
+  { light: "/img/stack2-light.svg", dark: "/img/stack2-dark.svg" },
+  { light: "/img/stack3-light.svg", dark: "/img/stack3-dark.svg" },
+].map((stack, index) => ({
+  ...stack,
+  desktopTop: DESKTOP_STACK_START + DESKTOP_STACK_GAP * index,
+  mobileTop: MOBILE_STACK_START + MOBILE_STACK_GAP * index,
+}));
+
 function HomePage() {
+  const [heroTheme, setHeroTheme] = useState("dark");
   const pageRef = useRef(null);
   const heroRef = useRef(null);
   const aboutCardRef = useRef(null);
   const whyCardRef = useRef(null);
 
-
   useEffect(() => {
-    let rafId = null;
+    const hero = heroRef.current;
+    if (!hero) return undefined;
 
-    const updateHeroScrollProgress = () => {
-      rafId = null;
+    const stacks = Array.from(hero.querySelectorAll(".hero__stack"));
+    const mainContent = document.querySelector("main.content");
+    const mobileQuery = window.matchMedia("(max-width: 760px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frameId = null;
 
-      if (!pageRef.current || !heroRef.current) {
-        return;
+    const updateParallax = () => {
+      frameId = null;
+      const heroRect = hero.getBoundingClientRect();
+      const scrollOffset = reducedMotionQuery.matches
+        ? 0
+        : Math.min(Math.max(-heroRect.top, 0), heroRect.height);
+      const speeds = mobileQuery.matches
+        ? STACK_SCROLL_SPEED.mobile
+        : STACK_SCROLL_SPEED.desktop;
+      const scrollProgress = heroRect.height > 0 ? scrollOffset / heroRect.height : 0;
+      const fadeProgress = Math.min(
+        Math.max(
+          (scrollProgress - HERO_CONTENT_FADE.start) /
+            (HERO_CONTENT_FADE.end - HERO_CONTENT_FADE.start),
+          0
+        ),
+        1
+      );
+      const contentOpacity = 1 - fadeProgress;
+      const introScroll = Math.min(scrollOffset, DESKTOP_PARALLAX_DISTANCE);
+      const stackOffsets = mobileQuery.matches
+        ? speeds.map((speed) => scrollOffset * speed)
+        : speeds.map((speed) => introScroll * speed);
+
+      hero.style.setProperty("--hero-scroll-offset", `${scrollOffset}px`);
+      hero.style.setProperty("--birds-scroll-offset", `${scrollOffset * 1.8}px`);
+      hero.style.setProperty("--fireflies-back-scroll-offset", `${scrollOffset * 1.55}px`);
+      hero.style.setProperty("--fireflies-middle-scroll-offset", `${scrollOffset * 1.15}px`);
+      hero.style.setProperty("--fireflies-front-scroll-offset", `${scrollOffset * 0.75}px`);
+      hero.style.setProperty("--hero-content-opacity", contentOpacity);
+      hero.toggleAttribute("data-content-hidden", contentOpacity === 0);
+
+      if (mainContent) {
+        mainContent.style.marginTop = `${-stackOffsets[2]}px`;
       }
-
-      const heroHeight = heroRef.current.offsetHeight;
-      const maxScrollableDistance = Math.max(heroHeight * 0.9, 1);
-      const scrollProgress = Math.min(window.scrollY / maxScrollableDistance, 1);
-      pageRef.current.style.setProperty("--hero-scroll-progress", scrollProgress.toFixed(4));
+      stacks.forEach((stack, index) => {
+        stack.style.setProperty("--stack-parallax-y", `${-stackOffsets[index]}px`);
+      });
     };
 
-    const scheduleUpdate = () => {
-      if (rafId !== null) {
-        return;
+    const requestParallaxUpdate = () => {
+      if (frameId === null) {
+        frameId = window.requestAnimationFrame(updateParallax);
       }
-
-      rafId = window.requestAnimationFrame(updateHeroScrollProgress);
     };
 
-    updateHeroScrollProgress();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+    updateParallax();
+    window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+    window.addEventListener("resize", requestParallaxUpdate);
+    mobileQuery.addEventListener("change", requestParallaxUpdate);
+    reducedMotionQuery.addEventListener("change", requestParallaxUpdate);
 
     return () => {
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
       }
-
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("scroll", requestParallaxUpdate);
+      window.removeEventListener("resize", requestParallaxUpdate);
+      mobileQuery.removeEventListener("change", requestParallaxUpdate);
+      reducedMotionQuery.removeEventListener("change", requestParallaxUpdate);
+      if (mainContent) {
+        mainContent.style.removeProperty("margin-top");
+      }
     };
   }, []);
+
+  const toggleHeroTheme = () => {
+    setHeroTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  };
 
   useEffect(() => {
     const updateAboutCardOverlap = () => {
@@ -166,46 +236,96 @@ function HomePage() {
     };
   }, []);
 
-  const handleMenuToggle = () => {
-    setIsMobileMenuOpen((current) => !current);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
-    <div className="page" ref={pageRef}>
+    <div className="page" ref={pageRef} data-theme={heroTheme}>
       <Navbar />
 
-      <header className="hero" ref={heroRef}>
-        <div className="hero-media" aria-hidden="true">
-          <div className="hero-bg" />
-          <div className="hero-overlay" />
+      <header
+        ref={heroRef}
+        className="hero"
+        data-theme={heroTheme}
+        style={{
+          "--stack-3-top-desktop": `${DESKTOP_STACK_3_TOP}px`,
+          "--hero-content-offset-y": `${HERO_CONTENT_OFFSET_Y}px`,
+          "--mobile-hero-photo-offset-y": `${MOBILE_HERO_PHOTO_OFFSET_Y}px`,
+          "--mobile-hero-menu-offset-y": `${MOBILE_HERO_MENU_OFFSET_Y}px`,
+        }}
+      >
+        <div className="hero__background" aria-hidden="true">
+          <img className="hero__background-image hero__background-image--light" src="/img/bg-light.svg" alt="" />
+          <img className="hero__background-image hero__background-image--dark" src="/img/bg-dark.svg" alt="" />
         </div>
-        <div className="hero-content">
-          <div className="hero-stage">
-            <section className="hero-text">
-              <h1>
-                Softwares <strong>robustos</strong>
-                <br />
-                focados na necessidade
-                <br />
-                do <strong>seu negócio</strong>.
-              </h1>
-              <p>Seu projeto no conforto e segurança do nosso covil.</p>
-            </section>
 
-            <div className="hero-fireflies" aria-hidden="true">
-              <span className="hero-firefly hero-firefly--north" />
-              <span className="hero-firefly hero-firefly--middle" />
-              <span className="hero-firefly hero-firefly--south" />
-            </div>
+        <div className="hero__birds" aria-hidden="true">
+          <img className="hero__bird hero__bird--1" src="/img/b1.png" alt="" />
+          <img className="hero__bird hero__bird--2" src="/img/b2.png" alt="" />
+          <img className="hero__bird hero__bird--3" src="/img/b3.png" alt="" />
+        </div>
+
+        {heroStacks.map((stack, index) => (
+          <div
+            className={`hero__stack hero__stack--${index + 1}`}
+            key={stack.light}
+            style={{
+              "--stack-top-desktop": `${stack.desktopTop}px`,
+              "--stack-top-mobile": `${stack.mobileTop}px`,
+            }}
+            aria-hidden="true"
+          >
+            <img className="hero__stack-image hero__stack-image--light" src={stack.light} alt="" />
+            <img className="hero__stack-image hero__stack-image--dark" src={stack.dark} alt="" />
+          </div>
+        ))}
+
+        <div className="hero__fireflies hero__fireflies--between-back" aria-hidden="true">
+          <span className="hero__firefly hero__firefly--1" />
+          <span className="hero__firefly hero__firefly--2" />
+        </div>
+        <div className="hero__fireflies hero__fireflies--between-front" aria-hidden="true">
+          <span className="hero__firefly hero__firefly--3" />
+        </div>
+        <div className="hero__fireflies hero__fireflies--foreground" aria-hidden="true">
+          <span className="hero__firefly hero__firefly--4" />
+          <span className="hero__firefly hero__firefly--5" />
+          <span className="hero__firefly hero__firefly--6" />
+        </div>
+
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={toggleHeroTheme}
+          aria-label={`Ativar modo ${heroTheme === "light" ? "escuro" : "claro"}`}
+          aria-pressed={heroTheme === "dark"}
+        >
+          {heroTheme === "light" ? (
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.5 14.1A8.5 8.5 0 0 1 9.9 3.5a8.5 8.5 0 1 0 10.6 10.6Z" />
+            </svg>
+          )}
+        </button>
+
+        <div className="content hero__content">
+          <div className="hero__layer hero__menu-layer">
+            <nav aria-label="Navegação principal">
+              <a href="#sobre">Sobre</a>
+              <a href="/equipe">Equipe</a>
+              <a href="/solucoes">Soluções</a>
+              <a href="#contato">Contato</a>
+            </nav>
+          </div>
+
+          <div className="hero__layer hero__identity-layer">
+            <img className="hero__logo" src="/img/logo.svg" alt="Covil Logo" />
           </div>
         </div>
       </header>
 
-      <main className="content">
+      <main className="content" data-theme={heroTheme}>
         <div className="main-content-wrapper">
           <section id="sobre" className="about-section" ref={aboutCardRef}>
             <h2 className="section-title">Sobre</h2>

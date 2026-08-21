@@ -12,7 +12,7 @@ function Footer() {
 
         <nav className="site-footer-nav" aria-label="Links rápidos">
           <h2 id="footer-title">Links rápidos</h2>
-          <a href="/#sobre">Sobre nós</a>
+          <a href="/#sobre">Sobre</a>
           <a href="/equipe">Equipe</a>
           <a href="/#projetos">Serviços</a>
           <a href="/#contato">Contato</a>

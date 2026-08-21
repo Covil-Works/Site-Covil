@@ -1,0 +1,62 @@
+# Instruções do repositório
+
+- Faça commits com Git semântico (Conventional Commits) e nunca adicione coautor.
+- Não execute build nem rode a aplicação, salvo quando o usuário pedir explicitamente.
+- Use UTF-8 em todos os arquivos e preserve acentos em português.
+- Preserve correções de interface e decisões visuais já consolidadas. Antes de alterar estilos, leia este arquivo e trate as proteções registradas como requisitos de não regressão; não remova, simplifique nem sobrescreva essas soluções sem pedido explícito do usuário.
+- Sempre que uma correção resolver um bug visual recorrente ou estabelecer uma decisão de interface que deva sobreviver a futuras alterações, registre-a neste `AGENTS.md`, incluindo o problema evitado e a restrição que deve ser preservada.
+
+## Correções visuais protegidas
+
+- No desktop (`min-width: 761px`), todas as `.hero__stack` devem ultrapassar 5px cada lateral da viewport, com `left: -5px` e `right: -5px`. Essa sangria elimina a borda residual que pode aparecer no lado esquerdo, especialmente no recorte inferior da stack 3. A regra deve permanecer comum aos SVGs `light` e `dark`; não crie comportamentos laterais diferentes por tema.
+- No tema claro, o rótulo `PORTFÓLIO` (se houver) ou a logo do hero deve se ajustar harmoniosamente. No tema escuro, preserve a cor clara já definida para os textos pequenos do hero.
+- O espaço vertical entre as seções principais deve ser de 80px. A composição atual divide esse intervalo em 40px no final de uma seção e 40px no início da seguinte; preserve essa medida ao alterar paddings ou margens.
+- No desktop (min-width: 761px), os títulos principais de seção (h2) usam escala aproximadamente 10% menor, clamp(3.15rem, 8.1vw, 6.75rem). No mobile, preserve exatamente a escala original clamp(3.5rem, 9vw, 7.5rem).
+- No desktop, a seção `Sobre` deve manter o texto à esquerda e o bloco `Currículo` à direita, com os dois blocos alinhados pelo topo. O contato não deve voltar a ser incorporado nessa área.
+- A seção principal `Experiência` deve permanecer imediatamente após `Sobre` e apresentar a sequência UFPA → GERCOM → DIAVI → Covil de forma compacta. Preserve uma única experiência aberta por vez. No desktop, mantenha a composição em duas colunas, com seleção vertical à esquerda sem divisores horizontais, painel de detalhes à direita e uma linha vertical contínua conectando os marcadores. O item ativo usa cores invertidas por meio de `var(--ink)` no fundo e `var(--paper)` no texto; no mobile, mantenha o accordion vertical e, quando aberto, oculte totalmente o resumo fechado para exibir apenas o detalhe.
+- Na lista de `Experiência`, preserve o deslocamento horizontal progressivo vinculado ao scroll: cada item avança brevemente e retorna à posição inicial antes de o próximo reagir, formando uma sequência conforme a seção entra na viewport. O deslocamento deve permanecer curto para não aproximar o conteúdo do controle de `+ / −`. O efeito deve continuar baseado em `transform`, sem alterar o layout, somar-se ao hover/foco e permanecer desativado em `prefers-reduced-motion`.
+- `Tecnologias` deve permanecer como uma faixa sutil de `Stack` integrada ao final de `Sobre`, com cerca de 40px entre o conteúdo de Sobre e a Stack, posicionada acima de sua linha divisória. O rótulo `Stack` ocupa o lugar antes usado pelo link `Vamos conversar`. Cada tecnologia usa uma pill compacta com ícone e nome; não transforme a área em seção principal, cards ou bloco de grande destaque. `Contato` deve permanecer como seção principal própria após `Projetos`, com ícones para LinkedIn, GitHub, e-mail e WhatsApp; o link `Vamos conversar` continua apontando para `#contato`.
+- Na seção `Projetos`, todo `.project-card__visual` deve permanecer retangular na proporção `5 / 4`, independentemente do tipo de mockup. Celulares, notebooks e desktops preservam suas proporções apenas no elemento interno; não altere a proporção do quadro externo ao adicionar ou ajustar projetos.
+- No tema escuro, a superfície visual dos cards de `Projetos` deve permanecer claramente mais clara que o fundo preto do site por meio de `--project-surface`, evitando que o quadro se confunda com `--paper: #000`. Previews `phone` usam três celulares sobrepostos em leque com movimento curto por `transform`; previews `desktop` permanecem com um único dispositivo e usam apenas um deslocamento sutil no hover.
+- Os previews phone e desktop com múltiplas telas só devem alternar enquanto o mouse estiver sobre o quadrado do projeto: a primeira troca acontece imediatamente, as seguintes ocorrem a cada 1,5s e, ao sair, o preview deve retornar automaticamente à primeira tela.
+- O seletor de tema deve permanecer no elemento `<main>` para alcançar o restante do site, além do `data-theme` próprio do hero. No modo escuro, as seções posteriores usam fundo preto por meio de `--paper`, textos principais brancos por meio de `--ink`, textos secundários claros por meio de `--muted` e superfícies/divisórias escuras apropriadas. Preserve a transição conjunta das cores ao alternar o tema.
+- No menu do hero, hover e `focus-visible` deslocam o link inteiro em `0.35rem`, incluindo o tracinho e o texto, durante `180ms`. Não volte a animar apenas o pseudo-elemento `::before`, pois isso separa visualmente o tracinho do rótulo.
+- Os seis vagalumes do hero aparecem somente no tema escuro. Três devem permanecer nas laterais da região inferior, visualmente à frente da stack 3 sem ultrapassar o botão de tema; os outros três permanecem distribuídos entre as camadas. Preserve os núcleos brancos de 5px nos três vagalumes à frente da stack 3 e a variação de 1px, 2px e 4px nos três vagalumes entre as camadas, além do brilho verde difuso, dos percursos limitados por elemento, das piscadas suaves, da subida ao ativar o tema escuro, da descida ao voltar ao tema claro e da alternativa estática de `prefers-reduced-motion`. Durante a rolagem, os grupos também descem conforme a profundidade: os mais distantes a `1.55`, o intermediário a `1.15` e os da frente a `0.75` do deslocamento. Os grupos entre camadas devem desaparecer sob as stacks seguintes; o grupo frontal deve desaparecer sob a seção `.about` (ou `.about-section`), mantendo a mesma acima da stack 3. No mobile, somente três vagalumes devem aparecer, um por plano de profundidade: `--2` com núcleo de 2px, `--3` com 1px e `--4` com 3px; `--1`, `--5` e `--6` permanecem ocultos.
+
+## Contrato visual do hero em camadas
+
+O hero é uma composição calibrada de SVGs sobrepostos. As medidas, velocidades, margens, preenchimentos e ordens de empilhamento atuais funcionam em conjunto para preservar o desenho. Trate este conjunto como uma invariante visual, não como valores independentes que podem ser simplificados.
+
+### Regras obrigatórias
+
+1. O conteúdo do hero — logo e menu — deve acompanhar a rolagem, passar entre as camadas SVG e aparentar afundar na composição.
+2. A logo da Covil centralizada pertence à camada de identidade.
+3. A logo deve passar entre a stack 1 e a stack 2.
+4. O menu deve passar entre a stack 2 e a stack 3.
+5. As camadas produzem parallax: as camadas visualmente mais distantes sobem mais rápido que as camadas da frente.
+6. Os temas claro e escuro usam os pares de arquivos `*-light.svg` e `*-dark.svg`. O botão de tema alterna `data-theme` e a opacidade dos arquivos correspondentes; preserve essa associação por nome.
+7. Nunca pode surgir espaço vazio entre as camadas durante a rolagem. Preserve os preenchimentos de `hero__stack::after`, suas cores por tema e a compensação aplicada à margem superior da seção posterior.
+8. O conteúdo do hero não pode aparecer por trás de `Sobre` ou qualquer seção posterior. Preserve o recorte do hero, o desaparecimento do conteúdo e superfícies opacas/ordens de empilhamento que separam as seções.
+9. A ordem de profundidade é intencional: fundo em `z-index: 0`; stack 1 em `2`; logo em `3`; stack 2 em `4`; menu em `5`; stack 3 em `6`; botão de tema em `7`; seção `.content` em `8`. Essa alternância é o que permite ao conteúdo passar entre os SVGs.
+
+### Calibração protegida
+
+Preserve, salvo pedido explícito para recalibrar as camadas:
+
+- `MOBILE_STACK_START = 20` e `MOBILE_STACK_GAP = 10`.
+- `DESKTOP_STACK_START = 300` e `DESKTOP_STACK_GAP = 30`.
+- `DESKTOP_STACK_3_TOP` derivado do início e do espaçamento desktop.
+- `STACK_SCROLL_SPEED.desktop = [1, 0.7, 0.4]`.
+- `STACK_SCROLL_SPEED.mobile = [0.8, 0.55, 0.3]`.
+- `DESKTOP_PARALLAX_DISTANCE = 60` apenas como limite do movimento das stacks no desktop; não use esse limite no deslocamento do conteúdo.
+- Altura desktop do hero: `calc(var(--stack-3-top-desktop) + 33.928571vw)`.
+- No mobile, `--composition-width: calc(294.7368421svh - 117.8947368px)` e altura de `100svh`.
+- Extensão inferior de cada stack com início em `calc(100% - 1px)` e altura de `calc(100svh + 2px)`.
+- O cálculo `about.style.marginTop = -stackOffsets[2]`, que fecha a composição após o deslocamento da última stack.
+- `overflow: hidden` e `isolation: isolate` no hero, além do fundo opaco de `.about::before` (ou `.content::before`).
+
+Não altere isoladamente dimensões dos SVGs, offsets, gaps, velocidades, altura do hero, extensões `::after`, margem compensatória ou z-index. Uma mudança em qualquer um desses pontos exige revisar o sistema completo em desktop e mobile e garantir todas as regras obrigatórias acima.
+
+### Parte flexível
+
+Logo, menu, tipografia, espaçamentos e offsets internos do conteúdo podem ser alterados. Essas mudanças são permitidas desde que a logo permaneça entre as stacks 1 e 2, o menu permaneça entre as stacks 2 e 3, e todo o conteúdo desapareça completamente antes de alcançar as seções posteriores.

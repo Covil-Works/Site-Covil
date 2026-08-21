@@ -71,7 +71,7 @@ function Navbar({ activePage = "" }) {
               onClick={closeMobileMenu}
               className={activePage === "sobre" ? "is-active" : ""}
             >
-              Sobre nós
+              Sobre
             </a>
             <a
               href="/equipe"
@@ -93,15 +93,6 @@ function Navbar({ activePage = "" }) {
               className={activePage === "contato" ? "is-active" : ""}
             >
               Contato
-            </a>
-            <a
-              href="https://wa.me/5591984085049"
-              target="_blank"
-              rel="noreferrer"
-              className="cta-button"
-              onClick={closeMobileMenu}
-            >
-              Crie seu projeto
             </a>
           </div>
         </nav>
