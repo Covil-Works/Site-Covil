@@ -392,70 +392,40 @@
   pointer-events: auto;
 }
 
-/* Text group layout */
-.hero__text-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.85rem;
-  pointer-events: auto;
-}
-
 /* Tagline below logo */
 .hero__tagline {
-  font-size: clamp(1.1rem, 2.4vw, 1.55rem);
-  font-weight: 700;
+  font-size: clamp(1.35rem, 3.2vw, 2.15rem);
+  font-weight: 400;
   text-align: center;
-  max-width: 44ch;
+  max-width: 30ch;
   margin: 0;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
   text-wrap: pretty;
-  transition: text-shadow 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: auto;
+  transition: color 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero[data-theme="dark"] .hero__tagline {
-  background: linear-gradient(135deg, #ffffff 55%, #62d98c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(98, 217, 140, 0.2);
+  color: #e2e8f0;
 }
 
 .hero[data-theme="light"] .hero__tagline {
-  background: linear-gradient(135deg, #070a0e 55%, #057447 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+  color: #0f172a;
 }
 
-/* Subtagline below tagline */
-.hero__subtagline {
-  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
-  font-weight: 500;
-  text-align: center;
-  max-width: 42ch;
-  margin: 0;
-  line-height: 1.4;
-  opacity: 0.75;
-  text-wrap: pretty;
+.hero__tagline strong {
+  font-weight: 800;
+  transition: color 650ms cubic-bezier(0.22, 1, 0.36, 1), text-shadow 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hero__subtagline::before {
-  content: "";
-  display: block;
-  width: 32px;
-  height: 2px;
-  background: #62d98c;
-  margin: 0 auto 0.85rem;
-  border-radius: var(--radius-pill);
-  transition: background-color 650ms cubic-bezier(0.22, 1, 0.36, 1);
+.hero[data-theme="dark"] .hero__tagline strong {
+  color: #55f289;
+  text-shadow: 0 0 15px rgba(85, 242, 137, 0.35);
 }
 
-.hero[data-theme="light"] .hero__subtagline::before {
-  background: #057447;
+.hero[data-theme="light"] .hero__tagline strong {
+  color: #057447;
 }
 
 
