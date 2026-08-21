@@ -301,40 +301,37 @@
   opacity: 1;
 }
 
-/* Theme toggle */
-.theme-toggle {
-  position: absolute;
-  top: clamp(1.25rem, 3vw, 2.5rem);
-  right: clamp(1.25rem, 3vw, 2.5rem);
-  z-index: 7;
+/* Theme toggle (inside navbar) */
+.theme-toggle-nav {
   display: grid;
-  width: 3rem;
+  width: 1.85rem;
   aspect-ratio: 1;
   padding: 0;
   place-items: center;
-  border: 2px solid currentColor;
+  border: 1.5px solid currentColor;
   border-radius: 50%;
   color: inherit;
   background: transparent;
   cursor: pointer;
+  flex-shrink: 0;
   transition:
     color 450ms cubic-bezier(0.22, 1, 0.36, 1),
     background-color 180ms ease-out,
     transform 180ms ease-out;
 }
 
-.theme-toggle:hover {
+.theme-toggle-nav:hover {
   background: color-mix(in oklch, currentColor 12%, transparent);
   transform: rotate(8deg);
 }
 
-.theme-toggle:focus-visible {
-  outline: 3px solid var(--honey);
-  outline-offset: 4px;
+.theme-toggle-nav:focus-visible {
+  outline: 2px solid var(--honey);
+  outline-offset: 3px;
 }
 
-.theme-toggle svg {
-  width: 1.35rem;
+.theme-toggle-nav svg {
+  width: 0.9rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
@@ -627,5 +624,5 @@ main.content {
   .hero__bird--3 { left: 76%; }
   .hero__stack,
   .hero__layer { will-change: auto; }
-  .theme-toggle:hover { transform: none; }
+  .theme-toggle-nav:hover { transform: none; }
 }

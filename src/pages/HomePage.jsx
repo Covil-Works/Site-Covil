@@ -238,7 +238,7 @@ function HomePage() {
 
   return (
     <div className="page" ref={pageRef} data-theme={heroTheme}>
-      <Navbar />
+      <Navbar theme={heroTheme} toggleTheme={toggleHeroTheme} />
 
       <header
         ref={heroRef}
@@ -286,25 +286,6 @@ function HomePage() {
           <span className="hero__firefly hero__firefly--5" />
           <span className="hero__firefly hero__firefly--6" />
         </div>
-
-        <button
-          className="theme-toggle"
-          type="button"
-          onClick={toggleHeroTheme}
-          aria-label={`Ativar modo ${heroTheme === "light" ? "escuro" : "claro"}`}
-          aria-pressed={heroTheme === "dark"}
-        >
-          {heroTheme === "light" ? (
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.5 14.1A8.5 8.5 0 0 1 9.9 3.5a8.5 8.5 0 1 0 10.6 10.6Z" />
-            </svg>
-          )}
-        </button>
 
         <div className="content hero__content">
           <div className="hero__layer hero__identity-layer">
