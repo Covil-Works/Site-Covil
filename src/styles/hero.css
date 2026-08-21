@@ -343,7 +343,7 @@
 }
 
 /* Hero Content & Layers */
-.hero__content {
+.hero .hero__content {
   position: absolute;
   inset: 0;
   display: flex;
@@ -351,6 +351,11 @@
   align-items: center;
   height: 100%;
   padding-block: clamp(3rem, 7vw, 7rem);
+  z-index: auto;
+}
+
+.hero .hero__content::before {
+  content: none;
 }
 
 .hero__layer {
