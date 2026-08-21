@@ -470,6 +470,10 @@
   background: #000000;
 }
 
+[data-theme="light"] .theme-toggle-nav {
+  color: #000000;
+}
+
 /* Light theme overrides for scrolled Navbar */
 [data-theme="light"] .site-header-fixed.is-scrolled .site-header-inner {
   background: rgba(255, 255, 255, 0.72);
