@@ -309,6 +309,7 @@ function HomePage() {
         <div className="content hero__content">
           <div className="hero__layer hero__identity-layer">
             <img className="hero__logo" src={heroTheme === "dark" ? "/img/logo-white.svg" : "/img/logo-black.svg"} alt="Covil Logo" />
+            <p className="hero__tagline">Seu projeto no conforto e segurança do nosso covil.</p>
           </div>
         </div>
       </header>
@@ -318,7 +319,7 @@ function HomePage() {
           <section id="sobre" className="about-section" ref={aboutCardRef}>
             <h2 className="section-title">Sobre</h2>
             <div className="about-inner">
-              <img src="/img/logo.svg" alt="Logo Covil" className="about-logo" />
+              <img src={heroTheme === "dark" ? "/img/logo-white.svg" : "/img/logo-black.svg"} alt="Logo Covil" className="about-logo" />
               <div className="about-text">
                 <p>
                   Uma ideia só tem impacto quando se torna realidade, e para isso, ela precisa de um ambiente focado em construção e excelência técnica. Esse lugar é a Covil. Do Norte do Brasil para o mundo, desenvolvemos softwares sob medida de acordo com as suas necessidades.
