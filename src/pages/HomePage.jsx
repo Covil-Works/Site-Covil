@@ -307,15 +307,6 @@ function HomePage() {
         </button>
 
         <div className="content hero__content">
-          <div className="hero__layer hero__menu-layer">
-            <nav aria-label="Navegação principal">
-              <a href="#sobre">Sobre</a>
-              <a href="/equipe">Equipe</a>
-              <a href="/solucoes">Soluções</a>
-              <a href="#contato">Contato</a>
-            </nav>
-          </div>
-
           <div className="hero__layer hero__identity-layer">
             <img className="hero__logo" src="/img/logo.svg" alt="Covil Logo" />
           </div>

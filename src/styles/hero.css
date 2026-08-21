@@ -346,19 +346,18 @@
 .hero__content {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.65fr);
+  display: flex;
+  justify-content: center;
   align-items: center;
   height: 100%;
   padding-block: clamp(3rem, 7vw, 7rem);
 }
 
 .hero__layer {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: subgrid;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
   opacity: var(--hero-content-opacity, 1);
   will-change: transform, opacity;
@@ -368,22 +367,9 @@
   pointer-events: none;
 }
 
-.hero__menu-layer {
-  z-index: 5;
-}
-
 .hero__identity-layer {
   z-index: 3;
   pointer-events: none;
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero__menu-layer nav {
-  grid-column: 2;
 }
 
 /* Centered Covil Logo */
@@ -398,34 +384,6 @@
 
 .hero__logo:hover {
   transform: scale(1.03);
-}
-
-/* Hero Navigation Scoped */
-.hero__menu-layer nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-}
-
-.hero__menu-layer nav a {
-  display: inline-block;
-  font-size: clamp(1.55rem, 3vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.15;
-  text-decoration: none;
-  transition: transform 180ms ease-out;
-}
-
-.hero__menu-layer nav a::before {
-  content: "—";
-  display: inline-block;
-  margin-right: 0.65rem;
-}
-
-.hero__menu-layer nav a:hover,
-.hero__menu-layer nav a:focus-visible {
-  transform: translateX(0.35rem);
 }
 
 .hero a:focus-visible {
@@ -561,22 +519,17 @@ main.content {
   }
   .hero__stack { top: var(--stack-top-mobile); }
   .hero__content {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    align-content: center;
-    gap: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-block: 0;
   }
-  .hero__layer { grid-column: 1; height: auto; }
-  .hero__menu-layer {
-    transform: translate3d(0, calc(var(--hero-scroll-offset, 0px) + var(--mobile-hero-menu-offset-y)), 0);
+  .hero__layer {
+    height: auto;
   }
   .hero__identity-layer {
-    grid-row: 1;
     transform: translate3d(0, calc(var(--hero-scroll-offset, 0px) + var(--mobile-hero-photo-offset-y)), 0);
   }
-  .hero__menu-layer { grid-row: 2; }
-  .hero__menu-layer nav { grid-column: 1; align-items: center; }
   .hero__birds { top: 10%; }
 }
 
