@@ -158,7 +158,7 @@
   position: absolute;
   top: calc(clamp(3.5rem, 9vw, 7rem) - 10px);
   left: 0;
-  z-index: 1;
+  z-index: 3; /* Fly in front of background and stack 1 for better visibility */
   width: 100%;
   height: clamp(5rem, 12vw, 9rem);
   pointer-events: none;
@@ -170,6 +170,11 @@
 .hero[data-theme="dark"] .hero__birds {
   opacity: 0;
   transform: translate3d(0, calc(var(--birds-scroll-offset, 0px) + clamp(12rem, 35vh, 24rem)), 0);
+}
+
+.hero[data-theme="light"] .hero__birds {
+  opacity: 1;
+  transform: translate3d(0, var(--birds-scroll-offset, 0px), 0);
 }
 
 .hero__bird {
