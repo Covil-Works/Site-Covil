@@ -455,42 +455,31 @@
   --text: #1c2024;
 }
 
-/* Light theme overrides for Navbar */
-[data-theme="light"] .menu a {
-  color: rgba(15, 23, 42, 0.82);
+/* Light theme overrides for Navbar when not scrolled (at the top over the light hero) */
+[data-theme="light"] .site-header-fixed:not(.is-scrolled) .menu a {
+  color: #000000;
 }
 
-[data-theme="light"] .menu a:hover {
-  color: #000;
+[data-theme="light"] .site-header-fixed:not(.is-scrolled) .menu a:hover {
+  color: rgba(0, 0, 0, 0.72);
 }
 
-[data-theme="light"] .brand img {
-  filter: brightness(0.08);
+[data-theme="light"] .site-header-fixed:not(.is-scrolled) .brand img {
+  filter: brightness(0);
   transition: filter 450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-theme="light"] .menu-toggle span {
-  background: #0f172a;
+[data-theme="light"] .site-header-fixed:not(.is-scrolled) .menu-toggle span {
+  background: #000000;
 }
 
-[data-theme="light"] .menu {
-  background: rgba(245, 247, 251, 0.98);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .site-header-fixed.is-scrolled .site-header-inner {
-  background: linear-gradient(
-    140deg,
-    rgba(245, 247, 251, 0.75) 0%,
-    rgba(233, 236, 240, 0.85) 48%,
-    rgba(223, 227, 232, 0.9) 100%
-  );
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.75),
-    0 0 24px rgba(5, 116, 71, 0.04);
+/* On mobile, style the open menu popup for light theme when not scrolled */
+@media (max-width: 760px) {
+  [data-theme="light"] .site-header-fixed:not(.is-scrolled) .menu {
+    background: rgba(245, 247, 251, 0.98);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
 }
 
 
