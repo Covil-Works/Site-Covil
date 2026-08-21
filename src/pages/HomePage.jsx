@@ -322,6 +322,9 @@ function HomePage() {
                 
               </article>
 
+            </div>
+          </section>
+
           <section className="why-section">
             <h2 className="section-title">Por que a Covil?</h2>
 
