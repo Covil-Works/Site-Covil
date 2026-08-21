@@ -379,7 +379,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 /* Centered Covil Logo */
@@ -392,17 +392,39 @@
   pointer-events: auto;
 }
 
+/* Text group layout */
+.hero__text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: auto;
+}
+
 /* Tagline below logo */
 .hero__tagline {
-  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
-  font-weight: 500;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  font-weight: 600;
   text-align: center;
-  max-width: 38ch;
+  max-width: 44ch;
   margin: 0;
-  line-height: 1.4;
-  opacity: 0.9;
+  line-height: 1.35;
+  opacity: 0.95;
   text-wrap: pretty;
 }
+
+/* Subtagline below tagline */
+.hero__subtagline {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 400;
+  text-align: center;
+  max-width: 42ch;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+
 
 .hero__logo:hover {
   transform: scale(1.03);

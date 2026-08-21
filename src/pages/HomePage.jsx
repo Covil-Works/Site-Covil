@@ -309,7 +309,10 @@ function HomePage() {
         <div className="content hero__content">
           <div className="hero__layer hero__identity-layer">
             <img className="hero__logo" src={heroTheme === "dark" ? "/img/logo-white.svg" : "/img/logo-black.svg"} alt="Covil Logo" />
-            <p className="hero__tagline">Seu projeto no conforto e segurança do nosso covil.</p>
+            <div className="hero__text-group">
+              <p className="hero__tagline">Softwares robustos, escaláveis e focados na necessidade do seu negócio.</p>
+              <p className="hero__subtagline">Seu projeto no conforto e segurança do nosso covil.</p>
+            </div>
           </div>
         </div>
       </header>
