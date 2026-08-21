@@ -47,14 +47,6 @@
     text-align: center;
   }
 
-  .forest-strip h2 {
-    font-size: 1.6rem;
-  }
-
-  .forest-content {
-    padding-top: 48px;
-  }
-
   .why-card {
     grid-template-columns: 1fr;
     padding: 26px 24px;
@@ -195,16 +187,8 @@
     text-align: center;
   }
 
-  .forest-section {
-    margin-top: 42px;
-  }
-
-  .forest-strip h2 {
-    font-size: 1.32rem;
-  }
-
-  .forest-content {
-    padding-top: 36px;
+  .why-section {
+    padding-top: 42px;
   }
 
   .why-card-left h3 {
