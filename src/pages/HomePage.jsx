@@ -241,8 +241,190 @@ function HomePage() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 760px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (heroTheme !== "dark" || mobileQuery.matches || reducedMotionQuery.matches) {
+      return undefined;
+    }
+
+    let animationFrameId = null;
+    let currentX = 0;
+    let currentY = 0;
+    let isInitialized = false;
+
+    const updateMotion = () => {
+      const fireflyEl = document.querySelector(".traveling-firefly");
+      const heroEl = heroRef.current;
+      if (!fireflyEl || !heroEl) {
+        animationFrameId = window.requestAnimationFrame(updateMotion);
+        return;
+      }
+
+      const aboutSection = document.getElementById("sobre");
+      const aboutLogo = document.querySelector(".about-logo");
+      const servicesSection = document.getElementById("projetos");
+      const serviceCards = Array.from(document.querySelectorAll(".services-grid article"));
+      const whySection = document.querySelector(".why-section");
+      const whyCard = document.querySelector(".why-card");
+      const contactSection = document.getElementById("contato");
+      const liveDot = document.querySelector(".contact-card-live-dot");
+
+      if (!aboutSection || !servicesSection || !contactSection) {
+        animationFrameId = window.requestAnimationFrame(updateMotion);
+        return;
+      }
+
+      const scrollX = window.scrollX;
+      const scrollY = window.scrollY;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const getDocPos = (el, fallbackXPercent, fallbackY) => {
+        if (!el) return { x: viewportWidth * fallbackXPercent, y: fallbackY };
+        const rect = el.getBoundingClientRect();
+        return {
+          x: rect.left + scrollX + rect.width / 2,
+          y: rect.top + scrollY + rect.height / 2,
+          rect,
+        };
+      };
+
+      const heroRect = heroEl.getBoundingClientRect();
+      const heroDocY = heroRect.top + scrollY;
+
+      // Keypoint 0: Hero Right
+      const k0 = {
+        x: viewportWidth * 0.91,
+        y: heroDocY + heroRect.height * 0.78,
+        triggerY: 0,
+      };
+
+      // Keypoint 1: Sobre Logo (Left)
+      const logoPos = getDocPos(aboutLogo, 0.25, heroDocY + heroRect.height + 200);
+      const aboutRect = aboutSection.getBoundingClientRect();
+      const k1 = {
+        x: logoPos.x,
+        y: logoPos.y,
+        triggerY: (aboutRect.top + scrollY) - viewportHeight * 0.35,
+      };
+
+      // Keypoints 2, 3, 4: Services (Left -> Center -> Right)
+      const servicesRect = servicesSection.getBoundingClientRect();
+      const servicesDocY = servicesRect.top + scrollY;
+      const servicesHeight = servicesRect.height;
+
+      const s1Pos = getDocPos(serviceCards[0], 0.2, servicesDocY + 150);
+      const s2Pos = getDocPos(serviceCards[1], 0.5, servicesDocY + 150);
+      const s3Pos = getDocPos(serviceCards[2], 0.8, servicesDocY + 150);
+
+      const k2 = {
+        x: s1Pos.x,
+        y: s1Pos.y,
+        triggerY: servicesDocY - viewportHeight * 0.3,
+      };
+      const k3 = {
+        x: s2Pos.x,
+        y: s2Pos.y,
+        triggerY: servicesDocY + servicesHeight * 0.35 - viewportHeight * 0.3,
+      };
+      const k4 = {
+        x: s3Pos.x,
+        y: s3Pos.y,
+        triggerY: servicesDocY + servicesHeight * 0.7 - viewportHeight * 0.3,
+      };
+
+      // Keypoint 5: Por que a Covil (Right)
+      const whyRect = whyCard ? whyCard.getBoundingClientRect() : (whySection ? whySection.getBoundingClientRect() : null);
+      const whyDocY = whyRect ? (whyRect.top + scrollY) : servicesDocY + servicesHeight + 300;
+      const whyRightX = whyRect ? (whyRect.right + scrollX - 30) : viewportWidth * 0.85;
+      const whyMidY = whyRect ? (whyRect.top + scrollY + whyRect.height / 2) : whyDocY + 200;
+
+      const k5 = {
+        x: whyRightX,
+        y: whyMidY,
+        triggerY: whyDocY - viewportHeight * 0.3,
+      };
+
+      // Keypoint 6: WhatsApp Live Dot (Left)
+      const dotPos = getDocPos(liveDot, 0.2, whyDocY + 600);
+      const contactRect = contactSection.getBoundingClientRect();
+      const contactDocY = contactRect.top + scrollY;
+      const k6 = {
+        x: dotPos.x,
+        y: dotPos.y,
+        triggerY: contactDocY - viewportHeight * 0.45,
+      };
+
+      const keypoints = [k0, k1, k2, k3, k4, k5, k6];
+
+      for (let i = 1; i < keypoints.length; i++) {
+        if (keypoints[i].triggerY <= keypoints[i - 1].triggerY) {
+          keypoints[i].triggerY = keypoints[i - 1].triggerY + 10;
+        }
+      }
+
+      const scrollRef = scrollY;
+      let targetDocX = k0.x;
+      let targetDocY = k0.y;
+
+      if (scrollRef <= keypoints[0].triggerY) {
+        targetDocX = k0.x;
+        targetDocY = k0.y;
+      } else if (scrollRef >= keypoints[keypoints.length - 1].triggerY) {
+        targetDocX = k6.x;
+        targetDocY = k6.y;
+      } else {
+        for (let i = 0; i < keypoints.length - 1; i++) {
+          const pA = keypoints[i];
+          const pB = keypoints[i + 1];
+          if (scrollRef >= pA.triggerY && scrollRef <= pB.triggerY) {
+            const rawT = (scrollRef - pA.triggerY) / (pB.triggerY - pA.triggerY);
+            const easeT = rawT * rawT * (3 - 2 * rawT);
+            targetDocX = pA.x + (pB.x - pA.x) * easeT;
+            targetDocY = pA.y + (pB.y - pA.y) * easeT;
+            break;
+          }
+        }
+      }
+
+      const targetVpX = targetDocX - scrollX;
+      const targetVpY = targetDocY - scrollY;
+
+      const time = performance.now() * 0.0015;
+      const flutterX = Math.sin(time * 2.1) * 3;
+      const flutterY = Math.cos(time * 1.7) * 3;
+
+      const finalTargetX = targetVpX + flutterX;
+      const finalTargetY = targetVpY + flutterY;
+
+      if (!isInitialized) {
+        currentX = finalTargetX;
+        currentY = finalTargetY;
+        isInitialized = true;
+      } else {
+        currentX += (finalTargetX - currentX) * 0.08;
+        currentY += (finalTargetY - currentY) * 0.08;
+      }
+
+      fireflyEl.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
+
+      animationFrameId = window.requestAnimationFrame(updateMotion);
+    };
+
+    animationFrameId = window.requestAnimationFrame(updateMotion);
+
+    return () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [heroTheme]);
+
   return (
     <div className="page" ref={pageRef} data-theme={heroTheme}>
+      <span className="traveling-firefly" aria-hidden="true" />
       <Navbar theme={heroTheme} toggleTheme={toggleHeroTheme} />
 
       <header
