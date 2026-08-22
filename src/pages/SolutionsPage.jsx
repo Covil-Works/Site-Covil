@@ -46,7 +46,6 @@ function SolutionsPage({ solutions }) {
         <section className="solutions-list">
           <div className="solutions-list-header reveal-on-scroll">
             <h2>Nossas soluções</h2>
-            <span>{Object.keys(solutions).length.toString().padStart(2, "0")} produtos</span>
           </div>
           <div className="project-grid solutions-grid">
             {Object.entries(solutions).map(([slug, solution]) => (
