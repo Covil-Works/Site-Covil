@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const MOBILE_STACK_START = 20;
+const MOBILE_STACK_START = -80;
 const MOBILE_STACK_GAP = 10;
 const DESKTOP_STACK_START = 300;
 const DESKTOP_STACK_GAP = 30;
 const DESKTOP_STACK_3_TOP = DESKTOP_STACK_START + DESKTOP_STACK_GAP * 2;
-const HERO_CONTENT_OFFSET_Y = -100;
-const MOBILE_HERO_PHOTO_OFFSET_Y = -90;
-const MOBILE_HERO_MENU_OFFSET_Y = -120;
+const HERO_CONTENT_OFFSET_Y = 0;
+const MOBILE_HERO_PHOTO_OFFSET_Y = 0;
+const MOBILE_HERO_MENU_OFFSET_Y = 0;
 const HERO_CONTENT_FADE = {
   start: 0.55,
   end: 0.8,

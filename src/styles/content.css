@@ -179,6 +179,12 @@
   }
 }
 
+@media (max-width: 760px) {
+  .about-inner .about-logo {
+    display: none;
+  }
+}
+
 .contact-section {
   margin-top: var(--section-max);
   padding: 0;

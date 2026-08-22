@@ -666,10 +666,14 @@ main.content {
     transform: translate3d(0, calc(var(--hero-scroll-offset, 0px) + var(--mobile-hero-photo-offset-y)), 0);
   }
   .hero__identity-layer {
-    padding-bottom: clamp(4rem, 15vh, 6rem);
+    justify-content: flex-start;
+    padding-top: calc(74px + 60px);
+    padding-bottom: 0;
   }
   .hero__text-layer {
-    padding-top: clamp(6rem, 20vh, 9rem);
+    justify-content: flex-start;
+    padding-top: clamp(210px, 30vh, 250px);
+    padding-bottom: 0;
   }
   .hero__birds { top: 10%; }
 }
