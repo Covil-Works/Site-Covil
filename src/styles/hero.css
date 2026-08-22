@@ -663,7 +663,7 @@ main.content {
   }
   .hero__layer {
     height: 100%;
-    transform: translate3d(0, calc(var(--hero-scroll-offset, 0px) + var(--mobile-hero-photo-offset-y)), 0);
+    transform: translate3d(0, var(--hero-scroll-offset, 0px), 0);
   }
   .hero__identity-layer {
     justify-content: flex-start;
@@ -672,7 +672,7 @@ main.content {
   }
   .hero__text-layer {
     justify-content: flex-start;
-    padding-top: clamp(210px, 30vh, 250px);
+    padding-top: clamp(260px, 36vh, 290px);
     padding-bottom: 0;
   }
   .hero__birds { top: 10%; }
