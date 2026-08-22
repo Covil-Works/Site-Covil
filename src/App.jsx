@@ -9,8 +9,31 @@ import SolutionPage from "./pages/SolutionPage";
 
 const APP_REGISTRY = { splitup: { name: "SplitUp" } };
 const SOLUTION_REGISTRY = {
-  splitup: { name: "SplitUp", category: "Aplicativo mobile", description: "Divida despesas, organize grupos e deixe as contas mais simples.", status: "Disponível", accent: "green" },
-  mywl: { name: "MyWL", category: "Solução digital", description: "Uma nova solução da Covil para transformar uma ideia em uma experiência simples.", status: "Em construção", accent: "violet" },
+  splitup: {
+    name: "SplitUp",
+    category: "Aplicativo mobile",
+    description: "App Mobile Android que ajuda a dividir contas entre amigos em bares, restaurantes e supermercados.",
+    details: "Kotlin · Room · Android",
+    status: "Disponível",
+    accent: "green",
+    device: "phone",
+    image: "/img/su-main.jpg",
+    imageAlt: "Tela principal do SplitUp",
+    phoneImages: { left: "/img/su-coomanda.jpg", right: "/img/su-amigos.jpg" },
+    rotatePhonePreview: true,
+  },
+  mywl: {
+    name: "MyWL",
+    category: "Solução digital",
+    description: "Aplicação Web para uma wishlist global compartilhada para presentes, aniversário, casamentos, etc.",
+    details: "Next.js · PostgreSQL · Vercel",
+    status: "Em construção",
+    accent: "violet",
+    device: "desktop",
+    image: null,
+    imageAlt: "Tela do MyWL",
+    carouselImages: ["/img/mywl-1.png", "/img/mywl-2.png", "/img/mywl-3.png"],
+  },
 };
 const APP_PAGE_REGISTRY = { privacypoly: PrivacyPolicyPage };
 function normalizePath(pathname) { if (!pathname) return "/"; const normalized = pathname.replace(/\/+$/, ""); return normalized === "" ? "/" : normalized; }
