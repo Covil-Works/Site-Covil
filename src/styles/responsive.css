@@ -62,7 +62,7 @@
   }
 
   .hero {
-    height: calc(100svh + 30px);
+    height: min(100svh, 500px);
   }
 
   .hero-bg {

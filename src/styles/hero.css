@@ -652,7 +652,7 @@ main.content {
   
   .hero {
     --composition-width: calc(294.7368421svh - 117.8947368px);
-    height: calc(100svh + 30px);
+    height: 100svh;
   }
   .hero__stack { top: var(--stack-top-mobile); }
   .hero__content {
