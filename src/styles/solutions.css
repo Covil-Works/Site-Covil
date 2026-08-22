@@ -83,7 +83,7 @@
   border-radius: 14px;
   text-decoration: none;
   color: var(--text);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 200ms ease;
 }
 
 .solution-card:hover, .solution-card:focus-visible {
@@ -91,6 +91,10 @@
   border-color: var(--accent);
   background: color-mix(in srgb, var(--panel) 90%, var(--accent) 10%);
   outline: none;
+}
+
+.solution-card:active {
+  transform: scale(0.98);
 }
 
 .solution-card-topline {
@@ -138,12 +142,14 @@
   bottom: 28px;
   color: var(--text);
   font-size: 1.4rem;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.solution-card:hover .solution-card-arrow {
-  transform: translate(4px, -4px);
-  color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .solution-card:hover .solution-card-arrow {
+    transform: translate(4px, -4px);
+    color: var(--accent);
+  }
 }
 
 /* Solution Detail Page */
@@ -232,12 +238,16 @@
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms ease;
 }
 
 .solution-primary-link:hover {
   transform: translateY(-2px);
   background-color: color-mix(in srgb, var(--accent) 85%, #fff 15%);
+}
+
+.solution-primary-link:active {
+  transform: scale(0.97);
 }
 
 .solution-detail-visual {

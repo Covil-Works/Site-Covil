@@ -113,13 +113,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .cta-button:hover,
 .cta-button:focus-visible {
   transform: scale(1.05);
   box-shadow: 0 10px 22px rgba(5, 116, 71, 0.35);
+}
+
+.cta-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 12px rgba(5, 116, 71, 0.25);
 }
 
 
@@ -324,6 +329,10 @@
 .theme-toggle-nav:hover {
   background: color-mix(in oklch, currentColor 12%, transparent);
   transform: rotate(8deg);
+}
+
+.theme-toggle-nav:active {
+  transform: scale(0.92) rotate(4deg);
 }
 
 .theme-toggle-nav:focus-visible {
