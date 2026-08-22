@@ -149,7 +149,7 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    const serviceCards = Array.from(document.querySelectorAll(".services article, .contact-card"));
+    const serviceCards = Array.from(document.querySelectorAll(".services-grid article, .contact-card, .why-card"));
 
     if (serviceCards.length === 0) {
       return undefined;
@@ -158,6 +158,8 @@ function HomePage() {
     const setCardPointerToCenter = (card) => {
       card.style.setProperty("--card-pointer-x", `${(card.clientWidth / 2).toFixed(1)}px`);
       card.style.setProperty("--card-pointer-y", `${(card.clientHeight / 2).toFixed(1)}px`);
+      card.style.setProperty("--tilt-x", "0");
+      card.style.setProperty("--tilt-y", "0");
     };
 
     const updateCardPointer = (event) => {
@@ -166,14 +168,29 @@ function HomePage() {
       const pointerX = event.clientX - bounds.left;
       const pointerY = event.clientY - bounds.top;
 
+      const centerX = bounds.width / 2;
+      const centerY = bounds.height / 2;
+
+      const tiltX = (((pointerX - centerX) / centerX) * 3.5).toFixed(2);
+      const tiltY = (((centerY - pointerY) / centerY) * 3.5).toFixed(2);
+
       card.style.setProperty("--card-pointer-x", `${pointerX.toFixed(1)}px`);
       card.style.setProperty("--card-pointer-y", `${pointerY.toFixed(1)}px`);
+      card.style.setProperty("--tilt-x", tiltX);
+      card.style.setProperty("--tilt-y", tiltY);
+    };
+
+    const resetCardPointer = (event) => {
+      const card = event.currentTarget;
+      card.style.setProperty("--tilt-x", "0");
+      card.style.setProperty("--tilt-y", "0");
     };
 
     serviceCards.forEach((card) => {
       setCardPointerToCenter(card);
       card.addEventListener("pointerenter", updateCardPointer);
       card.addEventListener("pointermove", updateCardPointer);
+      card.addEventListener("pointerleave", resetCardPointer);
     });
 
     const updateAllCardCenters = () => {
@@ -186,10 +203,42 @@ function HomePage() {
       serviceCards.forEach((card) => {
         card.removeEventListener("pointerenter", updateCardPointer);
         card.removeEventListener("pointermove", updateCardPointer);
+        card.removeEventListener("pointerleave", resetCardPointer);
       });
 
       window.removeEventListener("resize", updateAllCardCenters);
     };
+  }, []);
+
+  useEffect(() => {
+    const revealElements = Array.from(
+      document.querySelectorAll(".reveal-on-scroll, .reveal-slide-right, .text-reveal-item")
+    );
+
+    if (revealElements.length === 0) return undefined;
+
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (reducedMotionQuery.matches) {
+      revealElements.forEach((el) => el.classList.add("is-revealed"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -257,11 +306,11 @@ function HomePage() {
 
       <main className="content" data-theme={heroTheme}>
         <div className="main-content-wrapper">
-          <section id="sobre" className="about-section" ref={aboutCardRef}>
+          <section id="sobre" className="about-section reveal-on-scroll" ref={aboutCardRef}>
             <h2 className="section-title">Sobre</h2>
             <div className="about-inner">
-              <img src={heroTheme === "dark" ? "/img/logo-white.svg" : "/img/logo-black.svg"} alt="Logo Covil" className="about-logo" />
-              <div className="about-text">
+              <img src={heroTheme === "dark" ? "/img/logo-white.svg" : "/img/logo-black.svg"} alt="Logo Covil" className="about-logo reveal-slide-right" />
+              <div className="about-text text-reveal-item" style={{ "--reveal-delay": "120ms" }}>
                 <p>
                   Uma ideia só tem impacto quando se torna realidade, e para isso, ela precisa de um ambiente focado em construção e excelência técnica. Esse lugar é a Covil. Do Norte do Brasil para o mundo, desenvolvemos softwares sob medida de acordo com as suas necessidades.
                 </p>
@@ -269,11 +318,11 @@ function HomePage() {
             </div>
           </section>
 
-          <section id="projetos" className="services-section">
+          <section id="projetos" className="services-section reveal-on-scroll">
             <h2 className="section-title">Nossos Serviços</h2>
             <div className="services-grid">
               
-              <article className="service-card">
+              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "0ms" }}>
                 <div className="service-card-icon">
                   <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                     <circle cx="12" cy="12" r="9" />
@@ -289,7 +338,7 @@ function HomePage() {
                 
               </article>
 
-              <article className="service-card">
+              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "120ms" }}>
                 <div className="service-card-icon">
                   <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                     <rect x="7" y="2.5" width="10" height="19" rx="2.2" ry="2.2" />
@@ -304,7 +353,7 @@ function HomePage() {
                 
               </article>
 
-              <article className="service-card">
+              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "240ms" }}>
                 <div className="service-card-icon">
                   <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                     <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" ry="2.2" />
@@ -325,11 +374,11 @@ function HomePage() {
             </div>
           </section>
 
-          <section className="why-section">
+          <section className="why-section reveal-on-scroll">
             <h2 className="section-title">Por que a Covil?</h2>
 
             <article className="why-card">
-              <div className="why-card-left">
+              <div className="why-card-left reveal-slide-right" style={{ "--reveal-delay": "100ms" }}>
                 <h3>
                   Parceria,
                   <br />
@@ -340,15 +389,15 @@ function HomePage() {
               </div>
 
               <div className="why-card-right">
-                <p>
+                <p className="text-reveal-item" style={{ "--reveal-delay": "150ms" }}>
                   A Covil é o refúgio onde nossos desenvolvedores se reúnem para criar
                   código limpo e arquiteturas sólidas.
                 </p>
-                <p>
+                <p className="text-reveal-item" style={{ "--reveal-delay": "250ms" }}>
                   Nossa equipe é formada por pessoas apaixonadas por tecnologia e
                   resolução de problemas.
                 </p>
-                <p>
+                <p className="text-reveal-item" style={{ "--reveal-delay": "350ms" }}>
                   Tratamos cada projeto como se fosse nosso, garantindo segurança,
                   escalabilidade e manutenibilidade a longo prazo.
                 </p>
@@ -357,8 +406,8 @@ function HomePage() {
           </section>
         </div>
 
-        <section id="contato" className="contact-section" aria-labelledby="contact-heading">
-          <div className="contact-header">
+        <section id="contato" className="contact-section reveal-on-scroll" aria-labelledby="contact-heading">
+          <div className="contact-header reveal-on-scroll">
             <h2 id="contact-heading">Vamos tirar seu projeto do papel?</h2>
             <p>
               Fale com a Covil no WhatsApp e comece agora mesmo a construção do seu software.
@@ -370,7 +419,8 @@ function HomePage() {
               href="https://wa.me/5591984085049"
               target="_blank"
               rel="noreferrer"
-              className="contact-card contact-card--cta"
+              className="contact-card contact-card--cta reveal-on-scroll"
+              style={{ "--reveal-delay": "120ms" }}
               aria-label="Chamar a Covil no WhatsApp"
             >
               <span className="contact-card-icon" aria-hidden="true">
@@ -380,13 +430,16 @@ function HomePage() {
                 </svg>
               </span>
               <span className="contact-card-content">
-                <span className="contact-card-label">WhatsApp</span>
+                <span className="contact-card-label">
+                  WhatsApp
+                  <span className="contact-card-live-dot" aria-hidden="true" />
+                </span>
                 <span className="contact-card-value">(91) 98408-5049</span>
               </span>
               <span className="contact-card-action">Chamar agora</span>
             </a>
 
-            <div className="contact-alt" aria-label="Outras redes de contato">
+            <div className="contact-alt reveal-on-scroll" style={{ "--reveal-delay": "220ms" }} aria-label="Outras redes de contato">
               <p>ou pelas outras redes sociais</p>
               <div className="contact-alt-icons">
                 <a

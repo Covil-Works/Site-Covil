@@ -47,24 +47,41 @@ function SolutionsPage({ solutions }) {
       });
       window.removeEventListener("resize", updateAllCardCenters);
     };
+  useEffect(() => {
+    const revealElements = Array.from(document.querySelectorAll(".reveal-on-scroll"));
+    if (revealElements.length === 0) return undefined;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealElements.forEach((el) => el.classList.add("is-revealed"));
+      return undefined;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    revealElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div className="solutions-page">
       <Navbar />
-      <section className="solutions-title-section">
+      <section className="solutions-title-section reveal-on-scroll">
         <h1>Soluções que <strong>ganham vida.</strong></h1>
         <p>Produtos digitais criados pela Covil para resolver problemas reais — com clareza, cuidado e código que aguenta o caminho.</p>
       </section>
       <main className="solutions-container">
         <section className="solutions-list">
-          <div className="solutions-list-header">
+          <div className="solutions-list-header reveal-on-scroll">
             <h2>Nossas soluções</h2>
             <span>{Object.keys(solutions).length.toString().padStart(2, "0")} produtos</span>
           </div>
           <div className="solutions-grid">
             {Object.entries(solutions).map(([slug, solution], index) => (
-              <a className="solution-card" href={`/solucoes/${slug}`} key={slug}>
+              <a className="solution-card reveal-on-scroll" style={{ "--reveal-delay": `${index * 120}ms` }} href={`/solucoes/${slug}`} key={slug}>
                 <div className="solution-card-topline">
                   <span>0{index + 1}</span>
                   <span className="solution-status">{solution.status}</span>

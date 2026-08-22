@@ -487,3 +487,116 @@
 .site-footer-bottom p {
   font-size: 0.86rem;
 }
+
+/* ==========================================================================
+   Dynamic Scroll Reveal & Smooth Motion Effects
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    filter 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(-24px);
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    filter 750ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-slide-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+.text-reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(3px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    filter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+.text-reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Card 3D tilt & dynamic spotlight */
+.service-card,
+.contact-card--cta {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: perspective(1000px) rotateX(calc(var(--tilt-y, 0) * 1deg)) rotateY(calc(var(--tilt-x, 0) * 1deg)) translateY(-6px);
+  }
+
+  .contact-card--cta:hover {
+    transform: perspective(1000px) rotateX(calc(var(--tilt-y, 0) * 1deg)) rotateY(calc(var(--tilt-x, 0) * 1deg)) translateY(-3px);
+  }
+}
+
+/* Live WhatsApp status breathing signal */
+.contact-card-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #55f289;
+  box-shadow: 0 0 8px #55f289;
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: live-signal-pulse 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes live-signal-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(85, 242, 137, 0.7);
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.55;
+    box-shadow: 0 0 14px rgba(85, 242, 137, 0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-slide-right,
+  .text-reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .contact-card-live-dot {
+    animation: none !important;
+  }
+}
