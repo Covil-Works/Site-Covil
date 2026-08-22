@@ -7,9 +7,9 @@
 .why-card {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
-  gap: 28px;
-  padding: 34px 40px;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1fr);
+  gap: 52px;
+  padding: 44px 48px;
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--color-surface);
@@ -40,7 +40,7 @@
 .why-card-left h3 {
   margin: 0;
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-  line-height: 1.35;
+  line-height: 1.28;
   font-weight: 700;
   color: var(--text);
   transition: color 240ms ease;
@@ -48,12 +48,12 @@
 
 .why-card-right p {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   line-height: 1.7;
   color: var(--muted);
   transition: color 240ms ease;
 }
 
 .why-card-right p + p {
-  margin-top: 14px;
+  margin-top: 20px;
 }
