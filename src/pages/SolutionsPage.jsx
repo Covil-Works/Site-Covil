@@ -47,6 +47,8 @@ function SolutionsPage({ solutions }) {
       });
       window.removeEventListener("resize", updateAllCardCenters);
     };
+  }, []);
+
   useEffect(() => {
     const revealElements = Array.from(document.querySelectorAll(".reveal-on-scroll"));
     if (revealElements.length === 0) return undefined;
