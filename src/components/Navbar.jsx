@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Navbar({ activePage = "" }) {
+function Navbar({ activePage = "", theme = "dark", toggleTheme }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -71,7 +71,7 @@ function Navbar({ activePage = "" }) {
               onClick={closeMobileMenu}
               className={activePage === "sobre" ? "is-active" : ""}
             >
-              Sobre nós
+              Sobre
             </a>
             <a
               href="/equipe"
@@ -94,15 +94,29 @@ function Navbar({ activePage = "" }) {
             >
               Contato
             </a>
-            <a
-              href="https://wa.me/5591984085049"
-              target="_blank"
-              rel="noreferrer"
-              className="cta-button"
-              onClick={closeMobileMenu}
-            >
-              Crie seu projeto
-            </a>
+            {toggleTheme && (
+              <button
+                className="theme-toggle-nav"
+                type="button"
+                onClick={() => {
+                  toggleTheme();
+                  closeMobileMenu();
+                }}
+                aria-label={`Ativar modo ${theme === "light" ? "escuro" : "claro"}`}
+                aria-pressed={theme === "dark"}
+              >
+                {theme === "light" ? (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 14.1A8.5 8.5 0 0 1 9.9 3.5a8.5 8.5 0 1 0 10.6 10.6Z" />
+                  </svg>
+                )}
+              </button>
+            )}
           </div>
         </nav>
       </div>

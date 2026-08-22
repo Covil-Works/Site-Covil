@@ -1,0 +1,165 @@
+import { useEffect, useRef, useState } from "react";
+
+const PHONE_ROTATION_ORDER = ["main", "left", "right"];
+
+function ProjectCard({ project, className = "" }) {
+  const [phoneRotationStep, setPhoneRotationStep] = useState(0);
+  const [isPhoneCycling, setIsPhoneCycling] = useState(false);
+  const [desktopCarouselStep, setDesktopCarouselStep] = useState(0);
+  const phoneRotationTimer = useRef(null);
+  const desktopCarouselTimer = useRef(null);
+  const canRotatePhonePreview = project.device === "phone" && project.rotatePhonePreview;
+  const canRotateDesktopPreview = project.device === "desktop" && project.carouselImages?.length > 1;
+  const canAutoPreview = canRotatePhonePreview || canRotateDesktopPreview;
+  const desktopCarouselSize = project.carouselImages?.length ?? 0;
+
+  const stopPhoneRotation = () => {
+    if (phoneRotationTimer.current) {
+      clearInterval(phoneRotationTimer.current);
+      phoneRotationTimer.current = null;
+    }
+
+    setIsPhoneCycling(false);
+    setPhoneRotationStep(0);
+  };
+
+  const stopDesktopCarousel = () => {
+    if (desktopCarouselTimer.current) {
+      clearInterval(desktopCarouselTimer.current);
+      desktopCarouselTimer.current = null;
+    }
+
+    setDesktopCarouselStep(0);
+  };
+
+  useEffect(() => () => {
+    stopPhoneRotation();
+    stopDesktopCarousel();
+  }, []);
+
+  const startPhoneRotation = () => {
+    if (!canRotatePhonePreview || phoneRotationTimer.current) return;
+
+    setIsPhoneCycling(true);
+    setPhoneRotationStep(1);
+    phoneRotationTimer.current = setInterval(() => {
+      setPhoneRotationStep((currentStep) => (currentStep + 1) % PHONE_ROTATION_ORDER.length);
+    }, 1500);
+  };
+
+  const startDesktopCarousel = () => {
+    if (!canRotateDesktopPreview || desktopCarouselTimer.current) return;
+
+    setDesktopCarouselStep(1);
+    desktopCarouselTimer.current = setInterval(() => {
+      setDesktopCarouselStep((currentStep) => (currentStep + 1) % project.carouselImages.length);
+    }, 1500);
+  };
+
+  const startAutoPreview = canRotatePhonePreview ? startPhoneRotation : startDesktopCarousel;
+  const stopAutoPreview = () => {
+    stopPhoneRotation();
+    stopDesktopCarousel();
+  };
+
+  const getRotatingPhonePosition = (initialPosition) => {
+    const initialIndex = PHONE_ROTATION_ORDER.indexOf(initialPosition);
+    return PHONE_ROTATION_ORDER[(initialIndex + phoneRotationStep) % PHONE_ROTATION_ORDER.length];
+  };
+
+  const getPhoneClasses = (initialPosition) => {
+    const currentPosition = canRotatePhonePreview ? getRotatingPhonePosition(initialPosition) : initialPosition;
+    const classes = ["device-mockup", `device-mockup--${currentPosition}`];
+
+    if (currentPosition !== "main") classes.push("device-mockup--rear");
+    if (canRotatePhonePreview) classes.push(`device-mockup--slot-${initialPosition}`);
+
+    return classes.join(" ");
+  };
+
+  const renderScreen = (image = project.image, imageAlt = project.imageAlt, isDecorative = false) => (
+    <div className="device-mockup__screen">
+      {image ? (
+        <img src={image} alt={isDecorative ? "" : imageAlt} aria-hidden={isDecorative || undefined} />
+      ) : (
+        <span>{isDecorative ? "" : "Imagem do projeto"}</span>
+      )}
+    </div>
+  );
+
+  const visualVariantClass = project.name === "SplitUp"
+    ? " project-card__visual--splitup"
+    : (project.name === "MyWL" ? " project-card__visual--mywl" : "");
+
+  return (
+    <article className={`project-card ${className}`.trim()}>
+      <h3>{project.name}</h3>
+      <a
+        className={"project-card__visual visual--" + project.device + visualVariantClass}
+        href={project.href}
+        target={project.href?.startsWith("http") ? "_blank" : undefined}
+        rel={project.href?.startsWith("http") ? "noreferrer" : undefined}
+        onMouseEnter={canAutoPreview ? startAutoPreview : undefined}
+        onMouseLeave={canAutoPreview ? stopAutoPreview : undefined}
+      >
+        {project.description && <span className="project-card__intro">{project.description}</span>}
+        <span className="project-card__more">
+          Ver mais <span aria-hidden="true">↗</span>
+        </span>
+        {project.device === "phone" ? (
+          <div
+            className={[
+              "phone-preview",
+              canRotatePhonePreview && "phone-preview--rotating",
+              isPhoneCycling && "phone-preview--cycling",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <div className={getPhoneClasses("left")} aria-hidden="true">
+              {renderScreen(project.phoneImages?.left, "", true)}
+            </div>
+            <div className={getPhoneClasses("right")} aria-hidden="true">
+              {renderScreen(project.phoneImages?.right, "", true)}
+            </div>
+            <div className={getPhoneClasses("main")}>
+              {renderScreen()}
+            </div>
+          </div>
+        ) : (
+          <div className="device-mockup">
+            {project.carouselImages ? (
+              <div className="desktop-preview__screen" aria-label={`${project.name} - telas do projeto`}>
+                <div
+                  className="desktop-preview__track"
+                  style={{
+                    width: `${desktopCarouselSize * 100}%`,
+                    transform: `translateX(-${desktopCarouselStep * (100 / desktopCarouselSize)}%)`,
+                  }}
+                >
+                  {project.carouselImages.map((image, imageIndex) => (
+                    <img
+                      key={image}
+                      src={image}
+                      alt={`${project.name} tela ${imageIndex + 1}`}
+                      className="desktop-preview__image"
+                      style={{
+                        flexBasis: `${100 / desktopCarouselSize}%`,
+                        width: `${100 / desktopCarouselSize}%`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              renderScreen()
+            )}
+          </div>
+        )}
+      </a>
+      {project.details && <p className="project-card__description">{project.details}</p>}
+    </article>
+  );
+}
+
+export default ProjectCard;

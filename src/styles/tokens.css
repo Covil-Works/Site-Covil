@@ -1,19 +1,30 @@
 :root {
   /* Base palette */
-  --color-bg: #070a0e;
-  --color-black: #000000;
+  --ink: #f5f7fb;
+  --muted-ink: #c9d0dc;
+  --paper: #070a0e;
+  --honey: #057447;
+  --line: rgba(255, 255, 255, 0.12);
+  --color-bg: var(--paper);
+  --color-black: var(--ink);
   --color-surface: #0e1518;
   --color-surface-alt: #0e1218;
 
   /* Semantic tokens */
-  --bg: var(--color-bg);
+  --bg: var(--paper);
   --panel: var(--color-surface-alt);
   --text: #f5f7fb;
   --muted: #c9d0dc;
-  --accent: #057447;
+  --accent: var(--honey);
   --container-width: 1200px;
-  --container-gutter: 20px;
-  --hero-overlay-color: #050709;
+  --container-gutter: 1.25rem;
+  --content-gutter: 1.25rem;
+  --section-min: 5rem;
+  --section-max: 80px;
+  --radius-card: 14px;
+  --radius-device: 0.85rem;
+  --radius-pill: 999px;
+  --hero-overlay-color: #000000;
   --hero-overlay-opacity: 0;
   --hero-overlay-darken-speed: 1.55;
   --hero-scroll-progress: 0;

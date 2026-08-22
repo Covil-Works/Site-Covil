@@ -27,32 +27,84 @@ function Contact({ href, children }) {
 function EquipePage() {
   const [expandedId, setExpandedId] = useState(null);
   const [members] = useState(() => shuffleMembers(TEAM_MEMBERS));
+  const [revealedIds, setRevealedIds] = useState(() => new Set());
+
   useEffect(() => { document.title = "Equipe | Covil"; }, []);
 
+  useEffect(() => {
+    const revealElements = Array.from(document.querySelectorAll(".reveal-on-scroll"));
+    if (revealElements.length === 0) return undefined;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRevealedIds(new Set(["title", "contact", ...TEAM_MEMBERS.map((m) => m.id)]));
+      return undefined;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const revealId = entry.target.getAttribute("data-reveal-id");
+          if (revealId) {
+            setRevealedIds((prev) => {
+              if (prev.has(revealId)) return prev;
+              const next = new Set(prev);
+              next.add(revealId);
+              return next;
+            });
+          } else {
+            entry.target.classList.add("is-revealed");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    revealElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const toggleMember = (id) => {
-    const update = () => setExpandedId((current) => current === id ? null : id);
-    if (document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(update);
-    else update();
+    setRevealedIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+    const update = () => setExpandedId((current) => (current === id ? null : id));
+    if (document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.startViewTransition(update);
+    } else {
+      update();
+    }
   };
 
   return (
     <div className="equipe-page">
       <Navbar activePage="equipe" />
-      <section className="equipe-title-section">
+      <section data-reveal-id="title" className={`equipe-title-section reveal-on-scroll${revealedIds.has("title") ? " is-revealed" : ""}`}>
         <h1>Conheça a <strong>Nossa Equipe</strong></h1>
         <p>Os desenvolvedores por trás da Covil: profissionais apaixonados por tecnologia, código limpo e arquiteturas sólidas.</p>
       </section>
       <main className="equipe-container">
         <div className="team-grid">
-          {members.map((member) => {
+          {members.map((member, index) => {
             const expanded = expandedId === member.id;
+            const isRevealed = revealedIds.has(member.id);
             const activate = (event) => {
               if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
               if (event.type === "keydown") event.preventDefault();
               toggleMember(member.id);
             };
             return (
-              <article key={member.id} className={`team-card${expanded ? " is-expanded" : ""}`} style={{ viewTransitionName: `member-${member.id}` }} role="button" tabIndex="0" aria-expanded={expanded} aria-controls={`details-${member.id}`} onClick={activate} onKeyDown={activate}>
+              <article
+                key={member.id}
+                data-reveal-id={member.id}
+                className={`team-card reveal-on-scroll${isRevealed ? " is-revealed" : ""}${expanded ? " is-expanded" : ""}`}
+                style={{ "--reveal-delay": `${index * 120}ms`, viewTransitionName: `member-${member.id}` }}
+                role="button"
+                tabIndex="0"
+                aria-expanded={expanded}
+                aria-controls={`details-${member.id}`}
+                onClick={activate}
+                onKeyDown={activate}
+              >
                 {expanded && (
                   <button className="team-close" type="button" aria-label={`Fechar detalhes de ${member.name}`} onClick={(event) => { event.stopPropagation(); toggleMember(member.id); }}>
                     <span aria-hidden="true">×</span>
@@ -79,7 +131,7 @@ function EquipePage() {
           })}
         </div>
       </main>
-      <section className="equipe-contact" aria-labelledby="equipe-contact-title">
+      <section data-reveal-id="contact" className={`equipe-contact reveal-on-scroll${revealedIds.has("contact") ? " is-revealed" : ""}`} aria-labelledby="equipe-contact-title">
         <div>
           <h2 id="equipe-contact-title">Tem um projeto em mente?</h2>
           <p>Converse com a nossa equipe e descubra como podemos transformar sua ideia em uma solução digital.</p>
