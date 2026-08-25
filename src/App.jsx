@@ -8,7 +8,10 @@ import EquipePage from "./pages/EquipePage";
 import SolutionsPage from "./pages/SolutionsPage";
 import SolutionPage from "./pages/SolutionPage";
 
-const APP_REGISTRY = { splitup: { name: "SplitUp" } };
+const APP_REGISTRY = {
+  splitup: { name: "SplitUp", logo: "/img/logo-splitup.png" },
+  mywl: { name: "MyWL", logo: "/img/logo-mywl.png" },
+};
 const SOLUTION_REGISTRY = {
   splitup: {
     name: "SplitUp",
@@ -22,6 +25,7 @@ const SOLUTION_REGISTRY = {
     imageAlt: "Tela principal do SplitUp",
     phoneImages: { left: "/img/su-coomanda.jpg", right: "/img/su-amigos.jpg" },
     rotatePhonePreview: true,
+    logo: "/img/logo-splitup.png",
   },
   mywl: {
     name: "MyWL",
@@ -34,6 +38,7 @@ const SOLUTION_REGISTRY = {
     image: null,
     imageAlt: "Tela do MyWL",
     carouselImages: ["/img/mywl-1.png", "/img/mywl-2.png", "/img/mywl-3.png"],
+    logo: "/img/logo-mywl.png",
   },
 };
 const APP_PAGE_REGISTRY = { privacypoly: PrivacyPolicyPage };

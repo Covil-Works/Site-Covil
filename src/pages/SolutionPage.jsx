@@ -16,8 +16,15 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
           <a className="solution-back-link" href="/solucoes"><span>←</span> Todas as soluções</a>
           <div className="solution-detail-layout">
             <div className="solution-detail-content">
-              <p className="solutions-kicker">{solution.category}</p>
-              <h1>{solution.name}</h1>
+              <div className="solution-detail-header-wrap">
+                {solution.logo && (
+                  <img src={solution.logo} alt={`Logo ${solution.name}`} className="solution-header-logo" />
+                )}
+                <div>
+                  <p className="solutions-kicker">{solution.category}</p>
+                  <h1>{solution.name}</h1>
+                </div>
+              </div>
               <p className="solution-detail-description">{solution.description}</p>
               <p className="solution-detail-support">
                 {available ? "Uma experiência feita para deixar a rotina mais leve e as decisões mais claras." : "Estamos preparando cada detalhe para que essa solução chegue do jeito certo."}
@@ -29,9 +36,15 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
               )}
             </div>
             <div className="solution-detail-visual">
-               <div className="solution-visual-placeholder">
+              {solution.logo ? (
+                <div className="solution-visual-logo-container">
+                  <img src={solution.logo} alt={`Logo ${solution.name}`} className="solution-visual-logo" />
+                </div>
+              ) : (
+                <div className="solution-visual-placeholder">
                   <span>{solution.name.slice(0, 2).toUpperCase()}</span>
-               </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
