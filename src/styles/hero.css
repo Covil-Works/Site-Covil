@@ -193,6 +193,14 @@
   animation-iteration-count: infinite;
 }
 
+.hero__bird-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  will-change: transform;
+}
+
 .hero__bird--1 {
   top: 14%;
   width: 12px;
@@ -598,7 +606,15 @@ main.content {
   animation: firefly-drift var(--firefly-drift-duration) linear infinite;
 }
 
-.hero__firefly::before {
+.hero__firefly-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  will-change: transform;
+}
+
+.hero__firefly-inner::before {
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -721,7 +737,7 @@ main.content {
 
 @media (prefers-reduced-motion: reduce) {
   .hero__bird { animation: none; }
-  .hero__firefly, .hero__firefly::before { animation: none; }
+  .hero__firefly, .hero__firefly-inner::before { animation: none; }
   .hero__bird--1 { left: 20%; }
   .hero__bird--2 { left: 48%; }
   .hero__bird--3 { left: 76%; }

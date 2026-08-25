@@ -246,10 +246,22 @@ function HomePage({ theme = "dark", toggleTheme }) {
       return undefined;
     }
 
-    let animationFrameId = null;
-    let currentX = 0;
-    let currentY = 0;
-    let isInitialized = false;
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let isMouseActive = false;
+
+    const handlePointerMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isMouseActive = true;
+    };
+    const handlePointerLeave = () => {
+      isMouseActive = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("blur", handlePointerLeave);
 
     const updateMotion = () => {
       const fireflyEl = document.querySelector(".traveling-firefly");
@@ -393,8 +405,26 @@ function HomePage({ theme = "dark", toggleTheme }) {
       const flutterX = Math.sin(time * 2.1) * 3;
       const flutterY = Math.cos(time * 1.7) * 3;
 
-      const finalTargetX = targetVpX + flutterX;
-      const finalTargetY = targetVpY + flutterY;
+      let mousePullX = 0;
+      let mousePullY = 0;
+
+      if (isMouseActive) {
+        const dx = mouseX - currentX;
+        const dy = mouseY - currentY;
+        const dist = Math.hypot(dx, dy);
+        const RADIUS = 140;
+        const MAX_PULL = 32;
+
+        if (dist < RADIUS && dist > 0) {
+          const norm = dist / RADIUS;
+          const influence = (1 - norm) * (1 - norm);
+          mousePullX = (dx / dist) * MAX_PULL * influence;
+          mousePullY = (dy / dist) * MAX_PULL * influence;
+        }
+      }
+
+      const finalTargetX = targetVpX + flutterX + mousePullX;
+      const finalTargetY = targetVpY + flutterY + mousePullY;
 
       if (!isInitialized) {
         currentX = finalTargetX;
@@ -416,6 +446,153 @@ function HomePage({ theme = "dark", toggleTheme }) {
       if (animationFrameId !== null) {
         window.cancelAnimationFrame(animationFrameId);
       }
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("blur", handlePointerLeave);
+    };
+  }, [heroTheme]);
+
+  useEffect(() => {
+    const hoverQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!hoverQuery.matches || reducedMotionQuery.matches) {
+      return undefined;
+    }
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let isMouseActive = false;
+
+    const handlePointerMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isMouseActive = true;
+    };
+
+    const handlePointerLeave = () => {
+      isMouseActive = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("blur", handlePointerLeave);
+
+    const RADIUS_FIREFLY = 140;
+    const MAX_PULL_FIREFLY = 32;
+    const RADIUS_BIRD = 130;
+    const MAX_DODGE_BIRD = 28;
+
+    const fireflyOffsets = Array.from({ length: 6 }, () => ({ x: 0, y: 0 }));
+    const birdOffsets = Array.from({ length: 3 }, () => ({ y: 0 }));
+
+    let animationFrameId = null;
+
+    const tick = () => {
+      if (heroTheme === "dark") {
+        const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+        fireflyInners.forEach((el, index) => {
+          if (index >= fireflyOffsets.length) return;
+
+          const rect = el.getBoundingClientRect();
+          const state = fireflyOffsets[index];
+
+          const baseCenterX = rect.left + rect.width / 2 - state.x;
+          const baseCenterY = rect.top + rect.height / 2 - state.y;
+
+          let targetX = 0;
+          let targetY = 0;
+
+          if (isMouseActive) {
+            const dx = mouseX - baseCenterX;
+            const dy = mouseY - baseCenterY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < RADIUS_FIREFLY && dist > 0) {
+              const norm = dist / RADIUS_FIREFLY;
+              const influence = (1 - norm) * (1 - norm);
+              targetX = (dx / dist) * MAX_PULL_FIREFLY * influence;
+              targetY = (dy / dist) * MAX_PULL_FIREFLY * influence;
+            }
+          }
+
+          state.x += (targetX - state.x) * 0.06;
+          state.y += (targetY - state.y) * 0.06;
+
+          if (Math.abs(state.x) < 0.005) state.x = 0;
+          if (Math.abs(state.y) < 0.005) state.y = 0;
+
+          el.style.transform = `translate3d(${state.x.toFixed(2)}px, ${state.y.toFixed(2)}px, 0)`;
+        });
+
+        const birdInners = document.querySelectorAll(".hero__bird-inner");
+        birdInners.forEach((el, index) => {
+          if (birdOffsets[index]) birdOffsets[index].y = 0;
+          if (el.style.transform) el.style.transform = "";
+        });
+      } else {
+        const birdInners = document.querySelectorAll(".hero__bird-inner");
+        birdInners.forEach((el, index) => {
+          if (index >= birdOffsets.length) return;
+
+          const rect = el.getBoundingClientRect();
+          const state = birdOffsets[index];
+
+          const baseCenterX = rect.left + rect.width / 2;
+          const baseCenterY = rect.top + rect.height / 2 - state.y;
+
+          let targetY = 0;
+
+          if (isMouseActive) {
+            const dx = mouseX - baseCenterX;
+            const dy = mouseY - baseCenterY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < RADIUS_BIRD && dist > 0) {
+              const norm = dist / RADIUS_BIRD;
+              const influence = Math.pow(1 - norm, 1.5);
+              const dirY = dy >= 0 ? -1 : 1;
+              targetY = dirY * MAX_DODGE_BIRD * influence;
+            }
+          }
+
+          state.y += (targetY - state.y) * 0.07;
+          if (Math.abs(state.y) < 0.005) state.y = 0;
+
+          el.style.transform = `translate3d(0, ${state.y.toFixed(2)}px, 0)`;
+        });
+
+        const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+        fireflyInners.forEach((el, index) => {
+          if (fireflyOffsets[index]) {
+            fireflyOffsets[index].x = 0;
+            fireflyOffsets[index].y = 0;
+          }
+          if (el.style.transform) el.style.transform = "";
+        });
+      }
+
+      animationFrameId = window.requestAnimationFrame(tick);
+    };
+
+    animationFrameId = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("blur", handlePointerLeave);
+
+      const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+      fireflyInners.forEach((el) => {
+        el.style.transform = "";
+      });
+      const birdInners = document.querySelectorAll(".hero__bird-inner");
+      birdInners.forEach((el) => {
+        el.style.transform = "";
+      });
     };
   }, [heroTheme]);
 
@@ -438,9 +615,15 @@ function HomePage({ theme = "dark", toggleTheme }) {
         <div className="hero__background" aria-hidden="true" />
 
         <div className="hero__birds" aria-hidden="true">
-          <img className="hero__bird hero__bird--1" src="/img/b1.png" alt="" />
-          <img className="hero__bird hero__bird--2" src="/img/b2.png" alt="" />
-          <img className="hero__bird hero__bird--3" src="/img/b3.png" alt="" />
+          <div className="hero__bird hero__bird--1">
+            <img className="hero__bird-inner" src="/img/b1.png" alt="" />
+          </div>
+          <div className="hero__bird hero__bird--2">
+            <img className="hero__bird-inner" src="/img/b2.png" alt="" />
+          </div>
+          <div className="hero__bird hero__bird--3">
+            <img className="hero__bird-inner" src="/img/b3.png" alt="" />
+          </div>
         </div>
 
         {heroStacks.map((stack, index) => (
@@ -459,16 +642,16 @@ function HomePage({ theme = "dark", toggleTheme }) {
         ))}
 
         <div className="hero__fireflies hero__fireflies--between-back" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--1" />
-          <span className="hero__firefly hero__firefly--2" />
+          <span className="hero__firefly hero__firefly--1"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--2"><span className="hero__firefly-inner" /></span>
         </div>
         <div className="hero__fireflies hero__fireflies--between-front" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--3" />
+          <span className="hero__firefly hero__firefly--3"><span className="hero__firefly-inner" /></span>
         </div>
         <div className="hero__fireflies hero__fireflies--foreground" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--4" />
-          <span className="hero__firefly hero__firefly--5" />
-          <span className="hero__firefly hero__firefly--6" />
+          <span className="hero__firefly hero__firefly--4"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--5"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--6"><span className="hero__firefly-inner" /></span>
         </div>
 
         <div className="content hero__content">
