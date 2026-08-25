@@ -1,21 +1,41 @@
-import "../styles/fireflies.css";
+import { useEffect } from "react";
 import "../styles/not-found.css";
 
 function NotFoundPage({ theme = "dark" }) {
+  useEffect(() => {
+    document.title = "404 - Página Não Encontrada | Covil";
+  }, []);
+
   return (
     <main className="not-found-page" data-theme={theme}>
       <section className="not-found-content" aria-labelledby="not-found-title">
-        <div className="not-found-number-wrap" aria-hidden="true">
-          <h1 id="not-found-title" className="not-found-number">404</h1>
-          <div className="not-found-fireflies hero-fireflies">
-            <span className="not-found-firefly hero-firefly hero-firefly--north" />
-            <span className="not-found-firefly hero-firefly hero-firefly--middle" />
-            <span className="not-found-firefly hero-firefly hero-firefly--south" />
+        <div className="not-found-hero">
+          <h1 id="not-found-title" className="not-found-number">
+            404
+          </h1>
+
+          {/* Vagalumes para o tema escuro */}
+          <div className="not-found-fireflies" aria-hidden="true">
+            <span className="not-found-firefly not-found-firefly--1" />
+            <span className="not-found-firefly not-found-firefly--2" />
+            <span className="not-found-firefly not-found-firefly--3" />
+          </div>
+
+          {/* Pássaros para o tema claro (igual ao hero) */}
+          <div className="not-found-birds" aria-hidden="true">
+            <img className="not-found-bird not-found-bird--1" src="/img/b1.png" alt="" />
+            <img className="not-found-bird not-found-bird--2" src="/img/b2.png" alt="" />
+            <img className="not-found-bird not-found-bird--3" src="/img/b3.png" alt="" />
           </div>
         </div>
+
         <p className="not-found-message">
-          Nada para ver por aqui... <a href="/">Volte para o início.</a>
+          Não há nada para ver por aqui...
         </p>
+
+        <a href="/" className="not-found-button">
+          Voltar para home
+        </a>
       </section>
     </main>
   );

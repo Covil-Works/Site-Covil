@@ -88,7 +88,7 @@ function Navbar({ activePage = "", theme = "dark", toggleTheme }) {
               Soluções
             </a>
             <a
-              href="/#contato"
+              href="/contato"
               onClick={closeMobileMenu}
               className={activePage === "contato" ? "is-active" : ""}
             >

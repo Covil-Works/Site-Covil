@@ -246,10 +246,26 @@ function HomePage({ theme = "dark", toggleTheme }) {
       return undefined;
     }
 
-    let animationFrameId = null;
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let isMouseActive = false;
     let currentX = 0;
     let currentY = 0;
     let isInitialized = false;
+    let animationFrameId = null;
+
+    const handlePointerMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isMouseActive = true;
+    };
+    const handlePointerLeave = () => {
+      isMouseActive = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("blur", handlePointerLeave);
 
     const updateMotion = () => {
       const fireflyEl = document.querySelector(".traveling-firefly");
@@ -393,8 +409,26 @@ function HomePage({ theme = "dark", toggleTheme }) {
       const flutterX = Math.sin(time * 2.1) * 3;
       const flutterY = Math.cos(time * 1.7) * 3;
 
-      const finalTargetX = targetVpX + flutterX;
-      const finalTargetY = targetVpY + flutterY;
+      let mousePullX = 0;
+      let mousePullY = 0;
+
+      if (isMouseActive) {
+        const dx = mouseX - currentX;
+        const dy = mouseY - currentY;
+        const dist = Math.hypot(dx, dy);
+        const RADIUS = 140;
+        const MAX_PULL = 32;
+
+        if (dist < RADIUS && dist > 0) {
+          const norm = dist / RADIUS;
+          const influence = (1 - norm) * (1 - norm);
+          mousePullX = (dx / dist) * MAX_PULL * influence;
+          mousePullY = (dy / dist) * MAX_PULL * influence;
+        }
+      }
+
+      const finalTargetX = targetVpX + flutterX + mousePullX;
+      const finalTargetY = targetVpY + flutterY + mousePullY;
 
       if (!isInitialized) {
         currentX = finalTargetX;
@@ -416,6 +450,153 @@ function HomePage({ theme = "dark", toggleTheme }) {
       if (animationFrameId !== null) {
         window.cancelAnimationFrame(animationFrameId);
       }
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("blur", handlePointerLeave);
+    };
+  }, [heroTheme]);
+
+  useEffect(() => {
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (reducedMotionQuery.matches) {
+      return undefined;
+    }
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let isMouseActive = false;
+
+    const handlePointerMove = (e) => {
+      if (e.pointerType === "touch") return;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isMouseActive = true;
+    };
+
+    const handlePointerLeave = () => {
+      isMouseActive = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("blur", handlePointerLeave);
+
+    const RADIUS_FIREFLY = 150;
+    const MAX_PULL_FIREFLY = 36;
+    const RADIUS_BIRD = 130;
+    const MAX_DODGE_BIRD = 28;
+
+    const fireflyOffsets = Array.from({ length: 6 }, () => ({ x: 0, y: 0 }));
+    const birdOffsets = Array.from({ length: 3 }, () => ({ y: 0 }));
+
+    let animationFrameId = null;
+
+    const tick = () => {
+      if (heroTheme === "dark") {
+        const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+        fireflyInners.forEach((el, index) => {
+          if (index >= fireflyOffsets.length) return;
+
+          const rect = el.getBoundingClientRect();
+          const state = fireflyOffsets[index];
+
+          const baseCenterX = rect.left + rect.width / 2 - state.x;
+          const baseCenterY = rect.top + rect.height / 2 - state.y;
+
+          let targetX = 0;
+          let targetY = 0;
+
+          if (isMouseActive) {
+            const dx = mouseX - baseCenterX;
+            const dy = mouseY - baseCenterY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < RADIUS_FIREFLY && dist > 0) {
+              const norm = dist / RADIUS_FIREFLY;
+              const influence = (1 - norm) * (1 - norm);
+              targetX = (dx / dist) * MAX_PULL_FIREFLY * influence;
+              targetY = (dy / dist) * MAX_PULL_FIREFLY * influence;
+            }
+          }
+
+          state.x += (targetX - state.x) * 0.06;
+          state.y += (targetY - state.y) * 0.06;
+
+          if (Math.abs(state.x) < 0.005) state.x = 0;
+          if (Math.abs(state.y) < 0.005) state.y = 0;
+
+          el.style.transform = `translate3d(${state.x.toFixed(2)}px, ${state.y.toFixed(2)}px, 0)`;
+        });
+
+        const birdInners = document.querySelectorAll(".hero__bird-inner");
+        birdInners.forEach((el, index) => {
+          if (birdOffsets[index]) birdOffsets[index].y = 0;
+          if (el.style.transform) el.style.transform = "";
+        });
+      } else {
+        const birdInners = document.querySelectorAll(".hero__bird-inner");
+        birdInners.forEach((el, index) => {
+          if (index >= birdOffsets.length) return;
+
+          const rect = el.getBoundingClientRect();
+          const state = birdOffsets[index];
+
+          const baseCenterX = rect.left + rect.width / 2;
+          const baseCenterY = rect.top + rect.height / 2 - state.y;
+
+          let targetY = 0;
+
+          if (isMouseActive) {
+            const dx = mouseX - baseCenterX;
+            const dy = mouseY - baseCenterY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < RADIUS_BIRD && dist > 0) {
+              const norm = dist / RADIUS_BIRD;
+              const influence = Math.pow(1 - norm, 1.5);
+              const dirY = dy >= 0 ? -1 : 1;
+              targetY = dirY * MAX_DODGE_BIRD * influence;
+            }
+          }
+
+          state.y += (targetY - state.y) * 0.07;
+          if (Math.abs(state.y) < 0.005) state.y = 0;
+
+          el.style.transform = `translate3d(0, ${state.y.toFixed(2)}px, 0)`;
+        });
+
+        const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+        fireflyInners.forEach((el, index) => {
+          if (fireflyOffsets[index]) {
+            fireflyOffsets[index].x = 0;
+            fireflyOffsets[index].y = 0;
+          }
+          if (el.style.transform) el.style.transform = "";
+        });
+      }
+
+      animationFrameId = window.requestAnimationFrame(tick);
+    };
+
+    animationFrameId = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("blur", handlePointerLeave);
+
+      const fireflyInners = document.querySelectorAll(".hero__firefly-inner");
+      fireflyInners.forEach((el) => {
+        el.style.transform = "";
+      });
+      const birdInners = document.querySelectorAll(".hero__bird-inner");
+      birdInners.forEach((el) => {
+        el.style.transform = "";
+      });
     };
   }, [heroTheme]);
 
@@ -438,9 +619,15 @@ function HomePage({ theme = "dark", toggleTheme }) {
         <div className="hero__background" aria-hidden="true" />
 
         <div className="hero__birds" aria-hidden="true">
-          <img className="hero__bird hero__bird--1" src="/img/b1.png" alt="" />
-          <img className="hero__bird hero__bird--2" src="/img/b2.png" alt="" />
-          <img className="hero__bird hero__bird--3" src="/img/b3.png" alt="" />
+          <div className="hero__bird hero__bird--1">
+            <img className="hero__bird-inner" src="/img/b1.png" alt="" />
+          </div>
+          <div className="hero__bird hero__bird--2">
+            <img className="hero__bird-inner" src="/img/b2.png" alt="" />
+          </div>
+          <div className="hero__bird hero__bird--3">
+            <img className="hero__bird-inner" src="/img/b3.png" alt="" />
+          </div>
         </div>
 
         {heroStacks.map((stack, index) => (
@@ -459,16 +646,16 @@ function HomePage({ theme = "dark", toggleTheme }) {
         ))}
 
         <div className="hero__fireflies hero__fireflies--between-back" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--1" />
-          <span className="hero__firefly hero__firefly--2" />
+          <span className="hero__firefly hero__firefly--1"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--2"><span className="hero__firefly-inner" /></span>
         </div>
         <div className="hero__fireflies hero__fireflies--between-front" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--3" />
+          <span className="hero__firefly hero__firefly--3"><span className="hero__firefly-inner" /></span>
         </div>
         <div className="hero__fireflies hero__fireflies--foreground" aria-hidden="true">
-          <span className="hero__firefly hero__firefly--4" />
-          <span className="hero__firefly hero__firefly--5" />
-          <span className="hero__firefly hero__firefly--6" />
+          <span className="hero__firefly hero__firefly--4"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--5"><span className="hero__firefly-inner" /></span>
+          <span className="hero__firefly hero__firefly--6"><span className="hero__firefly-inner" /></span>
         </div>
 
         <div className="content hero__content">
@@ -647,6 +834,18 @@ function HomePage({ theme = "dark", toggleTheme }) {
                     <path d="M8 10.2v6.6" />
                     <circle cx="8" cy="7.5" r="1" />
                     <path d="M11.6 16.8v-6.6h3v1c.4-.7 1.3-1.3 2.5-1.3 2 0 2.9 1.2 2.9 3.4v3.5h-3v-3.2c0-1-.3-1.7-1.2-1.7s-1.2.7-1.2 1.8v3.1Z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://github.com/Covil-Works"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-alt-link"
+                  aria-label="GitHub da Covil"
+                >
+                  <svg viewBox="0 0 24 24" role="img">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" fill="currentColor" />
                   </svg>
                 </a>
 
