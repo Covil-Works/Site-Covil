@@ -249,6 +249,10 @@ function HomePage({ theme = "dark", toggleTheme }) {
     let mouseX = -9999;
     let mouseY = -9999;
     let isMouseActive = false;
+    let currentX = 0;
+    let currentY = 0;
+    let isInitialized = false;
+    let animationFrameId = null;
 
     const handlePointerMove = (e) => {
       mouseX = e.clientX;
