@@ -3,14 +3,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/solutions.css";
 
-function SolutionPage({ solutionSlug, solution }) {
+function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
   useEffect(() => { document.title = `${solution.name} | Covil`; }, [solution.name]);
   
   const available = solutionSlug === "splitup";
   
   return (
-    <div className="solution-page">
-      <Navbar />
+    <div className="solution-page" data-theme={theme}>
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main className="solution-detail">
         <div className="solution-detail-inner">
           <a className="solution-back-link" href="/solucoes"><span>←</span> Todas as soluções</a>

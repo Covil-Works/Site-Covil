@@ -33,3 +33,22 @@
   --forest-overlay-color: #020a10;
   --forest-overlay-opacity: 0.5;
 }
+
+[data-theme="light"] {
+  --ink: #1c2024;
+  --muted-ink: #5c6470;
+  --paper: #f5f7fb;
+  --honey: #057447;
+  --line: rgba(0, 0, 0, 0.12);
+  --color-bg: var(--paper);
+  --color-black: var(--ink);
+  --color-surface: #ffffff;
+  --color-surface-alt: #e9ecf0;
+
+  /* Semantic tokens */
+  --bg: #f5f7fb;
+  --panel: #e9ecf0;
+  --text: #1c2024;
+  --muted: #5c6470;
+  --accent: #057447;
+}

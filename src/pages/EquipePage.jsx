@@ -24,7 +24,7 @@ function Contact({ href, children }) {
   return <a className="team-contact" href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} onClick={(event) => event.stopPropagation()}>{children}{external && <span aria-hidden="true"> ↗</span>}</a>;
 }
 
-function EquipePage() {
+function EquipePage({ theme = "dark", toggleTheme }) {
   const [expandedId, setExpandedId] = useState(null);
   const [members] = useState(() => shuffleMembers(TEAM_MEMBERS));
   const [revealedIds, setRevealedIds] = useState(() => new Set());
@@ -76,8 +76,8 @@ function EquipePage() {
   };
 
   return (
-    <div className="equipe-page">
-      <Navbar activePage="equipe" />
+    <div className="equipe-page" data-theme={theme}>
+      <Navbar activePage="equipe" theme={theme} toggleTheme={toggleTheme} />
       <section data-reveal-id="title" className={`equipe-title-section reveal-on-scroll${revealedIds.has("title") ? " is-revealed" : ""}`}>
         <h1>Conheça a <strong>Nossa Equipe</strong></h1>
         <p>Os desenvolvedores por trás da Covil: profissionais apaixonados por tecnologia, código limpo e arquiteturas sólidas.</p>

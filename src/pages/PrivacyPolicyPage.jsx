@@ -1,8 +1,8 @@
-﻿import "../styles/apps.css";
+import "../styles/apps.css";
 
-function PrivacyPolicyPage({ appSlug }) {
+function PrivacyPolicyPage({ appSlug, theme = "dark" }) {
   return (
-    <main className="policy-shell">
+    <main className="policy-shell" data-theme={theme}>
       <article className="policy-card policy-card--content">
         <p className="policy-eyebrow">{appSlug}</p>
         <h1>Privacy Policy</h1>

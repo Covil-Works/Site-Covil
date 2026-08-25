@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
 import AppLandingPage from "./pages/AppLandingPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
@@ -36,33 +37,64 @@ const SOLUTION_REGISTRY = {
   },
 };
 const APP_PAGE_REGISTRY = { privacypoly: PrivacyPolicyPage };
-function normalizePath(pathname) { if (!pathname) return "/"; const normalized = pathname.replace(/\/+$/, ""); return normalized === "" ? "/" : normalized; }
+
+function normalizePath(pathname) {
+  if (!pathname) return "/";
+  const normalized = pathname.replace(/\/+$/, "");
+  return normalized === "" ? "/" : normalized;
+}
+
 function App() {
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("covil-theme");
+    if (saved === "light" || saved === "dark") return saved;
+    return "dark";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("covil-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (document.body) {
+      document.body.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  };
+
   const pathname = normalizePath(window.location.pathname);
-  if (pathname === "/") return <HomePage />;
-  if (pathname === "/equipe") return <EquipePage />;
-  if (pathname === "/links") return <LinksPage />;
-  if (pathname === "/solucoes") return <SolutionsPage solutions={SOLUTION_REGISTRY} />;
+
+  if (pathname === "/") return <HomePage theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/equipe") return <EquipePage theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/links") return <LinksPage theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/solucoes") return <SolutionsPage solutions={SOLUTION_REGISTRY} theme={theme} toggleTheme={toggleTheme} />;
+
   const parts = pathname.slice(1).split("/").filter(Boolean);
   if (parts[0] === "solucoes" && parts.length === 2) {
     const solution = SOLUTION_REGISTRY[parts[1]];
-    if (!solution) return <NotFoundPage pathname={pathname} />;
-    return <SolutionPage solutionSlug={parts[1]} solution={solution} />;
+    if (!solution) return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
+    return <SolutionPage solutionSlug={parts[1]} solution={solution} theme={theme} toggleTheme={toggleTheme} />;
   }
-  if (parts[0] !== "apps") return <NotFoundPage pathname={pathname} />;
+
+  if (parts[0] !== "apps") return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
+
   if (parts.length === 2) {
     const appInfo = APP_REGISTRY[parts[1]];
-    if (!appInfo) return <NotFoundPage pathname={pathname} />;
-    return <AppLandingPage appSlug={parts[1]} appName={appInfo.name} />;
+    if (!appInfo) return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
+    return <AppLandingPage appSlug={parts[1]} appName={appInfo.name} theme={theme} toggleTheme={toggleTheme} />;
   }
+
   if (parts.length === 3) {
     const [, appSlug, pageSlug] = parts;
     const appInfo = APP_REGISTRY[appSlug];
-    if (!appInfo) return <NotFoundPage pathname={pathname} />;
+    if (!appInfo) return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
     const PageComponent = APP_PAGE_REGISTRY[pageSlug];
-    if (!PageComponent) return <NotFoundPage pathname={pathname} />;
-    return <PageComponent appSlug={appSlug} appName={appInfo.name} />;
+    if (!PageComponent) return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
+    return <PageComponent appSlug={appSlug} appName={appInfo.name} theme={theme} toggleTheme={toggleTheme} />;
   }
-  return <NotFoundPage pathname={pathname} />;
+
+  return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
 }
+
 export default App;

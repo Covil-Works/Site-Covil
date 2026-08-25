@@ -30,8 +30,9 @@ const heroStacks = [
   mobileTop: MOBILE_STACK_START + MOBILE_STACK_GAP * index,
 }));
 
-function HomePage() {
-  const [heroTheme, setHeroTheme] = useState("dark");
+function HomePage({ theme = "dark", toggleTheme }) {
+  const heroTheme = theme;
+  const toggleHeroTheme = toggleTheme;
   const pageRef = useRef(null);
   const heroRef = useRef(null);
   const aboutCardRef = useRef(null);
@@ -111,10 +112,6 @@ function HomePage() {
       }
     };
   }, []);
-
-  const toggleHeroTheme = () => {
-    setHeroTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
-  };
 
   useEffect(() => {
     const updateAboutCardOverlap = () => {

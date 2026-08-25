@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../styles/links.css";
 
-function LinksPage() {
+function LinksPage({ theme = "dark" }) {
   useEffect(() => {
     document.title = "Links | Covil";
   }, []);
@@ -77,7 +77,7 @@ function LinksPage() {
   ];
 
   return (
-    <div className="links-page">
+    <div className="links-page" data-theme={theme}>
       <div className="links-fireflies" aria-hidden="true">
         <span className="links-firefly links-firefly--north" />
         <span className="links-firefly links-firefly--middle" />

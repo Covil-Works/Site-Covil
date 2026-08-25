@@ -1,8 +1,8 @@
-﻿import "../styles/apps.css";
+import "../styles/apps.css";
 
-function AppLandingPage({ appSlug, appName }) {
+function AppLandingPage({ appSlug, appName, theme = "dark" }) {
   return (
-    <main className="policy-shell">
+    <main className="policy-shell" data-theme={theme}>
       <div className="policy-card">
         <p className="policy-eyebrow">{appSlug}</p>
         <h1>{appName}</h1>

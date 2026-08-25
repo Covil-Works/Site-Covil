@@ -1,39 +1,55 @@
 .equipe-page { min-height: 100vh; overflow-x: hidden; color: var(--text); background: var(--bg); }
 .equipe-title-section { max-width: 720px; margin: 120px auto 48px; padding: 0 var(--container-gutter); text-align: center; }
 .equipe-title-section h1 { margin: 0 0 14px; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.25; letter-spacing: -.025em; text-wrap: balance; }
-.equipe-title-section h1 strong { color: #fff; font-weight: 800; }
+.equipe-title-section h1 strong { color: var(--text); font-weight: 800; }
 .equipe-title-section p { margin: 0; color: var(--muted); font-size: clamp(.98rem, 1.6vw, 1.1rem); line-height: 1.65; text-wrap: pretty; }
 .equipe-container { width: min(100%, var(--container-width)); margin: 0 auto; padding: 0 var(--container-gutter) 100px; }
-.equipe-contact { width: min(calc(100% - (2 * var(--container-gutter))), var(--container-width)); margin: 0 auto 100px; padding: 40px 0; display: flex; align-items: center; justify-content: space-between; gap: 48px; border-top: 1px solid rgba(255,255,255,.14); }
+.equipe-contact { width: min(calc(100% - (2 * var(--container-gutter))), var(--container-width)); margin: 0 auto 100px; padding: 40px 0; display: flex; align-items: center; justify-content: space-between; gap: 48px; border-top: 1px solid var(--line); }
 .equipe-contact div { max-width: 650px; }
-.equipe-contact h2 { margin: 0 0 8px; color: #fff; font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
+.equipe-contact h2 { margin: 0 0 8px; color: var(--text); font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
 .equipe-contact p { margin: 0; color: var(--muted); line-height: 1.65; text-wrap: pretty; }
-.equipe-contact a { flex: 0 0 auto; padding: 12px 0 9px; color: #66efa9; border-bottom: 1px solid currentColor; font-size: .95rem; font-weight: 700; text-decoration: none; transition: color 180ms ease, transform 180ms ease; }
-.equipe-contact a:hover, .equipe-contact a:focus-visible { color: #fff; transform: translateX(4px); outline: none; }
+.equipe-contact a { flex: 0 0 auto; padding: 12px 0 9px; color: var(--accent); border-bottom: 1px solid currentColor; font-size: .95rem; font-weight: 700; text-decoration: none; transition: color 180ms ease, transform 180ms ease; }
+.equipe-contact a:hover, .equipe-contact a:focus-visible { color: var(--text); transform: translateX(4px); outline: none; }
 .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; align-items: start; }
-.team-card { position: relative; min-width: 0; padding: 28px; overflow: hidden; color: var(--text); background: var(--color-surface); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; cursor: pointer; outline: none; transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1), border-color 240ms ease, background-color 240ms ease; }
-.team-card:hover, .team-card:focus-visible { border-color: rgba(255,255,255,.72); transform: translateY(-6px); }
+.team-card { position: relative; min-width: 0; padding: 28px; overflow: hidden; color: var(--text); background: var(--color-surface); border: 1px solid var(--line); border-radius: 16px; cursor: pointer; outline: none; transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1), border-color 240ms ease, background-color 240ms ease; }
+.team-card:hover, .team-card:focus-visible { border-color: var(--ink); transform: translateY(-6px); }
 .team-card:active { transform: scale(0.98); }
-.team-card:focus-visible { box-shadow: 0 0 0 3px rgba(255,255,255,.2); }
-.team-card.is-expanded { grid-column: 1 / -1; grid-row: 1; transform: translateY(-14px); background: #13171b; border-color: rgba(255,255,255,.72); cursor: zoom-out; }
-.team-close { position: absolute; top: 16px; right: 16px; z-index: 1; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; color: var(--text); background: rgba(7,10,14,.72); cursor: pointer; font: inherit; font-size: 1.55rem; line-height: 1; transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
-.team-close:hover, .team-close:focus-visible { color: #070a0e; background: #fff; border-color: #fff; transform: scale(1.06); outline: none; }
+.team-card:focus-visible { box-shadow: 0 0 0 3px var(--line); }
+
+/* Selected/Expanded Team Card in Dark Mode (Original) */
+.team-card.is-expanded { grid-column: 1 / -1; grid-row: 1; transform: translateY(-14px); background: #13171b; border-color: rgba(255, 255, 255, 0.72); cursor: zoom-out; }
+
+/* Selected/Expanded Team Card in Light Mode (Totally White) */
+[data-theme="light"] .team-card.is-expanded { background: #ffffff; color: #070a0e; border-color: rgba(0, 0, 0, 0.15); box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15); }
+[data-theme="light"] .team-card.is-expanded .team-name { color: #070a0e; }
+[data-theme="light"] .team-card.is-expanded .team-role { color: #057447; }
+[data-theme="light"] .team-card.is-expanded .team-description { color: #5c6470; }
+[data-theme="light"] .team-card.is-expanded .team-more { color: #070a0e; }
+[data-theme="light"] .team-card.is-expanded .team-avatar { border-color: rgba(0, 0, 0, 0.15); background: #eef2f5; color: #070a0e; }
+[data-theme="light"] .team-card.is-expanded .team-close { color: #070a0e; background: #eef2f5; border-color: rgba(0, 0, 0, 0.15); }
+[data-theme="light"] .team-card.is-expanded .team-close:hover, [data-theme="light"] .team-card.is-expanded .team-close:focus-visible { color: #ffffff; background: #070a0e; border-color: #070a0e; }
+[data-theme="light"] .team-card.is-expanded .team-contacts { border-top-color: rgba(0, 0, 0, 0.12); }
+[data-theme="light"] .team-card.is-expanded .team-contact { border-color: rgba(7, 10, 14, 0.35); color: #070a0e; }
+[data-theme="light"] .team-card.is-expanded a.team-contact:hover, [data-theme="light"] .team-card.is-expanded a.team-contact:focus-visible { color: #ffffff; background: #070a0e; }
+
+.team-close { position: absolute; top: 16px; right: 16px; z-index: 1; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--text); background: var(--color-surface); cursor: pointer; font: inherit; font-size: 1.55rem; line-height: 1; transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.team-close:hover, .team-close:focus-visible { color: var(--paper); background: var(--text); border-color: var(--text); transform: scale(1.06); outline: none; }
 .team-close:active { transform: scale(0.92); }
 .team-summary { display: grid; grid-template-columns: 88px minmax(0,1fr); gap: 18px; align-items: center; }
-.team-avatar { width: 88px; height: 88px; overflow: hidden; border: 2px solid rgba(255,255,255,.62); border-radius: 50%; background: #171b20; color: #fff; font-size: 1.65rem; font-weight: 700; }
+.team-avatar { width: 88px; height: 88px; overflow: hidden; border: 2px solid var(--line); border-radius: 50%; background: var(--color-surface-alt); color: var(--text); font-size: 1.65rem; font-weight: 700; }
 .team-avatar img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .team-avatar span { width: 100%; height: 100%; display: grid; place-items: center; }
 .team-heading { min-width: 0; }
 .team-name { margin: 0 0 5px; color: var(--text); font-size: 1.3rem; font-weight: 650; line-height: 1.25; text-wrap: balance; }
-.team-role { display: block; color: #66efa9; font-size: .83rem; font-weight: 600; line-height: 1.4; }
-.team-more { grid-column: 1 / -1; justify-self: center; color: #fff; font-size: .86rem; font-weight: 600; opacity: 1; }
+.team-role { display: block; color: var(--accent); font-size: .83rem; font-weight: 600; line-height: 1.4; }
+.team-more { grid-column: 1 / -1; justify-self: center; color: var(--text); font-size: .86rem; font-weight: 600; opacity: 1; }
 .team-details { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 240ms cubic-bezier(0.32, 0.72, 0, 1), opacity 180ms cubic-bezier(0.23, 1, 0.32, 1); }
 .team-details-inner { min-height: 0; overflow: hidden; }
 .team-card.is-expanded .team-details { grid-template-rows: 1fr; opacity: 1; }
 .team-description { max-width: 68ch; margin: 26px auto 20px; color: var(--muted); font-size: .98rem; line-height: 1.65; text-align: center; text-wrap: pretty; }
-.team-contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08); }
-.team-contact { min-width: 108px; padding: 9px 14px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; color: #fff; font-size: .84rem; font-weight: 600; text-align: center; text-decoration: none; transition: color 180ms ease, background-color 180ms ease; }
-a.team-contact:hover, a.team-contact:focus-visible { color: #070a0e; background: #fff; outline: none; }
+.team-contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+.team-contact { min-width: 108px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); font-size: .84rem; font-weight: 600; text-align: center; text-decoration: none; transition: color 180ms ease, background-color 180ms ease; }
+a.team-contact:hover, a.team-contact:focus-visible { color: var(--paper); background: var(--text); outline: none; }
 ::view-transition-group(member-arthur-pimentel), ::view-transition-group(member-caio-silva), ::view-transition-group(member-jose-pereira) { animation-duration: 420ms; animation-timing-function: cubic-bezier(.22,1,.36,1); }
 @media (min-width: 641px) {
   .team-card.is-expanded .team-name { margin-bottom: 8px; font-size: 1.75rem; line-height: 1.2; }

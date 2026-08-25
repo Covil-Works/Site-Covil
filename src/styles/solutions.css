@@ -4,6 +4,11 @@
   --project-frame: rgba(255, 255, 255, 0.15);
 }
 
+[data-theme="light"] {
+  --project-surface: #e4e8ee;
+  --project-frame: rgba(0, 0, 0, 0.12);
+}
+
 .solutions-page, .solution-page {
   min-height: 100vh;
   overflow-x: hidden;
@@ -29,7 +34,7 @@
 }
 
 .solutions-title-section h1 strong {
-  color: #fff;
+  color: var(--text);
   font-weight: 800;
 }
 
