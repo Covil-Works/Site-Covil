@@ -599,9 +599,11 @@ main.content {
 
 .hero__firefly {
   position: absolute;
+  display: block;
   top: var(--firefly-y);
   left: var(--firefly-x);
   width: var(--firefly-size, 5px);
+  height: var(--firefly-size, 5px);
   aspect-ratio: 1;
   animation: firefly-drift var(--firefly-drift-duration) linear infinite;
 }

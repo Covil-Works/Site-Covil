@@ -453,10 +453,9 @@ function HomePage({ theme = "dark", toggleTheme }) {
   }, [heroTheme]);
 
   useEffect(() => {
-    const hoverQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (!hoverQuery.matches || reducedMotionQuery.matches) {
+    if (reducedMotionQuery.matches) {
       return undefined;
     }
 
@@ -465,6 +464,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
     let isMouseActive = false;
 
     const handlePointerMove = (e) => {
+      if (e.pointerType === "touch") return;
       mouseX = e.clientX;
       mouseY = e.clientY;
       isMouseActive = true;
@@ -478,8 +478,8 @@ function HomePage({ theme = "dark", toggleTheme }) {
     window.addEventListener("pointerleave", handlePointerLeave);
     window.addEventListener("blur", handlePointerLeave);
 
-    const RADIUS_FIREFLY = 140;
-    const MAX_PULL_FIREFLY = 32;
+    const RADIUS_FIREFLY = 150;
+    const MAX_PULL_FIREFLY = 36;
     const RADIUS_BIRD = 130;
     const MAX_DODGE_BIRD = 28;
 
