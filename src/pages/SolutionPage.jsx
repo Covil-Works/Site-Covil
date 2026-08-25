@@ -6,7 +6,7 @@ import "../styles/solutions.css";
 function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
   useEffect(() => { document.title = `${solution.name} | Covil`; }, [solution.name]);
   
-  const available = solutionSlug === "splitup";
+  const hasExternalUrl = Boolean(solution.externalUrl);
   
   return (
     <div className="solution-page" data-theme={theme}>
@@ -27,10 +27,10 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
               </div>
               <p className="solution-detail-description">{solution.description}</p>
               <p className="solution-detail-support">
-                {available ? "Uma experiência feita para deixar a rotina mais leve e as decisões mais claras." : "Estamos preparando cada detalhe para que essa solução chegue do jeito certo."}
+                {hasExternalUrl ? "Uma experiência feita para deixar a rotina mais leve e as decisões mais claras." : "Estamos preparando cada detalhe para que essa solução chegue do jeito certo."}
               </p>
-              {available ? (
-                <a className="solution-primary-link" href="https://play.google.com/store/apps/details?id=com.covildev.splitup&pcampaignid=web_share" target="_blank" rel="noreferrer">Conhecer no Google Play ↗</a>
+              {hasExternalUrl ? (
+                <a className="solution-primary-link" href={solution.externalUrl} target="_blank" rel="noreferrer">{solution.ctaLabel || "Acessar ↗"}</a>
               ) : (
                 <a className="solution-primary-link" href="https://wa.me/5591984085049" target="_blank" rel="noreferrer">Falar com a Covil ↗</a>
               )}
