@@ -517,7 +517,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
                 
               </article>
 
-              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "120ms" }}>
+              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "60ms" }}>
                 <div className="service-card-icon">
                   <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                     <rect x="7" y="2.5" width="10" height="19" rx="2.2" ry="2.2" />
@@ -532,7 +532,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
                 
               </article>
 
-              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "240ms" }}>
+              <article className="service-card reveal-on-scroll" style={{ "--reveal-delay": "120ms" }}>
                 <div className="service-card-icon">
                   <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                     <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" ry="2.2" />
