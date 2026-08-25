@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import "../styles/solutions.css";
 
-function SolutionsPage({ solutions }) {
+function SolutionsPage({ solutions, theme = "dark", toggleTheme }) {
   useEffect(() => {
     document.title = "Soluções | Covil";
   }, []);
@@ -32,8 +32,8 @@ function SolutionsPage({ solutions }) {
   }, []);
 
   return (
-    <div className="solutions-page">
-      <Navbar activePage="solucoes" />
+    <div className="solutions-page" data-theme={theme}>
+      <Navbar activePage="solucoes" theme={theme} toggleTheme={toggleTheme} />
       <section className="solutions-title-section reveal-on-scroll">
         <h1>
           Soluções que <strong>ganham vida.</strong>

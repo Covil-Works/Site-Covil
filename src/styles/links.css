@@ -36,8 +36,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
 }
 
@@ -59,6 +59,14 @@
 .links-title-image {
   height: 24px;
   margin: 0 0 1rem 0;
+}
+
+[data-theme="light"] .links-title-image {
+  filter: brightness(0);
+}
+
+[data-theme="light"] .links-fireflies {
+  opacity: 0;
 }
 
 .links-bio {
@@ -84,7 +92,7 @@
   height: 40px;
   border-radius: 50%;
   background: var(--panel, #0e1218);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
   color: var(--text, #f5f7fb);
   transition: all 0.3s ease;
 }
@@ -95,10 +103,10 @@
 }
 
 .links-social-icon:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface);
   color: var(--accent, #057447);
   transform: translateY(-2px);
-  border-color: rgba(5, 116, 71, 0.5);
+  border-color: var(--accent, #057447);
   box-shadow: 0 4px 12px rgba(5, 116, 71, 0.15);
 }
 
@@ -112,22 +120,22 @@
   display: flex;
   align-items: center;
   background: var(--panel, #0e1218);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
   padding: 1rem 1.5rem;
   border-radius: 12px;
   color: var(--text, #f5f7fb);
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
 
 .links-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(5, 116, 71, 0.5);
+  border-color: var(--accent, #057447);
   box-shadow: 0 8px 24px rgba(5, 116, 71, 0.15);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface);
 }
 
 .links-card-icon {
@@ -137,7 +145,7 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface);
   margin-right: 1rem;
   color: var(--accent, #057447);
 }

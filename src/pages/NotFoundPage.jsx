@@ -1,9 +1,9 @@
 import "../styles/fireflies.css";
 import "../styles/not-found.css";
 
-function NotFoundPage() {
+function NotFoundPage({ theme = "dark" }) {
   return (
-    <main className="not-found-page">
+    <main className="not-found-page" data-theme={theme}>
       <section className="not-found-content" aria-labelledby="not-found-title">
         <div className="not-found-number-wrap" aria-hidden="true">
           <h1 id="not-found-title" className="not-found-number">404</h1>

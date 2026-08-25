@@ -1,9 +1,21 @@
-﻿import "../styles/apps.css";
+import "../styles/apps.css";
 
-function PrivacyPolicyPage({ appSlug }) {
+const APP_LOGOS = {
+  splitup: "/img/logo-splitup.png",
+  mywl: "/img/logo-mywl.png",
+};
+
+function PrivacyPolicyPage({ appSlug, theme = "dark" }) {
+  const logo = APP_LOGOS[appSlug] || `/img/logo-${appSlug}.png`;
+
   return (
-    <main className="policy-shell">
+    <main className="policy-shell" data-theme={theme}>
       <article className="policy-card policy-card--content">
+        {logo && (
+          <div className="policy-logo-wrap">
+            <img src={logo} alt={`Logo ${appSlug}`} className="policy-logo" />
+          </div>
+        )}
         <p className="policy-eyebrow">{appSlug}</p>
         <h1>Privacy Policy</h1>
 
