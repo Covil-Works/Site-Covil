@@ -15,6 +15,7 @@ function Footer() {
           <a href="/#sobre">Sobre</a>
           <a href="/equipe">Equipe</a>
           <a href="/solucoes">Soluções</a>
+          <a href="/lab">Lab</a>
           <a href="/contato">Contato</a>
         </nav>
 

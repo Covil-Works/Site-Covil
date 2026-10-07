@@ -88,6 +88,13 @@ function Navbar({ activePage = "", theme = "dark", toggleTheme }) {
               Soluções
             </a>
             <a
+              href="/lab"
+              onClick={closeMobileMenu}
+              className={activePage === "lab" ? "is-active" : ""}
+            >
+              Lab
+            </a>
+            <a
               href="/contato"
               onClick={closeMobileMenu}
               className={activePage === "contato" ? "is-active" : ""}
