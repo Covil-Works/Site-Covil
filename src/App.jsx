@@ -15,6 +15,7 @@ const APP_REGISTRY = {
   mywl: { name: "MyWL", logo: "/img/logo-mywl.png" },
   memorycard: { name: "MemoryCard", logo: null },
 };
+
 const SOLUTION_REGISTRY = {
   splitup: {
     name: "SplitUp",
@@ -49,26 +50,25 @@ const SOLUTION_REGISTRY = {
   },
   memorycard: {
     name: "MemoryCard",
-    initials: "MC",
     category: "Solução digital",
     description: "Gerenciador ágil e local de projetos e tarefas, com estética retrô e sincronização na rede para smartphone e PC.",
     details: "React · Node.js · Localhost",
-    status: "Em desenvolvimento",
+    status: "Disponível",
     accent: "teal",
     device: "desktop",
     image: null,
     imageAlt: "Telas do MemoryCard",
     carouselImages: [
-      "/img/memorycard-1.png",
-      "/img/memorycard-2.png",
-      "/img/memorycard-3.png",
-      "/img/memorycard-4.png",
+      "/img/mc (1).png",
+      "/img/mc (2).png",
+      "/img/mc (3).png",
     ],
     logo: null,
-    externalUrl: null,
-    ctaLabel: null,
+    externalUrl: "https://github.com/Covil-Works/MemoryCard",
+    ctaLabel: "Ver no GitHub ↗",
   },
 };
+
 const APP_PAGE_REGISTRY = { privacypoly: PrivacyPolicyPage };
 
 function normalizePath(pathname) {

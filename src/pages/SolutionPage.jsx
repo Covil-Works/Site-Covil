@@ -21,12 +21,8 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
           <div className="solution-detail-layout">
             <div className="solution-detail-content">
               <div className="solution-detail-header-wrap">
-                {solution.logo ? (
+                {solution.logo && (
                   <img src={solution.logo} alt={`Logo ${solution.name}`} className="solution-header-logo" />
-                ) : (
-                  <div className="solution-header-badge" aria-hidden="true">
-                    <span>{solution.initials || solution.name.slice(0, 2).toUpperCase()}</span>
-                  </div>
                 )}
                 <div>
                   <p className="solutions-kicker">{solution.category}</p>
@@ -34,15 +30,6 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
                 </div>
               </div>
               <p className="solution-detail-description">{solution.description}</p>
-              {solution.details && (
-                <div className="solution-tags">
-                  {solution.details.split("·").map((tech) => (
-                    <span key={tech.trim()} className="solution-tag">
-                      {tech.trim()}
-                    </span>
-                  ))}
-                </div>
-              )}
               <p className="solution-detail-support">
                 {hasExternalUrl
                   ? "Uma experiência feita para deixar a rotina mais leve e as decisões mais claras."
@@ -65,35 +52,11 @@ function SolutionPage({ solutionSlug, solution, theme = "dark", toggleTheme }) {
                 </div>
               ) : (
                 <div className="solution-visual-placeholder">
-                  <span>{solution.initials || solution.name.slice(0, 2).toUpperCase()}</span>
+                  <span>{solution.name.slice(0, 2).toUpperCase()}</span>
                 </div>
               )}
             </div>
           </div>
-
-          {solution.carouselImages?.length > 0 && (
-            <section className="solution-gallery-section">
-              <div className="solution-gallery-header">
-                <h2>Galeria do projeto</h2>
-                <p>Confira os detalhes e interfaces de {solution.name}.</p>
-              </div>
-              <div className="solution-gallery-grid">
-                {solution.carouselImages.map((image, idx) => (
-                  <div key={image} className="solution-gallery-card">
-                    <div className="solution-gallery-browser-bar">
-                      <span className="solution-gallery-dot red" />
-                      <span className="solution-gallery-dot yellow" />
-                      <span className="solution-gallery-dot green" />
-                      <span className="solution-gallery-bar-title">{solution.name} — Tela {idx + 1}</span>
-                    </div>
-                    <div className="solution-gallery-img-wrap">
-                      <img src={image} alt={`${solution.name} tela ${idx + 1}`} loading="lazy" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
         </div>
       </main>
       <Footer />
