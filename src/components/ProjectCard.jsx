@@ -89,7 +89,11 @@ function ProjectCard({ project, className = "" }) {
 
   const visualVariantClass = project.name === "SplitUp"
     ? " project-card__visual--splitup"
-    : (project.name === "MyWL" ? " project-card__visual--mywl" : "");
+    : (project.name === "MyWL"
+      ? " project-card__visual--mywl"
+      : (project.name === "MemoryCard"
+        ? " project-card__visual--memorycard"
+        : (project.visualClass ? ` ${project.visualClass}` : "")));
 
   return (
     <article className={`project-card ${className}`.trim()}>
@@ -144,7 +148,7 @@ function ProjectCard({ project, className = "" }) {
                       alt={`${project.name} tela ${imageIndex + 1}`}
                       className="desktop-preview__image"
                       style={{
-                        flexBasis: `${100 / desktopCarouselSize}%`,
+                        flex: `0 0 ${100 / desktopCarouselSize}%`,
                         width: `${100 / desktopCarouselSize}%`,
                       }}
                     />

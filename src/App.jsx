@@ -13,6 +13,7 @@ import LabPage from "./pages/LabPage";
 const APP_REGISTRY = {
   splitup: { name: "SplitUp", logo: "/img/logo-splitup.png" },
   mywl: { name: "MyWL", logo: "/img/logo-mywl.png" },
+  memorycard: { name: "MemoryCard", logo: null },
 };
 const SOLUTION_REGISTRY = {
   splitup: {
@@ -45,6 +46,27 @@ const SOLUTION_REGISTRY = {
     logo: "/img/logo-mywl.png",
     externalUrl: "https://mywl.covildev.com",
     ctaLabel: "Acessar o MyWL ↗",
+  },
+  memorycard: {
+    name: "MemoryCard",
+    initials: "MC",
+    category: "Solução digital",
+    description: "Gerenciador ágil e local de projetos e tarefas, com estética retrô e sincronização na rede para smartphone e PC.",
+    details: "React · Node.js · Localhost",
+    status: "Em desenvolvimento",
+    accent: "teal",
+    device: "desktop",
+    image: null,
+    imageAlt: "Telas do MemoryCard",
+    carouselImages: [
+      "/img/memorycard-1.png",
+      "/img/memorycard-2.png",
+      "/img/memorycard-3.png",
+      "/img/memorycard-4.png",
+    ],
+    logo: null,
+    externalUrl: null,
+    ctaLabel: null,
   },
 };
 const APP_PAGE_REGISTRY = { privacypoly: PrivacyPolicyPage };
@@ -79,12 +101,12 @@ function App() {
   if (pathname === "/") return <HomePage theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/equipe") return <EquipePage theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/links") return <LinksPage theme={theme} toggleTheme={toggleTheme} />;
-  if (pathname === "/solucoes") return <SolutionsPage solutions={SOLUTION_REGISTRY} theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/solucoes" || pathname === "/projetos") return <SolutionsPage solutions={SOLUTION_REGISTRY} theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/lab") return <LabPage theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/contato") return <ContatoPage theme={theme} toggleTheme={toggleTheme} />;
 
   const parts = pathname.slice(1).split("/").filter(Boolean);
-  if (parts[0] === "solucoes" && parts.length === 2) {
+  if ((parts[0] === "solucoes" || parts[0] === "projetos") && parts.length === 2) {
     const solution = SOLUTION_REGISTRY[parts[1]];
     if (!solution) return <NotFoundPage pathname={pathname} theme={theme} toggleTheme={toggleTheme} />;
     return <SolutionPage solutionSlug={parts[1]} solution={solution} theme={theme} toggleTheme={toggleTheme} />;
