@@ -11,8 +11,6 @@ const DIRECT_CHANNELS = [
     copyValue: "+5591984085049",
     url: "https://wa.me/5591984085049?text=Ol%C3%A1%2C%20equipe%20Covil!%20Quero%20conversar%20sobre%20um%20projeto.",
     description: "Mensagens instantâneas, novos projetos e alinhamentos rápidos.",
-    tag: "Resposta rápida",
-    isLive: true,
     actionLabel: "Chamar no WhatsApp",
     icon: (
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true" fill="currentColor">
@@ -27,8 +25,6 @@ const DIRECT_CHANNELS = [
     copyValue: "covildev@gmail.com",
     url: "mailto:covildev@gmail.com",
     description: "Para envio de escopos detalhados, propostas comerciais e parcerias.",
-    tag: "Propostas formais",
-    isLive: false,
     actionLabel: "Enviar e-mail",
     icon: (
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
@@ -125,13 +121,9 @@ function ContatoPage({ theme = "dark", toggleTheme }) {
       <Navbar activePage="contato" theme={theme} toggleTheme={toggleTheme} />
 
       <section className="contato-hero reveal-on-scroll">
-        <span className="contato-eyebrow">Contato</span>
         <h1>
-          Vamos iniciar uma <strong>conversa?</strong>
+          Fale diretamente com a <strong>equipe da Covil.</strong>
         </h1>
-        <p>
-          Tem um projeto em mente, uma demanda técnica ou quer conhecer mais sobre nosso trabalho? Fale diretamente com a equipe da Covil.
-        </p>
       </section>
 
       <main className="contato-container">
@@ -153,11 +145,7 @@ function ContatoPage({ theme = "dark", toggleTheme }) {
                       {channel.icon}
                     </span>
                     <span className="contato-direct-name">{channel.label}</span>
-                    {channel.isLive && (
-                      <span className="contact-card-live-dot" aria-hidden="true" title="Disponível" />
-                    )}
                   </div>
-                  <span className="contato-direct-tag">{channel.tag}</span>
                 </div>
 
                 <div className="contato-direct-body">
@@ -217,7 +205,7 @@ function ContatoPage({ theme = "dark", toggleTheme }) {
 
         <section className="contato-presence-section">
           <div className="contato-section-label reveal-on-scroll" style={{ "--reveal-delay": "220ms" }}>
-            <span>Presença digital & código</span>
+            <span>Outras redes</span>
           </div>
 
           <div className="contato-presence-grid">
