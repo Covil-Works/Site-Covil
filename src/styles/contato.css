@@ -5,45 +5,31 @@
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Official Brand Icon Colors */
-.contato-primary-card--whatsapp .contato-primary-icon-wrap,
-.contato-card--whatsapp .contato-card-icon {
-  color: #25D366;
-}
-
-.contato-card--instagram .contato-card-icon {
-  color: #E4405F;
-}
-
-.contato-card--linkedin .contato-card-icon {
-  color: #0A66C2;
-}
-
-.contato-card--email .contato-card-icon {
-  color: #EA4335;
-}
-
-.contato-card--github .contato-card-icon {
-  color: #000000;
-}
-
-[data-theme="dark"] .contato-card--github .contato-card-icon {
-  color: #ffffff;
-}
-
-/* Hero Title Section */
+/* Hero Section */
 .contato-hero {
-  max-width: 760px;
-  margin: 120px auto 48px;
+  max-width: 680px;
+  margin: 120px auto 44px;
   padding: 0 var(--container-gutter);
   text-align: center;
 }
 
+.contato-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .contato-hero h1 {
-  margin: 0 0 16px;
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  margin: 0 0 14px;
+  font-size: clamp(2.1rem, 4.2vw, 3rem);
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: -0.03em;
@@ -59,274 +45,376 @@
 .contato-hero p {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-size: clamp(0.98rem, 1.5vw, 1.1rem);
   line-height: 1.65;
   text-wrap: pretty;
 }
 
 /* Container */
 .contato-container {
-  width: min(100%, var(--container-width));
+  width: min(100%, 860px);
   margin: 0 auto;
   padding: 0 var(--container-gutter) 100px;
   display: flex;
   flex-direction: column;
   gap: 48px;
-}
-
-/* Featured Primary WhatsApp Card */
-.contato-primary-section {
-  width: 100%;
-}
-
-.contato-primary-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  background: var(--color-surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  padding: 28px 36px;
-  text-decoration: none;
-  color: var(--text);
-  transition: transform 120ms ease-out, border-color 100ms ease, background-color 100ms ease;
-}
-
-.contato-primary-card:hover,
-.contato-primary-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: var(--ink);
-}
-
-.contato-primary-card:active {
-  transform: scale(0.99);
-}
-
-.contato-primary-main {
-  display: flex;
-  align-items: center;
-  gap: 24px;
   flex: 1;
 }
 
-.contato-primary-icon-wrap {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--color-surface-alt);
-  border: 1px solid var(--line);
+/* Section Labels */
+.contato-section-label {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 120ms ease;
+  margin-bottom: 14px;
 }
 
-.contato-primary-card:hover .contato-primary-icon-wrap {
-  transform: scale(1.05);
-}
-
-.contato-primary-icon-wrap svg {
-  width: 28px;
-  height: 28px;
-}
-
-.contato-primary-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.contato-primary-title {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.2;
-}
-
-.contato-primary-handle {
-  margin: 4px 0 0;
-  font-size: 1.1rem;
-  font-weight: 500;
+.contato-section-label span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
-.contato-primary-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 24px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.98rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: transform 120ms ease, background-color 120ms ease;
-}
-
-.contato-primary-card:hover .contato-primary-action {
-  transform: translateX(3px);
-  background-color: color-mix(in srgb, var(--accent) 88%, #ffffff 12%);
-}
-
-.contato-primary-action svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* Secondary Grid Section */
-.contato-grid-section {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.contato-section-header h2 {
-  margin: 0;
-  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
-  font-weight: 700;
-  color: var(--text);
-}
-
-.contato-grid {
+/* Direct Channels (Tier 1) */
+.contato-direct-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.contato-card {
+.contato-direct-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 230px;
+  padding: 26px 28px;
   background: var(--color-surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 24px 22px;
-  text-decoration: none;
   color: var(--text);
-  transition: transform 120ms ease-out, border-color 100ms ease, background-color 100ms ease;
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 160ms ease,
+    background-color 160ms ease;
 }
 
-.contato-card:hover,
-.contato-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .contato-direct-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--ink);
+  }
 }
 
-.contato-card:active {
-  transform: scale(0.98);
-}
-
-.contato-card-header {
+.contato-direct-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.contato-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--color-surface-alt);
-  border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 120ms ease;
-}
-
-.contato-card:hover .contato-card-icon {
-  transform: scale(1.06);
-}
-
-.contato-card-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.contato-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.contato-card-title {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
+.contato-direct-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contato-direct-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color 160ms ease;
+}
+
+.contato-direct-card:hover .contato-direct-icon {
   color: var(--text);
 }
 
-.contato-card-handle {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--muted);
+.contato-direct-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
-.contato-card-footer {
+.contato-direct-name {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.contato-direct-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--line);
+}
+
+.contato-direct-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.contato-direct-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  transition: color 140ms ease;
+  word-break: break-word;
+}
+
+.contato-direct-value:hover,
+.contato-direct-value:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.contato-direct-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.contato-direct-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contato-action-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--paper);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    opacity 140ms ease,
+    transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.contato-action-primary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contato-action-primary:hover {
+    opacity: 0.9;
+  }
+
+  .contato-action-primary:hover svg {
+    transform: translate(2px, -2px);
+  }
+}
+
+.contato-action-primary svg {
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.contato-action-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  font-size: 0.84rem;
+  font-weight: 550;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.contato-action-copy:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contato-action-copy:hover {
+    color: var(--text);
+    border-color: var(--ink);
+    background: var(--color-surface-alt);
+  }
+}
+
+.contato-action-copy.is-copied {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Presence Section (Tier 2) */
+.contato-presence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contato-presence-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  text-decoration: none;
   color: var(--text);
-  font-size: 0.88rem;
-  font-weight: 600;
-  transition: color 120ms ease;
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 160ms ease,
+    background-color 160ms ease;
 }
 
-.contato-card-footer svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 160ms ease;
+.contato-presence-item:active {
+  transform: scale(0.98);
 }
 
-.contato-card:hover .contato-card-footer {
-  color: var(--ink);
-}
-
-.contato-card:hover .contato-card-footer svg {
-  transform: translate(3px, -3px);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .contato-primary-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 28px 24px;
-    gap: 20px;
+@media (hover: hover) and (pointer: fine) {
+  .contato-presence-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--ink);
   }
 
-  .contato-primary-main {
-    flex-direction: row;
-    align-items: center;
-    gap: 18px;
+  .contato-presence-item:hover .contato-presence-icon {
+    color: var(--text);
   }
 
-  .contato-primary-action {
-    width: 100%;
-    justify-content: center;
+  .contato-presence-item:hover .contato-presence-arrow svg {
+    transform: translate(2px, -2px);
+    color: var(--text);
   }
 }
 
-@media (max-width: 720px) {
+.contato-presence-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.contato-presence-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 160ms ease;
+}
+
+.contato-presence-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.contato-presence-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contato-presence-title {
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.contato-presence-handle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contato-presence-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.contato-presence-arrow svg {
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    color 160ms ease;
+}
+
+/* Light Theme Enhancements */
+[data-theme="light"] .contact-card-live-dot {
+  background: #057447;
+  box-shadow: 0 0 6px rgba(5, 116, 71, 0.45);
+}
+
+/* Responsiveness */
+@media (max-width: 760px) {
   .contato-hero {
     margin: 64px auto 32px;
   }
 
   .contato-container {
     gap: 36px;
-    padding-bottom: 60px;
+    padding-bottom: 64px;
   }
 
-  .contato-grid {
+  .contato-direct-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contato-direct-card {
+    min-height: auto;
+    padding: 22px 20px;
+  }
+
+  .contato-presence-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .contato-direct-card,
+  .contato-presence-item,
+  .contato-action-primary,
+  .contato-action-copy,
+  .contato-presence-arrow svg,
+  .contato-action-primary svg {
+    transition: none !important;
+    transform: none !important;
   }
 }
