@@ -282,7 +282,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
       const whySection = document.querySelector(".why-section");
       const whyCard = document.querySelector(".why-card");
       const contactSection = document.getElementById("contato");
-      const liveDot = document.querySelector(".contact-card-live-dot");
+      const contactAnchor = document.querySelector(".contact-card-label");
 
       if (!aboutSection || !servicesSection || !contactSection) {
         animationFrameId = window.requestAnimationFrame(updateMotion);
@@ -360,8 +360,8 @@ function HomePage({ theme = "dark", toggleTheme }) {
         triggerY: whyDocY - viewportHeight * 0.3,
       };
 
-      // Keypoint 6: WhatsApp Live Dot (Left)
-      const dotPos = getDocPos(liveDot, 0.2, whyDocY + 600);
+      // Keypoint 6: WhatsApp Contact Card (Left)
+      const dotPos = getDocPos(contactAnchor, 0.2, whyDocY + 600);
       const contactRect = contactSection.getBoundingClientRect();
       const contactDocY = contactRect.top + scrollY;
       const k6 = {
@@ -796,10 +796,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
                 </svg>
               </span>
               <span className="contact-card-content">
-                <span className="contact-card-label">
-                  WhatsApp
-                  <span className="contact-card-live-dot" aria-hidden="true" />
-                </span>
+                <span className="contact-card-label">WhatsApp</span>
                 <span className="contact-card-value">(91) 98408-5049</span>
               </span>
               <span className="contact-card-action">Chamar agora</span>
