@@ -282,7 +282,7 @@ function HomePage({ theme = "dark", toggleTheme }) {
       const whySection = document.querySelector(".why-section");
       const whyCard = document.querySelector(".why-card");
       const contactSection = document.getElementById("contato");
-      const contactAnchor = document.querySelector(".contact-card-label");
+      const callNowBtn = document.querySelector(".contact-card-action");
 
       if (!aboutSection || !servicesSection || !contactSection) {
         animationFrameId = window.requestAnimationFrame(updateMotion);
@@ -360,13 +360,20 @@ function HomePage({ theme = "dark", toggleTheme }) {
         triggerY: whyDocY - viewportHeight * 0.3,
       };
 
-      // Keypoint 6: WhatsApp Contact Card (Left)
-      const dotPos = getDocPos(contactAnchor, 0.2, whyDocY + 600);
+      // Keypoint 6: Top of "Chamar agora" button in WhatsApp card
+      const actionRect = callNowBtn ? callNowBtn.getBoundingClientRect() : null;
+      const actionPos = actionRect
+        ? {
+            x: actionRect.left + scrollX + actionRect.width / 2,
+            y: actionRect.top + scrollY,
+          }
+        : getDocPos(document.querySelector(".contact-card"), 0.8, whyDocY + 600);
+
       const contactRect = contactSection.getBoundingClientRect();
       const contactDocY = contactRect.top + scrollY;
       const k6 = {
-        x: dotPos.x,
-        y: dotPos.y,
+        x: actionPos.x,
+        y: actionPos.y,
         triggerY: contactDocY - viewportHeight * 0.45,
       };
 
