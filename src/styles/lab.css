@@ -9,7 +9,7 @@
   color: var(--text);
 }
 
-/* Title / Hero Section */
+/* Title / Hero Section (Hub) */
 .lab-title-section {
   max-width: 720px;
   margin: 120px auto 48px;
@@ -40,11 +40,131 @@
   text-wrap: pretty;
 }
 
+/* Header for inner Lab pages (Skills, Aulas) */
+.lab-header-wrap {
+  width: min(100%, var(--container-width));
+  margin: 120px auto 40px;
+  padding: 0 var(--container-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lab-back-link {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  transition: color 140ms ease;
+}
+
+.lab-back-link span {
+  color: var(--accent);
+  transition: transform 140ms ease;
+}
+
+.lab-back-link:hover {
+  color: var(--text);
+}
+
+.lab-back-link:hover span {
+  transform: translateX(-3px);
+}
+
+.lab-page-title {
+  margin: 0;
+  font-size: clamp(2rem, 3.8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+}
+
 /* Container */
 .lab-container {
   width: min(100%, var(--container-width));
   margin: 0 auto;
   padding: 0 var(--container-gutter) 100px;
+}
+
+/* Hub Grid & Cards */
+.lab-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.lab-hub-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  padding: 36px 32px;
+  background: var(--color-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  color: var(--text);
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lab-hub-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--ink);
+  }
+}
+
+.lab-hub-card-kicker {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.lab-hub-card h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 650;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.lab-hub-card p {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lab-hub-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color 140ms ease;
+}
+
+.lab-hub-card-cta span {
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.lab-hub-card:hover .lab-hub-card-cta {
+  color: var(--text);
+}
+
+.lab-hub-card:hover .lab-hub-card-cta span {
+  transform: translateX(4px);
 }
 
 /* Sections */
@@ -367,6 +487,10 @@
     margin: 100px auto 36px;
   }
 
+  .lab-header-wrap {
+    margin: 100px auto 28px;
+  }
+
   .lab-placeholder-card {
     padding: 32px 24px;
   }
@@ -377,6 +501,18 @@
 
   .lab-section {
     margin-bottom: 56px;
+  }
+}
+
+@media (max-width: 680px) {
+  .lab-hub-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .lab-hub-card {
+    padding: 28px 24px;
+    min-height: auto;
   }
 }
 

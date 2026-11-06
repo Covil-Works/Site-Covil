@@ -1,48 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/lab.css";
 
-const OUR_SKILLS = [
-  {
-    id: "memorycard",
-    name: "MemoryCard",
-    description: "Gerencia tarefas e preserva o contexto operacional localmente para coding agents e desenvolvedores.",
-    command: "npx degit covil-works/memorycard/skills/memorycard skills/memorycard",
-    url: "https://github.com/covil-works/memorycard",
-  },
-];
-
-const RECOMMENDED_SKILLS = [
-  {
-    id: "grill-me",
-    name: "grill-me",
-    description: "Entrevista técnica interativa para estressar ideias e alinhar decisões antes de iniciar o código.",
-    command: "npx skills add mattpocock/skills",
-    url: "https://github.com/mattpocock/skills",
-  },
-  {
-    id: "humanizer",
-    name: "Humanizer",
-    description: "Reescreve textos gerados por inteligência artificial para remover padrões artificiais e soar natural.",
-    command: "npx skills add blader/humanizer",
-    url: "https://github.com/blader/humanizer",
-  },
-  {
-    id: "impeccable",
-    name: "Impeccable",
-    description: "Diretrizes e comandos práticos para orientar agentes e evitar designs genéricos de interface.",
-    command: "npx skills add pbakaus/impeccable",
-    url: "https://github.com/pbakaus/impeccable",
-  },
-];
-
-// Espaço para futuras aulas, artigos, materiais escritos e tutoriais
-const LAB_ITEMS = [];
-
 function LabPage({ theme = "dark", toggleTheme }) {
-  const [copiedId, setCopiedId] = useState(null);
-
   useEffect(() => {
     document.title = "Lab | Covil";
   }, []);
@@ -69,90 +30,6 @@ function LabPage({ theme = "dark", toggleTheme }) {
     return () => observer.disconnect();
   }, []);
 
-  const handleCopy = (id, command) => {
-    navigator.clipboard.writeText(command);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 1800);
-  };
-
-  const renderSkillCard = (skill) => (
-    <article key={skill.id} className="lab-skill-card reveal-on-scroll">
-      <div className="lab-skill-header">
-        <h4 className="lab-skill-name">{skill.name}</h4>
-        <a
-          href={skill.url}
-          target="_blank"
-          rel="noreferrer"
-          className="lab-skill-link"
-          aria-label={`Abrir repositório de ${skill.name} no GitHub`}
-        >
-          <span>GitHub</span>
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 17L17 7" />
-            <path d="M7 7h10v10" />
-          </svg>
-        </a>
-      </div>
-      <p className="lab-skill-description">{skill.description}</p>
-      <div className="lab-skill-command-box">
-        <code className="lab-skill-command">{skill.command}</code>
-        <button
-          type="button"
-          className={`lab-skill-copy-btn ${copiedId === skill.id ? "is-copied" : ""}`}
-          onClick={() => handleCopy(skill.id, skill.command)}
-          aria-label={copiedId === skill.id ? "Comando copiado" : `Copiar comando de ${skill.name}`}
-        >
-          {copiedId === skill.id ? (
-            <>
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>Copiado</span>
-            </>
-          ) : (
-            <>
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-              <span>Copiar</span>
-            </>
-          )}
-        </button>
-      </div>
-    </article>
-  );
-
   return (
     <div className="lab-page" data-theme={theme}>
       <Navbar activePage="lab" theme={theme} toggleTheme={toggleTheme} />
@@ -162,66 +39,38 @@ function LabPage({ theme = "dark", toggleTheme }) {
           Covil <strong>Lab</strong>
         </h1>
         <p>
-          Nosso espaço educacional e laboratório prático. Recomendações de ferramentas, materiais técnicos e pesquisas sobre desenvolvimento.
+          Laboratório de desenvolvimento, ferramentas e conteúdos práticos da Covil.
         </p>
       </section>
 
       <main className="lab-container">
-        <section className="lab-section">
-          <div className="lab-section-header reveal-on-scroll">
-            <h2>Skills</h2>
-            <span>Coding Agents</span>
-          </div>
-
-          <div className="lab-subsection">
-            <h3 className="lab-subsection-title reveal-on-scroll">Nossa skill</h3>
-            <div className="lab-skills-grid lab-skills-grid-featured">
-              {OUR_SKILLS.map(renderSkillCard)}
-            </div>
-          </div>
-
-          <div className="lab-subsection">
-            <h3 className="lab-subsection-title reveal-on-scroll">Recomendações</h3>
-            <div className="lab-skills-grid">
-              {RECOMMENDED_SKILLS.map(renderSkillCard)}
-            </div>
-          </div>
-        </section>
-
-        <section className="lab-section">
-          <div className="lab-section-header reveal-on-scroll">
-            <h2>Aulas & Materiais</h2>
-            <span>Em breve</span>
-          </div>
-
-          {LAB_ITEMS.length === 0 ? (
-            <div className="lab-placeholder-card reveal-on-scroll">
-              <div className="lab-placeholder-badge">
-                <span className="contact-card-live-dot" aria-hidden="true" />
-                <span>Em preparação</span>
-              </div>
-              <h3>Laboratório em construção</h3>
+        <div className="lab-hub-grid">
+          <a href="/lab/skills" className="lab-hub-card reveal-on-scroll">
+            <div>
+              <span className="lab-hub-card-kicker">Coding Agents</span>
+              <h2>Skills</h2>
               <p>
-                Estamos estruturando este ambiente para compartilhar aulas práticas, roteiros de estudo, artigos técnicos e materiais abertos desenvolvidos pela equipe da Covil. Em breve, todo o conteúdo estará disponível por aqui.
+                Skills prontas para agentes de IA: ferramenta da Covil de contexto e tarefas, além de recomendações abertas.
               </p>
             </div>
-          ) : (
-            <div className="lab-grid">
-              {LAB_ITEMS.map((item) => (
-                <article key={item.id} className="lab-item-card reveal-on-scroll">
-                  <span className="lab-item-category">{item.category}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  {item.url && (
-                    <a href={item.url} target="_blank" rel="noreferrer" className="lab-item-link">
-                      Acessar material ↗
-                    </a>
-                  )}
-                </article>
-              ))}
+            <span className="lab-hub-card-cta">
+              Acessar skills <span>→</span>
+            </span>
+          </a>
+
+          <a href="/lab/aulas" className="lab-hub-card reveal-on-scroll">
+            <div>
+              <span className="lab-hub-card-kicker">Conteúdos Práticos</span>
+              <h2>Aulas</h2>
+              <p>
+                Materiais técnicos, roteiros e tutoriais de engenharia de software desenvolvidos pela equipe.
+              </p>
             </div>
-          )}
-        </section>
+            <span className="lab-hub-card-cta">
+              Acessar aulas <span>→</span>
+            </span>
+          </a>
+        </div>
       </main>
 
       <Footer />

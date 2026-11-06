@@ -9,6 +9,8 @@ import SolutionsPage from "./pages/SolutionsPage";
 import SolutionPage from "./pages/SolutionPage";
 import ContatoPage from "./pages/ContatoPage";
 import LabPage from "./pages/LabPage";
+import LabSkillsPage from "./pages/LabSkillsPage";
+import LabAulasPage from "./pages/LabAulasPage";
 
 const APP_REGISTRY = {
   splitup: { name: "SplitUp", logo: "/img/logo-splitup.png" },
@@ -103,6 +105,8 @@ function App() {
   if (pathname === "/links") return <LinksPage theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/solucoes" || pathname === "/projetos") return <SolutionsPage solutions={SOLUTION_REGISTRY} theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/lab") return <LabPage theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/lab/skills") return <LabSkillsPage theme={theme} toggleTheme={toggleTheme} />;
+  if (pathname === "/lab/aulas") return <LabAulasPage theme={theme} toggleTheme={toggleTheme} />;
   if (pathname === "/contato") return <ContatoPage theme={theme} toggleTheme={toggleTheme} />;
 
   const parts = pathname.slice(1).split("/").filter(Boolean);
