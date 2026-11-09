@@ -11,6 +11,13 @@ const OUR_SKILLS = [
     command: "npx degit covil-works/memorycard/skills/memorycard skills/memorycard",
     url: "https://github.com/covil-works/memorycard",
   },
+  {
+    id: "docxt",
+    name: "docxt",
+    description: "Inicializa e governa a documentação do repositório em /docs com índice temático e regras com IDs únicos.",
+    command: "npx degit covil-works/skills/docxt/docxt .agents/skills/docxt",
+    url: "https://github.com/covil-works/skills/tree/main/docxt",
+  },
 ];
 
 const RECOMMENDED_SKILLS = [
@@ -164,7 +171,7 @@ function LabSkillsPage({ theme = "dark", toggleTheme }) {
       <main className="lab-container">
         <section className="lab-section">
           <div className="lab-subsection">
-            <h3 className="lab-subsection-title reveal-on-scroll">Nossa skill</h3>
+            <h3 className="lab-subsection-title reveal-on-scroll">Nossas skills</h3>
             <div className="lab-skills-grid lab-skills-grid-featured">
               {OUR_SKILLS.map(renderSkillCard)}
             </div>

@@ -50,7 +50,7 @@ function LabPage({ theme = "dark", toggleTheme }) {
               <span className="lab-hub-card-kicker">Coding Agents</span>
               <h2>Skills</h2>
               <p>
-                Skills prontas para agentes de IA: ferramenta da Covil de contexto e tarefas, além de recomendações abertas.
+                Skills prontas para agentes de IA: ferramentas da Covil para documentação, contexto e tarefas, além de recomendações abertas.
               </p>
             </div>
             <span className="lab-hub-card-cta">

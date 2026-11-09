@@ -225,8 +225,8 @@
 }
 
 .lab-skills-grid-featured {
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 680px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 100%;
 }
 
 /* Skill Card */
@@ -517,7 +517,8 @@
 }
 
 @media (max-width: 640px) {
-  .lab-skills-grid {
+  .lab-skills-grid,
+  .lab-skills-grid-featured {
     grid-template-columns: 1fr;
   }
 }
