@@ -53,7 +53,7 @@ const SOLUTION_REGISTRY = {
   memorycard: {
     name: "MemoryCard",
     category: "Solução digital",
-    description: "Gerenciador ágil e local de projetos e tarefas, com estética retrô e sincronização na rede para smartphone e PC.",
+    description: "Gerenciador de contexto e tarefas para o agente: divide tarefas complexas e ajuda a gerenciar o fluxo localmente.",
     details: "React · Node.js · Localhost",
     status: "Disponível",
     accent: "teal",

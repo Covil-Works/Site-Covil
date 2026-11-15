@@ -7,7 +7,7 @@ const OUR_SKILLS = [
   {
     id: "memorycard",
     name: "MemoryCard",
-    description: "Gerencia tarefas e preserva o contexto operacional localmente para coding agents e desenvolvedores.",
+    description: "Gerencia o contexto e divide tarefas complexas localmente para coding agents e desenvolvedores.",
     command: "npx degit covil-works/memorycard/skills/memorycard skills/memorycard",
     url: "https://github.com/covil-works/memorycard",
   },
