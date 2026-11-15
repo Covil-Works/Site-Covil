@@ -3,6 +3,7 @@ import "../styles/apps.css";
 const APP_LOGOS = {
   splitup: "/img/logo-splitup.png",
   mywl: "/img/logo-mywl.png",
+  memorycard: "/img/logo-mc.png",
 };
 
 function AppLandingPage({ appSlug, appName, theme = "dark" }) {

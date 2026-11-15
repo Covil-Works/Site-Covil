@@ -15,7 +15,7 @@ import LabAulasPage from "./pages/LabAulasPage";
 const APP_REGISTRY = {
   splitup: { name: "SplitUp", logo: "/img/logo-splitup.png" },
   mywl: { name: "MyWL", logo: "/img/logo-mywl.png" },
-  memorycard: { name: "MemoryCard", logo: null },
+  memorycard: { name: "MemoryCard", logo: "/img/logo-mc.png" },
 };
 
 const SOLUTION_REGISTRY = {
@@ -65,7 +65,7 @@ const SOLUTION_REGISTRY = {
       "/img/mc (2).png",
       "/img/mc (3).png",
     ],
-    logo: null,
+    logo: "/img/logo-mc.png",
     externalUrl: "https://github.com/Covil-Works/MemoryCard",
     ctaLabel: "Ver no GitHub ↗",
   },
