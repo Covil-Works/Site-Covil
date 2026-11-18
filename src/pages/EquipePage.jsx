@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import "../styles/equipe.css";
 
 const TEAM_MEMBERS = [
-  { id: "arthur-pimentel", name: "Arthur Pimentel", initials: "AP", role: "Cofundador e Arquiteto de Software", description: "Atua na arquitetura das soluções e na construção de experiências claras e funcionais, conectando decisões técnicas às necessidades de cada projeto.", photo: "/img/equipe/arthur.png", github: "https://github.com/artuenric", linkedin: "https://www.linkedin.com/in/artuenric" },
+  { id: "arthur-pimentel", name: "Arthur Pimentel", initials: "AP", role: "Cofundador e Arquiteto de Software", description: "Atua na arquitetura das soluções e na construção de experiências claras e funcionais, conectando decisões técnicas às necessidades de cada projeto.", photo: "/img/equipe/arthur.png", portfolio: "https://arthur.covildev.com", github: "https://github.com/artuenric", linkedin: "https://www.linkedin.com/in/artuenric" },
   { id: "caio-silva", name: "Caio Silva", initials: "CS", role: "Cofundador e Especialista em Segurança", description: "Contribui para o desenvolvimento de aplicações confiáveis, com atenção especial à segurança, à estabilidade e à qualidade das entregas.", photo: "/img/equipe/caio.jpeg", github: "https://github.com/caiojulio", linkedin: "https://www.linkedin.com/in/caiojs/" },
   { id: "jose-pereira", name: "José Pereira", initials: "JP", role: "Cofundador e Desenvolvedor Back-end", description: "Trabalha principalmente na construção das regras de negócio, integrações e serviços que sustentam as soluções desenvolvidas pela equipe.", photo: "/img/equipe/jose.jpeg", github: "https://github.com/josegab12", linkedin: "https://linkedin.com/in/josé-gabriel-silva-pereira-a55854262" }
 ];
@@ -121,6 +121,7 @@ function EquipePage({ theme = "dark", toggleTheme }) {
                   <div className="team-details-inner">
                     <p className="team-description">{member.description}</p>
                     <div className="team-contacts" aria-label={`Contatos de ${member.name}`}>
+                      <Contact href={member.portfolio}>Portfólio</Contact>
                       <Contact href={member.github}>GitHub</Contact>
                       <Contact href={member.linkedin}>LinkedIn</Contact>
                     </div>
