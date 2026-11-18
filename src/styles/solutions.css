@@ -73,7 +73,7 @@
 }
 
 .solutions-grid {
-  padding-top: 28px;
+  padding-top: 0;
 }
 
 /* Project Card & Grid (Portfolio Design System) */
@@ -360,10 +360,9 @@
 
 /* Solution Detail Page */
 .solution-detail {
-  min-height: min(760px, 86vh);
-  padding: 152px max(20px, calc((100vw - var(--container-width))/2)) 100px;
-  display: flex;
-  align-items: center;
+  width: min(100%, var(--container-width));
+  margin: 120px auto 100px;
+  padding: 0 var(--container-gutter);
 }
 
 .solution-detail-inner {
@@ -377,12 +376,12 @@
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   transition: color 0.2s ease;
 }
 
 .solution-back-link span {
   color: var(--accent);
-  margin-right: 8px;
   transition: transform 0.2s ease;
 }
 
@@ -399,7 +398,7 @@
   grid-template-columns: 1fr minmax(320px, 0.75fr);
   gap: clamp(60px, 10vw, 120px);
   align-items: center;
-  margin-top: 64px;
+  margin-top: 40px;
 }
 
 .solution-detail-header-wrap {
@@ -524,6 +523,9 @@
   .solutions-title-section {
     margin: 64px auto 34px;
   }
+  .solution-detail {
+    margin: 100px auto 72px;
+  }
   .project-grid {
     grid-template-columns: 1fr;
   }
@@ -531,8 +533,8 @@
   .visual--phone .device-mockup__screen { width: calc(100% + 2px); margin-right: -2px; }
   .solution-detail-layout {
     grid-template-columns: 1fr;
-    gap: 48px;
-    margin-top: 48px;
+    gap: 40px;
+    margin-top: 32px;
   }
   .solution-detail-visual {
     width: min(80vw, 360px);

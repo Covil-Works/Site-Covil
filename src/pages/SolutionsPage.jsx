@@ -44,9 +44,6 @@ function SolutionsPage({ solutions, theme = "dark", toggleTheme }) {
       </section>
       <main className="solutions-container">
         <section className="solutions-list">
-          <div className="solutions-list-header reveal-on-scroll">
-            <h2>Nossas soluções</h2>
-          </div>
           <div className="project-grid solutions-grid">
             {Object.entries(solutions).map(([slug, solution]) => (
               <ProjectCard
